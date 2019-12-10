@@ -11,7 +11,7 @@ namespace Tshirt.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            int ads = 0;
+            int ads = 10;
             return RedirectToAction("../Overview/Index");
         }
     }
