@@ -1,0 +1,255 @@
+﻿@model RocketSystem.Models.User
+
+
+
+@{
+    //Layout = null;
+    //ViewBag.StageTitle = "Stage Five";
+    Layout = "~/Views/Shared/StageSideBar.cshtml";
+}
+<!-- User Profile Styles-->
+<link rel="stylesheet" type="text/css" href="~/css/userpro.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<!-- Start User Profile View -->
+<style>
+    .tree123 {
+        overflow-y: hidden;
+        overflow-x: hidden;
+        height: 86%;
+    }
+</style>
+@{
+    //List<RocketSystem.Models.User> memberDetail = new List<RocketSystem.Models.User>();
+    //memberDetail = Model.ToList();
+
+    var UserList = ViewBag.UserProfileList;
+    var noval = "-";
+    var Male = "男性";
+    var Female = "女性";
+}
+<!-- Start User Profile View -->
+<div class="table-title">
+    <h3>User Profile</h3>
+    <hr>
+
+</div>
+
+<div class="container">
+    <div class="row">
+
+        <div class="col">
+            <table class="table-fill">
+                <thead>
+                </thead>
+                <tbody class="table-hover">
+                    <tr>
+                        <td class="text-left"><i class="fas fa-file-signature"></i>&nbsp; 名前:</td>
+                        <td class="text-left">@UserList[0].name</td>
+                    </tr>
+                    <tr>
+                        <td class="text-left"><i class="fab fa-autoprefixer"></i>&nbsp; 会員番号:</td>
+                        <td class="text-left">@UserList[0].membershipNo</td>
+                    </tr>
+                    <tr>
+                        <td class="text-left"><i class="fab fa-autoprefixer"></i>&nbsp; 生年月日:</td>
+                        <td class="text-left">
+                            @if (@UserList[0].dateOfBirth.ToString("yyyy-MM-dd") == "1111-11-11")
+                            {@noval}
+                        else
+                        {@UserList[0].dateOfBirth.ToString("yyyy-MM-dd")}
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-left"><i class="fas fa-calendar-week"></i>&nbsp; 電話番号:</td>
+                        <td class="text-left">
+                            @if (@UserList[0].telephoneNo == "NoValue")
+                            {@noval}
+                        else
+                        {@UserList[0].telephoneNo}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-left"><i class="fas fa-id-card-alt"></i>&nbsp;携帯電話番号:</td>
+                        <td class="text-left">
+                            @if (@UserList[0].mobileNo == "NoValue")
+                            {@noval}
+                        else
+                        {@UserList[0].mobileNo}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-left"><i class="fab fa-autoprefixer"></i>&nbsp; ニックネーム:</td>
+                        <td class="text-left">
+                            @if (@UserList[0].nickName == "NoValue")
+                            {@noval}
+                        else
+                        {@UserList[0].nickName}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-left"><i class="fab fa-autoprefixer"></i>&nbsp; 郵便コード:</td>
+                        <td class="text-left">
+                            @if (@UserList[0].postalCode == "NoValue")
+                            {@noval}
+                        else
+                        {@UserList[0].postalCode}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-left"><i class="fab fa-autoprefixer"></i>&nbsp; 性別:</td>
+                        <td class="text-left">
+                            @if (@UserList[0].gender == "1")
+                            {@Male}
+                        else if (@UserList[0].gender == "2")
+                        {@Female}
+                    else
+                    {@noval
+                }
+                        </td>
+                    </tr>
+
+            </table>
+        </div>
+
+        <div class="col">
+            <table class="table-fill">
+                <thead>
+                </thead>
+                <tbody class="table-hover">
+                    <tr>
+                        <td class="text-left"><i class="fas fa-file-signature"></i>&nbsp; 御住所:</td>
+                        <td class="text-left " id="addressOne"></td>
+                    </tr>
+                    <tr>
+                        <td class="text-left"><i class="fab fa-autoprefixer"></i>&nbsp;ファックス番号:</td>
+                        <td class="text-left">
+                            @if (@UserList[0].faxNo == "NoValue")
+                            {@noval}
+                        else
+                        {@UserList[0].faxNo}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-left"><i class="fab fa-autoprefixer"></i>&nbsp;ウェブメール:</td>
+                        <td class="text-left">
+                            @if (@UserList[0].webEmail == "NoValue")
+                            {@noval}
+                        else
+                        {@UserList[0].webEmail}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-left"><i class="fas fa-calendar-week"></i>&nbsp; 携帯メール:</td>
+                        <td class="text-left">
+                            @if (@UserList[0].mobileEmail == "NoValue")
+                            {@noval}
+                        else
+                        {@UserList[0].mobileEmail}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-left"><i class="fas fa-id-card-alt"></i>&nbsp; 銀行名:</td>
+                        <td class="text-left">
+                            @if (@UserList[0].bankNameKatakana == "NoValue")
+                            {@noval}
+                        else
+                        {@UserList[0].bankNameKatakana}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-left"><i class="fas fa-id-card-alt"></i>&nbsp; 口座番号:</td>
+                        <td class="text-left">
+                            @if (@UserList[0].transferAccountNumber == "NoValue")
+                            {@noval}
+                        else
+                        {@UserList[0].transferAccountNumber}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-left"><i class="fas fa-id-card-alt"></i>&nbsp; 銀行のコード:</td>
+                        <td class="text-left">
+                            @if (@UserList[0].transferDestinationBank == "Noval")
+                            {@noval}
+                        else
+                        {@UserList[0].transferDestinationBank}
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td class="text-left"><i class="fas fa-id-card-alt"></i>&nbsp; 支店名:</td>
+                        <td class="text-left">
+                            @if (@UserList[0].branchNameKatakana == "NoValue")
+                            {@noval}
+                        else
+                        {@UserList[0].branchNameKatakana}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-left"><i class="fas fa-id-card-alt"></i>&nbsp; 支店コード:</td>
+                        <td class="text-left">
+                            @if (@UserList[0].transferDestinationBranchCode == "NoValue")
+                            {@noval}
+                        else
+                        {@UserList[0].transferDestinationBranchCode}
+                        </td>
+                    </tr>
+
+
+            </table>
+        </div>
+    </div>
+    <br><br>
+    <div class="d-flex justify-content-center">
+        <div class="row">
+            <div class="col">
+                <button type="button"><a href='@Url.Action("EditProfileDetail", "Users")' class="btn btn-secondary"> Edit Profile</a></button>
+            </div>
+
+            @*<button type="button" class="btn btn-secondary">Change Password</button>*@
+
+        </div>
+    </div>
+    <br /><br />
+
+</div>
+<script>
+    var values =@Html.Raw(Json.Encode(UserList));
+        var add = values[0].addressOne;
+        var res = add.split("");
+        var tex = "";
+        for (var x = 0; x < res.length;x++) {
+            if (res[x] == "都") {
+
+                tex += res[x];
+                break;
+            }
+            else if (res[x] == "道") {
+                tex += res[x];
+                break;
+            }
+            else if (res[x] == "府") {
+                tex += res[x];
+                break;
+            }
+            else if (res[x] == "県") {
+                tex += res[x];
+                break;
+            }
+            tex += res[x];
+        }
+         // =======GET ADDRESS ========//
+        var add3 = values[0].addressOne.split(tex);
+        var addnum3 = add3[1].split("^");
+        //document.getElementById("pref").value = tex;
+        //document.getElementById("addr").value = addnum3[0];
+        var addnumber = addnum3[1];
+            if (addnum3[1] == undefined || addnum3[1] == "NoValue") {
+                addnumber = "";
+            }
+        //document.getElementById("addrnum").value = addnumber;
+        document.getElementById("addressOne").innerHTML = tex+" -- "+addnum3[0]+" -- "+addnumber;
+</script>
+
+
+<!-- End User Profile View -->

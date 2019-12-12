@@ -1,0 +1,224 @@
+﻿@model RocketSystem.Models.User
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>User</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.membershipNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.membershipNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dateOfBirth)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dateOfBirth)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.telephoneNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.telephoneNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.mobileNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mobileNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.postalCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.postalCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.katakanaName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.katakanaName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nickName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nickName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.gender)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.gender)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.addressOne)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.addressOne)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.addressTwo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.addressTwo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.addressThree)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.addressThree)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.faxNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.faxNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.webEmail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.webEmail)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.mobileEmail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mobileEmail)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.accountName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.accountName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.accountNameKatakana)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.accountNameKatakana)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.bankNameKatakana)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.bankNameKatakana)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.transferDestinationBank)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.transferDestinationBank)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.branchNameKatakana)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.branchNameKatakana)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.transferDestinationBranchCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.transferDestinationBranchCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.accountClassification)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.accountClassification)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.transferAccountNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.transferAccountNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.userName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.userName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.password)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.password)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

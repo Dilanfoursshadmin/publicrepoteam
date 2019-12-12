@@ -1,0 +1,1379 @@
+﻿@using RocketSystem.Models
+@{
+
+    Layout = null;
+    Layout = "~/Views/Shared/AdminPanel.cshtml";
+    //int introducer = (int)ViewBag.introducer;
+    var grid2 = ViewBag.list2;
+    var positiondetail = ViewBag.list3;
+    var profitdetails = ViewBag.list4;
+    var datewisepos = ViewBag.list5;
+    var topmembership = ViewBag.list6;
+    var onlytopmemberlist = ViewBag.list7;
+    var middlememberlist = ViewBag.list8;
+    var smallememberlist = ViewBag.list9;
+    var paidbonusvalue = ViewBag.list10;
+    var yearlybonus = ViewBag.list11;
+    var expectedincome = ViewBag.list12;
+    var introducerall = ViewBag.list13;
+    var thirtyfiveintroducerall = ViewBag.list14;
+    var middleintroducerall = ViewBag.list15;
+    var freeposition = ViewBag.list16;
+    var freepositionbonusprsentage = ViewBag.list17;
+    var introducepersoncounting = ViewBag.list18;
+    var introducepersonamount = ViewBag.list19;
+    var freepositontotalbonus = ViewBag.list20;
+}
+
+<head>
+    <script src="~/js/newcharts.js"></script>
+
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/data.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <style>
+        .canvasjs-chart-credit {
+            display: none !important;
+        }
+
+        .highcharts-credits {
+            display: none;
+        }
+
+        .colorbox {
+            color: white;
+            margin: 5px;
+            /*box-shadow: 10px 5px 3px #f3f1f1;*/
+            box-shadow: 0 8px 6px -6px #808080;
+            border-radius: 5px;
+            padding: 3px;
+        }
+
+        ::selection {
+            background: #1fe7b6;
+        }
+
+        ::-moz-selection {
+            background: #1fe7b6;
+        }
+
+        @@media (max-width: 767px) {
+            .sm-res-ds-n {
+                display: block;
+            }
+
+            .email-round-gp {
+                display: flow-root;
+                margin-top: 40px;
+            }
+        }
+
+        @@media only screen and (max-width: 3000px) and (min-width: 2000px) {
+            #nuwan {
+                display: block;
+            }
+        }
+
+        @@media only screen and (max-width: 2500px) and (min-width: 1000px) {
+            #nuwan {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+@*Start Color Area*@
+<div class="container-fluid">
+
+    <div class="row">
+
+        <div class="col-md-1">
+
+        </div>
+
+        <div class="col-md-1 colorbox" style="background-color:#00c292;">
+            <center>Super Position</center>
+        </div>
+
+        <div class="col-md-1 colorbox" style="background-color:#fb9678;">
+            <center>Middle Position</center>
+        </div>
+
+        <div class="col-md-1 colorbox" style="background-color:#01c0c8;">
+            <center>Free Position</center>
+        </div>
+
+        <div class="col-md-1 colorbox" style="background-color:#44addd;">
+            <center>Introduce Bonus</center>
+        </div>
+
+        <div class="col-md-1 colorbox" style="background-color:#E74C3C;">
+            <center>3rd Stage Bonus</center>
+        </div>
+
+        <div class="col-md-1 colorbox" style="background-color:#66AA00;">
+            <center>5th Stage Bonus</center>
+        </div>
+
+        <div class="col-md-1 colorbox" style="background-color:#E67300;">
+            <center>Position Bonus</center>
+        </div>
+
+        <div class="col-md-1 colorbox" style="background-color:#AAAA11;">
+            <center>Precentage Bonus</center>
+        </div>
+
+        <div class="col-md-1 colorbox" style="background-color:#D576D5;">
+            <center>Share Bonus</center>
+        </div>
+
+        <div class="col-md-1">
+
+        </div>
+        <div class="col-md-1">
+
+        </div>
+    </div>
+</div>
+<br />
+@*Start Color Area*@
+
+<!-- Start Status area -->
+<div class="notika-status-area">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                <div class="wb-traffic-inner notika-shadow sm-res-mg-t-30 tb-res-mg-t-30">
+                    <div class="website-traffic-ctn">
+                        <h2><span class="counter">@positiondetail[0]</span></h2>
+                        <p>Super Position</p>
+                    </div>
+                    <div class="sparkline-bar-stats1">9,4,8,6,5,6,4,8,3,5,9,5</div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                <div class="wb-traffic-inner notika-shadow sm-res-mg-t-30 tb-res-mg-t-30">
+                    <div class="website-traffic-ctn">
+                        <h2><span class="counter">@positiondetail[1]</span></h2>
+                        <p>Middle Position</p>
+                    </div>
+                    <div class="sparkline-bar-stats2">1,4,8,3,5,6,4,8,3,3,9,5</div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                <div class="wb-traffic-inner notika-shadow sm-res-mg-t-30 tb-res-mg-t-30 dk-res-mg-t-30">
+                    <div class="website-traffic-ctn">
+                        <h2><span class="counter">@positiondetail[2]</span></h2>
+                        <p>Free Position</p>
+                    </div>
+                    <div class="sparkline-bar-stats3">4,2,8,2,5,6,3,8,3,5,9,5</div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                <div class="wb-traffic-inner notika-shadow sm-res-mg-t-30 tb-res-mg-t-30 dk-res-mg-t-30">
+                    <div class="website-traffic-ctn">
+                        <h2><span class="counter">@positiondetail[3]</span></h2>
+                        <p>Total Position</p>
+                    </div>
+                    <div class="sparkline-bar-stats4">2,4,8,4,5,7,4,7,3,5,7,5</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Status area-->
+<br />
+<!-- New Chart  area start -->
+<div class="col-md-12">
+    @*<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>*@
+    <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+</div>
+<!-- New Chart  area end -->
+<!-- Start Sale Statistic area-->
+<div class="sale-statistic-area">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-9 col-md-8 col-sm-7 col-xs-12">
+                <div class="sale-statistic-inner notika-shadow mg-tb-30">
+                    <div class="curved-inner-pro">
+                        <div class="curved-ctn">
+                            <h2>Monthly Paid Bonus</h2>
+                            @*<p>Month Wise Paid Bonus</p>*@
+                        </div>
+                    </div>
+                    <canvas id="bar-chart-horizontal" width="100%"></canvas>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-4 col-sm-5 col-xs-12">
+                <div class="statistic-right-area notika-shadow mg-tb-30 sm-res-mg-t-0" style="padding-bottom: 183px;">
+                    <div class="past-day-statis">
+                        <h2>Monthly Vs Income, Profit & Bonus (\) (2019)</h2><br />
+                        @*<p>Fusce eget dolor id justo luctus the commodo vel pharetra nisi. Donec velit of libero.</p>*@
+                    </div>
+                    <div id="chartContainernew" style="height: 370px; width: 100%;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Sale Statistic area-->
+<!-- Start Email Statistic area-->
+
+<div class="notika-email-post-area">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                <div class="email-statis-inner notika-shadow">
+                    <div class="email-ctn-round">
+                        <div class="email-rdn-hd">
+                            <h2>Paid Bonus (%)</h2>
+                        </div>
+                        <div class="email-statis-wrap">
+                            <div class="email-round-nock">
+                                <input type="text" class="knob" value="0" data-rel="@grid2[4]" data-linecap="round" data-width="130" data-bgcolor="#E4E4E4" data-fgcolor="#44addd" data-thickness=".10" data-readonly="true">
+                            </div>
+                            <div class="email-ctn-nock">
+                                <p>Introduced Bonus</p>
+                            </div>
+                        </div>
+                        <div class="email-round-gp">
+                            <div class="email-round-pro">
+                                <div class="email-signle-gp">
+                                    <input type="text" class="knob" value="0" data-rel="@grid2[1]" data-linecap="round" data-width="90" data-bgcolor="#E4E4E4" data-fgcolor="#E67300" data-thickness=".10" data-readonly="true" disabled>
+                                </div>
+                                <div class="email-ctn-nock">
+                                    <p>Position Bonus</p>
+                                </div>
+                            </div>
+                            <div class="email-round-pro">
+                                <div class="email-signle-gp">
+                                    <input type="text" class="knob" value="0" data-rel="@grid2[0]" data-linecap="round" data-width="90" data-bgcolor="#E4E4E4" data-fgcolor="#AAAA11" data-thickness=".10" data-readonly="true" disabled>
+                                </div>
+                                <div class="email-ctn-nock">
+                                    <p>Profit Percentage Bonus</p>
+                                </div>
+                            </div>
+                            <div class="email-round-pro sm-res-ds-n lg-res-mg-bl">
+                                <div class="email-signle-gp">
+                                    <input type="text" class="knob" value="0" data-rel="@grid2[3]" data-linecap="round" data-width="90" data-bgcolor="#E4E4E4" data-fgcolor="#E74C3C" data-thickness=".10" data-readonly="true" disabled>
+                                </div>
+                                <div class="email-ctn-nock">
+                                    <p>3rd Stage Bonus</p>
+                                </div>
+                                <br>
+                            </div>
+
+                            <div class="email-round-pro sm-res-ds-n lg-res-mg-bl">
+                                <div class="email-signle-gp">
+                                    <input type="text" class="knob" value="0" data-rel="@grid2[2]" data-linecap="round" data-width="90" data-bgcolor="#E4E4E4" data-fgcolor="#66AA00" data-thickness=".10" data-readonly="true" disabled>
+                                </div>
+                                <div class="email-ctn-nock">
+                                    <p>5th Stage Bonus</p>
+                                </div>
+                                <br>
+                            </div>
+                            <div class="email-round-pro sm-res-ds-n lg-res-mg-bl">
+                                <div class="email-signle-gp">
+                                    <input type="text" class="knob" value="0" data-rel="@grid2[5]" data-linecap="round" data-width="90" data-bgcolor="#E4E4E4" data-fgcolor="#D576D5" data-thickness=".10" data-readonly="true" disabled>
+                                </div>
+                                <div class="email-ctn-nock">
+                                    <p>Share Bonus</p>
+                                </div>
+                                <br>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                <div class="recent-post-wrapper notika-shadow sm-res-mg-t-30 tb-res-ds-n dk-res-ds">
+                    <div class="recent-post-ctn">
+                        <div class="recent-post-title">
+                        </div>
+                    </div>
+                    <div class="recent-post-items">
+                        <div id="chartContainer3" style="height: 370px; width: 100%;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                <div class="recent-items-wp notika-shadow sm-res-mg-t-30">
+                    <div class="rc-it-ltd">
+                        <div class="recent-items-ctn">
+                            <div class="recent-items-title">
+                                <h2>Top Members With Highest Received Bonus</h2>
+                            </div>
+                        </div>
+                        <div class="recent-items-inn">
+                            <table class="table table-inner table-vmiddle">
+                                <thead>
+                                    <tr>
+                                        <th>Member ID</th>
+                                        <th>Name</th>
+                                        <th style="width: 60px">Bonus(\)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @{
+                                        var s = 0;
+                                        foreach (var a in topmembership)
+                                        {
+
+                                            <tr>
+                                                <td class="f-500 c-cyan">0000 @a.paidPresentageBonus</td>
+                                                <td>@a.memberId</td>
+                                                <td class="f-500 c-cyan">@a.paidIntoduceBonus</td>
+                                            </tr>
+                                            s = s + 1;
+                                            if (s == 8)
+                                            {
+                                                break;
+                                            }
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <div id="recent-items-chart" class="flot-chart-items flot-chart vt-ct-it tb-rc-it-res"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Realtime sts area-->
+<br>
+<!-- Start Second row-->
+<div class="notika-email-post-area">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                <div class="email-statis-inner notika-shadow">
+                    <div class="email-ctn-round">
+                        <div class="email-rdn-hd">
+                            <h2>Free Position Paid Bonus (%)</h2>
+                        </div>
+                        <div class="email-statis-wrap">
+                            <div class="email-round-nock">
+                                <input type="text" class="knob" value="0" data-rel="@freepositionbonusprsentage[1]" data-linecap="round" data-width="130" data-bgcolor="#E4E4E4" data-fgcolor="#44addd" data-thickness=".10" data-readonly="true">
+                            </div>
+                            <div class="email-ctn-nock">
+                                <p>Introduced Bonus</p>
+                            </div>
+                        </div>
+                        <div class="email-round-gp">
+                            <div class="email-round-pro">
+                                <div class="email-signle-gp">
+                                    <input type="text" class="knob" value="0" data-rel="@freepositionbonusprsentage[0]" data-linecap="round" data-width="90" data-bgcolor="#E4E4E4" data-fgcolor="#E67300" data-thickness=".10" data-readonly="true" disabled>
+                                </div>
+                                <div class="email-ctn-nock">
+                                    <p>Position Bonus</p>
+                                </div>
+                            </div>
+                            <div class="email-round-pro">
+                                <div class="email-signle-gp">
+                                    <input type="text" class="knob" value="0" data-rel="@freepositionbonusprsentage[5]" data-linecap="round" data-width="90" data-bgcolor="#E4E4E4" data-fgcolor="#AAAA11" data-thickness=".10" data-readonly="true" disabled>
+                                </div>
+                                <div class="email-ctn-nock">
+                                    <p>Profit Percentage Bonus</p>
+                                </div>
+                            </div>
+                            <div class="email-round-pro sm-res-ds-n lg-res-mg-bl">
+                                <div class="email-signle-gp">
+                                    <input type="text" class="knob" value="0" data-rel="@freepositionbonusprsentage[3]" data-linecap="round" data-width="90" data-bgcolor="#E4E4E4" data-fgcolor="#E74C3C" data-thickness=".10" data-readonly="true" disabled>
+                                </div>
+                                <div class="email-ctn-nock">
+                                    <p>3rd Stage Bonus</p>
+                                </div>
+                                <br>
+                            </div>
+
+                            <div class="email-round-pro sm-res-ds-n lg-res-mg-bl">
+                                <div class="email-signle-gp">
+                                    <input type="text" class="knob" value="0" data-rel="@freepositionbonusprsentage[4]" data-linecap="round" data-width="90" data-bgcolor="#E4E4E4" data-fgcolor="#66AA00" data-thickness=".10" data-readonly="true" disabled>
+                                </div>
+                                <div class="email-ctn-nock">
+                                    <p>5th Stage Bonus</p>
+                                </div>
+                                <br>
+                            </div>
+                            <div class="email-round-pro sm-res-ds-n lg-res-mg-bl">
+                                <div class="email-signle-gp">
+                                    <input type="text" class="knob" value="0" data-rel="@freepositionbonusprsentage[2]" data-linecap="round" data-width="90" data-bgcolor="#E4E4E4" data-fgcolor="#D576D5" data-thickness=".10" data-readonly="true" disabled>
+                                </div>
+                                <div class="email-ctn-nock">
+                                    <p>Share Bonus</p>
+                                </div>
+                                <br>
+                            </div>
+                        </div>
+                    </div><br /><br /><br /><br /><br /><br id="nuwan" /><br id="nuwan" /><br id="nuwan" /><br id="nuwan" /><br id="nuwan" /><br id="nuwan" />
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                <div class="recent-post-wrapper notika-shadow sm-res-mg-t-30 tb-res-ds-n dk-res-ds">
+                    <div class="recent-post-ctn">
+                        <div class="recent-post-title">
+                            <h2>Profit Precentage(members)</h2>
+                        </div>
+                    </div>
+                    <div class="recent-post-items">
+
+                        @*<div id="container5" style="height: 370px; width: 100%;"></div>*@
+                        <canvas id="pie-chart2" width="600" height="450"></canvas>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                <div class="recent-items-wp notika-shadow sm-res-mg-t-30">
+                    <div class="rc-it-ltd">
+                        <div class="recent-items-ctn">
+                            <div class="recent-items-title">
+                                <h2>Recent Items</h2>
+                            </div>
+                        </div>
+                        <div class="recent-items-inn">
+                            <div id="container6" style="height: 370px; width: 100%;"></div>
+                        </div>
+
+                    </div>
+                    <br /><br /><br /><br /><br id="nuwan" /><br id="nuwan" /><br id="nuwan" /><br id="nuwan" /><br id="nuwan" /><br id="nuwan" />
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<br>
+@*End Second Row*@
+<!-- Breadcomb area Start-->
+<div class="breadcomb-area">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="breadcomb-list">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="breadcomb-wp">
+                                <div class="breadcomb-icon">
+                                    <i class="notika-icon notika-house"></i>
+                                </div>
+                                <div class="breadcomb-ctn">
+                                    <h2>Financial Breakup</h2>
+                                    <p>@*Anlysics Bonus<span class="bread-ntd">Tree Piramid</span>*@</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-3">
+                            <div class="breadcomb-report">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Breadcomb area End-->
+<!-- Server time start-->
+<div class="visitor-sv-tm-area">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                <div class="visitor-sv-tm-int sm-res-mg-t-30 tb-res-mg-t-30 tb-res-ds-n dk-res-ds">
+                    <div class="contact-hd mg-bt-ant-inner">
+                        <h2>Free Positon Total Paid Bonus</h2>
+
+                    </div>
+                    <div class="visitor-st-ch visitor-ov-ct">
+                        <canvas id="pie-chart3" width="600" height="450"></canvas>
+                    </div>
+                    <br /><br /> <br />
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                <div class="visitor-sv-tm-int sm-res-mg-t-30">
+                    <div class="contact-hd mg-bt-ant-inner server-sts-rgt">
+                        <h2>Yearly Paid Bonus & Total Income(\)</h2>
+                    </div>
+                    <br />
+                    <canvas id="bar-chart-grouped" width="600" height="450"></canvas>
+                    <br /><br />
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                <div class="visitor-sv-tm-int">
+                    <div class="contact-hd mg-bt-ant-inner">
+                        <h2>Total Paid Bonus(\)</h2>
+
+                    </div>
+                    <div class="visitor-sv-tm-ch">
+                        <br />
+                        <canvas id="pie-chart" width="600" height="450"></canvas>
+                        <br /><br />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Server time End-->
+<!-- Search Engine Start-->
+<div class="search-engine-area mg-t-30">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                <div class="search-engine-int">
+                    <div class="contact-hd search-hd-eg">
+                        <h2>Super Position</h2>
+                        <p>Top 6 Super Position Holders</p>
+                    </div>
+                    <div class="search-eg-table">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th class="text-right">Position Count</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                    var memm = 0;
+                                    foreach (var mem in onlytopmemberlist)
+                                    {
+                                        <tr>
+                                            <td><img class="search-engine-img" src="img/search-engines/google.png" alt="">@mem.memberId</td>
+                                            <td class="text-right">@mem.paidIntoduceBonus <i class="notika-icon notika-up-arrow"></i></td>
+                                        </tr>
+                                        memm = memm + 1;
+                                        if (memm == 5)
+                                        {
+                                            break;
+                                        }
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                <div class="search-engine-int sm-res-mg-t-30 tb-res-mg-t-30 tb-res-mg-t-0">
+                    <div class="contact-hd search-hd-eg">
+                        <h2>Middle Position</h2>
+                        <p>Top 6 Middle Position Holders</p>
+                    </div>
+                    <div class="search-eg-table">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th class="text-right">Position Count</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                    var midmem = 0;
+                                    foreach (var midlle in middlememberlist)
+                                    {
+                                        <tr>
+                                            <td>@midlle.memberId</td>
+                                            <td class="text-right">@midlle.paidIntoduceBonus <i class="notika-icon notika-up-arrow"></i></td>
+                                        </tr>
+                                        midmem++;
+                                        if (midmem == 5)
+                                        {
+                                            break;
+                                        }
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                <div class="search-engine-int sm-res-mg-t-30 tb-res-mg-t-30 tb-res-ds-n dk-res-ds">
+                    <div class="contact-hd search-hd-eg">
+                        <h2>Free Position</h2>
+                        <p>Top 6 Free Position Holders</p>
+                    </div>
+                    <div class="search-eg-table">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th class="text-right">Position Count</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                    var sxs = 0;
+                                    foreach (var a in smallememberlist)
+                                    {
+
+                                        <tr>
+                                            <td>@a.memberId</td>
+                                            <td class="text-right">
+                                                <h4>@a.paidIntoduceBonus </h4>
+                                            </td>
+                                        </tr>
+                                        sxs = sxs + 1;
+                                        if (sxs == 5)
+                                        {
+                                            break;
+                                        }
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+<!-- last area 2-->
+<div class="search-engine-area mg-t-30">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                <div class="search-engine-int">
+                    <div class="contact-hd search-hd-eg">
+                        <h2>Top Introducer</h2>
+                        <p>top 6 users 350000/- Package And 100000/- Package introducer for sky Rocket</p>
+                    </div>
+                    <div class="search-eg-table">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>User Name</th>
+                                    <th class="text-right">Introduce Positioncount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                    foreach (var a in introducerall)
+                                    {
+                                        <tr>
+                                            <td><img class="search-engine-img" src="~/img/search-engines/google.png" alt="">@a.membershipNo</td>
+                                            <td class="text-right">@a.bcNo <i class="fas fa-arrow-up"></i></td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                <div class="search-engine-int sm-res-mg-t-30 tb-res-mg-t-30 tb-res-mg-t-0">
+                    <div class="contact-hd search-hd-eg">
+                        <h2>Top Introducer (350000/- package)</h2>
+                        <p>top 6 users 350000/- Package introducer for sky Rocket</p>
+                    </div>
+                    <div class="search-eg-table">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>User Name</th>
+                                    <th class="text-right">Introducer Count</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                    foreach (var a in thirtyfiveintroducerall)
+                                    {
+                                        <tr>
+                                            <td>@a.membershipNo</td>
+                                            <td class="text-right">@a.bcNo<i class="notika-icon notika-up-arrow"></i></td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                <div class="search-engine-int sm-res-mg-t-30 tb-res-mg-t-30 tb-res-ds-n dk-res-ds">
+                    <div class="contact-hd search-hd-eg">
+                        <h2>Top Introducer (100000/- package)</h2>
+                        <p>top 6 users 100000/- Package introducer for sky Rocket</p>
+                    </div>
+                    <div class="search-eg-table">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>User Name</th>
+                                    <th class="text-right">Introducer Count</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                    foreach (var a in middleintroducerall)
+                                    {
+                                        <tr>
+                                            <td>@a.membershipNo</td>
+                                            <td class="text-right">@a.bcNo<i class="notika-icon notika-up-arrow"></i></td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+@*Start top chart*@
+<script>
+    Highcharts.chart('container', {
+        chart: {
+            marginBottom: 80,
+            animation: {
+                duration: 3500,
+                easing: 'easeOutBounce'
+            }
+        },
+
+        title: {
+            text: 'Binary Tree Free Position'
+        },
+
+        yAxis: {
+            title: { text: 'MSFT' },
+            opposite: false,
+        },
+
+        xAxis: {
+            title: { text: 'down' },
+            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+            labels: {
+                rotation: 60
+            }
+        },
+
+        plotOptions: {
+            pie: {
+                animation: {
+                    duration: 3000
+                },
+            }
+        },
+
+        series: [{
+            name: 'Free Position',
+            data: [@freeposition[0], @freeposition[2], @freeposition[4], @freeposition[6], @freeposition[8], @freeposition[10], @freeposition[12], @freeposition[14], @freeposition[16], @freeposition[18], @freeposition[20], @freeposition[22]]
+        }, {
+            name: 'package Position',
+            data: [@freeposition[1], @freeposition[3], @freeposition[5], @freeposition[7], @freeposition[9], @freeposition[11], @freeposition[13], @freeposition[15], @freeposition[17], @freeposition[19], @freeposition[21], @freeposition[23]]
+        }],
+
+    });
+
+    //Start 3rd chart
+    Highcharts.chart('container6', {
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Total Prsentage Bonus From Today Onward'
+        },
+        subtitle: {
+            text: 'Introduction Bonus for Members who Introduced 4 Members and 6 Members'
+        },
+        xAxis: {
+            title: { text: 'MSFT' },
+            type: 'category'
+        },
+        yAxis: {
+            title: { text: 'Precentage' },
+
+        },
+        legend: {
+            enabled: false
+        },
+        plotOptions: {
+            series: {
+                borderWidth: 0,
+                dataLabels: {
+                    enabled: true,
+                    format: '{point.y:.1f}'
+                }
+            }
+        },
+
+        tooltip: {
+            headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+            pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}</b> of total<br/>'
+        },
+
+        series: [
+            {
+                name: "Bonus Amount",
+                colorByPoint: true,
+                data: [
+                    {
+                        name: "More Than 6 People Introduced Bonus",
+                        color: "#F6F21F",
+                        y: @introducepersonamount[0],
+                        drilldown: "Profit presentage"
+                    },
+                    {
+                        name: "More Than 4 People Introduced Bonus",
+                        color: "#DAF7A6",
+                        y: @introducepersonamount[1],
+                        drilldown: "Profit Presentage"
+                    }
+                ]
+            }
+        ],
+        drilldown: {
+            series: [
+                {
+                    name: "More Than 4 People Introduced",
+                    id: "Chrome",
+                    data: [
+                        [
+                            "v65.0",
+                            0.1
+                        ],
+                        [
+                            "v64.0",
+                            1.3
+                        ],
+                        [
+                            "v63.0",
+                            53.02
+                        ],
+                        [
+                            "v62.0",
+                            1.4
+                        ],
+                        [
+                            "v61.0",
+                            0.88
+                        ],
+                        [
+                            "v60.0",
+                            0.56
+                        ],
+                        [
+                            "v59.0",
+                            0.45
+                        ],
+                        [
+                            "v58.0",
+                            0.49
+                        ],
+                        [
+                            "v57.0",
+                            0.32
+                        ],
+                        [
+                            "v56.0",
+                            0.29
+                        ],
+                        [
+                            "v55.0",
+                            0.79
+                        ],
+                        [
+                            "v54.0",
+                            0.18
+                        ],
+                        [
+                            "v51.0",
+                            0.13
+                        ],
+                        [
+                            "v49.0",
+                            2.16
+                        ],
+                        [
+                            "v48.0",
+                            0.13
+                        ],
+                        [
+                            "v47.0",
+                            0.11
+                        ],
+                        [
+                            "v43.0",
+                            0.17
+                        ],
+                        [
+                            "v29.0",
+                            0.26
+                        ]
+                    ]
+                },
+                {
+                    name: "Firefox",
+                    id: "Firefox",
+                    data: [
+                        [
+                            "v58.0",
+                            1.02
+                        ],
+                        [
+                            "v57.0",
+                            7.36
+                        ],
+                        [
+                            "v56.0",
+                            0.35
+                        ],
+                        [
+                            "v55.0",
+                            0.11
+                        ],
+                        [
+                            "v54.0",
+                            0.1
+                        ],
+                        [
+                            "v52.0",
+                            0.95
+                        ],
+                        [
+                            "v51.0",
+                            0.15
+                        ],
+                        [
+                            "v50.0",
+                            0.1
+                        ],
+                        [
+                            "v48.0",
+                            0.31
+                        ],
+                        [
+                            "v47.0",
+                            0.12
+                        ]
+                    ]
+                },
+
+            ]
+        }
+    });
+</script>
+@*end top chart new*@
+<script>
+    window.onload = function () {
+
+        var today = new Date();
+        var year = today.getFullYear();
+
+        //Second chart
+        var x = 2019;
+        var chart = new CanvasJS.Chart("chartContainernew", {
+            animationEnabled: true,
+            theme: "light2",
+            title: {
+                //text: "Monthly Bonus and Profit"
+            },
+            axisX: {
+                title: 'Month',
+                valueFormatString: "MMM"
+            },
+            axisY: {
+                title: 'Amount',
+                prefix: "$",
+                labelFormatter: addSymbols
+            },
+            toolTip: {
+                shared: true
+            },
+            legend: {
+                cursor: "pointer",
+                itemclick: toggleDataSeries
+            },
+            data: [
+                {
+                    type: "column",
+                    name: "income",
+                    showInLegend: true,
+                    xValueFormatString: "MMMM YYYY",
+                    yValueFormatString: "$#,##0",
+                    dataPoints: [
+                        { x: new Date(year, 0), y: @profitdetails[1] },
+                        { x: new Date(year, 1), y: @profitdetails[4] },
+                        { x: new Date(year, 2), y: @profitdetails[7] },
+                        { x: new Date(year, 3), y: @profitdetails[10], indexLabel: "High Renewals" },
+                        { x: new Date(year, 4), y: @profitdetails[13] },
+                        { x: new Date(year, 5), y: @profitdetails[16] },
+                        { x: new Date(year, 6), y: @profitdetails[19] },
+                        { x: new Date(year, 7), y: @profitdetails[22] },
+                        { x: new Date(year, 8), y: @profitdetails[25] },
+                        { x: new Date(year, 9), y: @profitdetails[28] },
+                        { x: new Date(year, 10), y: @profitdetails[31] },
+                        { x: new Date(year, 11), y: @profitdetails[34] }
+                    ]
+                },
+                {
+                    type: "line",
+                    name: "profit",
+                    showInLegend: true,
+                    yValueFormatString: "$#,##0",
+                    dataPoints: [
+                        { x: new Date(year, 0), y: @profitdetails[2] },
+                        { x: new Date(year, 1), y: @profitdetails[5] },
+                        { x: new Date(year, 2), y: @profitdetails[8] },
+                        { x: new Date(year, 3), y: @profitdetails[11] },
+                        { x: new Date(year, 4), y: @profitdetails[14] },
+                        { x: new Date(year, 5), y: @profitdetails[17] },
+                        { x: new Date(year, 6), y: @profitdetails[20] },
+                        { x: new Date(year, 7), y: @profitdetails[23] },
+                        { x: new Date(year, 8), y: @profitdetails[26] },
+                        { x: new Date(year, 9), y: @profitdetails[29] },
+                        { x: new Date(year, 10), y: @profitdetails[32] },
+                        { x: new Date(year, 11), y: @profitdetails[35] }
+                    ]
+                },
+                {
+                    type: "area",
+                    name: "PaidBonus",
+                    markerBorderColor: "white",
+                    markerBorderThickness: 2,
+                    showInLegend: true,
+                    yValueFormatString: "$#,##0",
+                    dataPoints: [
+                        { x: new Date(year, 0), y: @profitdetails[0] },
+                        { x: new Date(year, 1), y: @profitdetails[3] },
+                        { x: new Date(year, 2), y: @profitdetails[6] },
+                        { x: new Date(year, 3), y: @profitdetails[9] },
+                        { x: new Date(year, 4), y: @profitdetails[12] },
+                        { x: new Date(year, 5), y: @profitdetails[15] },
+                        { x: new Date(year, 6), y: @profitdetails[18] },
+                        { x: new Date(year, 7), y: @profitdetails[21] },
+                        { x: new Date(year, 8), y: @profitdetails[24] },
+                        { x: new Date(year, 9), y: @profitdetails[27] },
+                        { x: new Date(year, 10), y: @profitdetails[30] },
+                        { x: new Date(year, 11), y: @profitdetails[33] }
+                    ]
+                }]
+        });
+        chart.render();
+
+        function addSymbols(e) {
+            var suffixes = ["", "K", "M", "B"];
+            var order = Math.max(Math.floor(Math.log(e.value) / Math.log(1000)), 0);
+
+            if (order > suffixes.length - 1)
+                order = suffixes.length - 1;
+
+            var suffix = suffixes[order];
+            return CanvasJS.formatNumber(e.value / Math.pow(1000, order)) + suffix;
+        }
+
+        function toggleDataSeries(e) {
+            if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+                e.dataSeries.visible = false;
+            } else {
+                e.dataSeries.visible = true;
+            }
+            e.chart.render();
+        }
+
+        //third chart
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth() + 1; //January is 0!
+        var startOfWeek = moment().startOf('week').toDate();
+        var endOfWeek = moment().endOf('week').toDate();
+        var dx1 = endOfWeek.getDate();
+        var dx1month = endOfWeek.getMonth();
+        var x = @datewisepos[24] + 0;
+        var x1 = @datewisepos[24] + 1;
+        var x2 = @datewisepos[24] + 2;
+        var x3 = @datewisepos[24] + 3;
+        var x4 = @datewisepos[24] + 4;
+        var x5 = @datewisepos[24] + 5;
+        var x6 = @datewisepos[24] + 6;
+        var xp = 10;
+
+        var currentDate = new Date();
+        currentDate.setDate(currentDate.getDate() + x);
+
+        var currentDate1 = new Date();
+        currentDate1.setDate(currentDate1.getDate() + x1);
+
+        var currentDate2 = new Date();
+        currentDate2.setDate(currentDate2.getDate() + x2);
+
+        var currentDate3 = new Date();
+        currentDate3.setDate(currentDate3.getDate() + x3);
+
+        var currentDate4 = new Date();
+        currentDate4.setDate(currentDate4.getDate() + x4);
+
+        var currentDate5 = new Date();
+        currentDate5.setDate(currentDate5.getDate() + x5);
+
+        var currentDate6 = new Date();
+        currentDate6.setDate(currentDate6.getDate() + x6);
+
+        var dx = startOfWeek.getDate();
+        var yyyy = today.getFullYear() + 1;
+
+        // alert(endOfWeek);
+
+        var chart = new CanvasJS.Chart("chartContainer3", {
+
+            animationEnabled: true,
+            title: {
+
+                text: "Current Week Positions"
+            },
+            axisX: {
+                title: 'Days',
+                valueFormatString: "DDD",
+                minimum: startOfWeek,
+                maximum: endOfWeek
+             },
+            axisY: {
+                title: "Number of Position"
+            },
+            legend: {
+                verticalAlign: "top",
+                horizontalAlign: "right",
+                dockInsidePlotArea: true
+            },
+            toolTip: {
+                shared: true
+            },
+
+            data: [{
+                name: "Super Positions",
+                showInLegend: true,
+                legendMarkerType: "square",
+                type: "area",
+                color: "rgba(40,175,101,0.6)",
+                markerSize: 0,
+                dataPoints: [
+                    { x: currentDate, y: @datewisepos[1]  },
+                    { x: currentDate1, y: @datewisepos[4]  },
+                    { x: currentDate2, y: @datewisepos[7]  },
+                    { x: currentDate3, y: @datewisepos[10]  },
+                    { x: currentDate4, y: @datewisepos[13]  },
+                    { x: currentDate5, y: @datewisepos[16]  },
+                    { x: currentDate6, y: @datewisepos[19]  }
+                ]
+            },
+
+            {
+                name: "Middle Positions",
+                showInLegend: true,
+                legendMarkerType: "square",
+                type: "area",
+                color: "#fb9678",
+                markerSize: 0,
+                dataPoints: [
+                    { x: currentDate, y: @datewisepos[0] },
+                    { x: currentDate1, y: @datewisepos[3]  },
+                    { x: currentDate2, y: @datewisepos[6]  },
+                    { x: currentDate3, y: @datewisepos[9]  },
+                    { x: currentDate4, y: @datewisepos[12]  },
+                    { x: currentDate5, y: @datewisepos[15]  },
+                    { x: currentDate6, y: @datewisepos[18]  }
+                ]
+            },
+
+            @*{
+                name: "Small Package",
+                showInLegend: false,
+                legendMarkerType: "square",
+                type: "area",
+                color: "rgba(0,75,141,0.7)",
+                markerSize: 0,
+                dataPoints: [
+                    { x: currentDate, y: @datewisepos[2]  },
+                    { x: currentDate1, y: @datewisepos[5]  },
+                    { x: currentDate2, y: @datewisepos[8]  },
+                    { x: currentDate3, y: @datewisepos[11]  },
+                    { x: currentDate4, y: @datewisepos[14]  },
+                    { x: currentDate5, y: @datewisepos[17]  },
+                    { x: currentDate6, y: @datewisepos[20]  }
+                ]
+            }*@]
+        });
+        chart.render();
+
+    }
+
+</script>
+<script>
+    var today = new Date();
+    var dd = today.getDate();
+    var now = today.getFullYear();
+    var now1 = today.getFullYear()-1;
+    var now2 = today.getFullYear()-2;
+    var now3 = today.getFullYear() - 3;
+
+    //Start Chart JS
+
+    new Chart(document.getElementById("bar-chart-horizontal"), {
+        type: 'horizontalBar',
+        data: {
+            label: 'Distance (km)',
+            labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+            datasets: [
+                {
+                    label: "Monthly Bonus",
+                    backgroundColor: ["red", "#8e5ea2", "#3cba9f", "#e8c3b9", "#c45850", "#3e95cd", "#965A09", "#3cba9f", "green", "yellow", "#061E73","#14B3B1"],
+                    data: [@profitdetails[0], @profitdetails[3], @profitdetails[6], @profitdetails[9], @profitdetails[12], @profitdetails[15], @profitdetails[18], @profitdetails[21], @profitdetails[24], @profitdetails[27], @profitdetails[30], @profitdetails[33]]
+                }
+            ]
+        },
+        options: {
+            legend: { display: false },
+            title: {
+                display: true,
+                position: 'bottom',
+                text: 'Paid Bonus (\)'
+            }
+        }
+
+    });
+    //Pie Chart
+    new Chart(document.getElementById("pie-chart"), {
+        type: 'pie',
+        data: {
+            labels: ["Introduced Bonus", "Profit Percentage Bonus", "Position Bonus","Share Bonus", "3rd Stage Bonus", "5th Stage Bonus"],
+            datasets: [{
+                label: "Population (millions)",
+                backgroundColor: ["#44addd", "#AAAA11", "#E67300", "#D576D5", "#E74C3C","#66AA00"],
+                data: [@paidbonusvalue[4], @paidbonusvalue[0], @paidbonusvalue[1],@paidbonusvalue[5], @paidbonusvalue[3], @paidbonusvalue[2]]
+            }]
+        },
+        options: {
+            title: {
+                display: true,
+                text: 'Total Bonus'
+            }
+        }
+    });
+
+    //Pie Chart2
+    new Chart(document.getElementById("pie-chart2"), {
+        type: 'pie',
+        data: {
+            labels: ["Introduced (6 members)", "Introduced (4 members)"],
+            datasets: [{
+                label: "Population (millions)",
+                backgroundColor: ["#F6F21F", "#DAF7A6 "],
+                data: [@introducepersoncounting[0], @introducepersoncounting[1]]
+            }]
+        },
+        options: {
+            title: {
+                display: true,
+                //text: 'Profit Precentage(members)'
+            }
+        }
+    });
+
+    //Pie Chart3
+    new Chart(document.getElementById("pie-chart3"), {
+        type: 'pie',
+        data: {
+            labels: ["Introduce Bonus", "positon Bonus", "Profit Presntage Bonus", "share Bonus", "3rd Stage Bonus","fifth Stage Bonus"],
+            datasets: [{
+                label: "Population (millions)",
+                backgroundColor: ["#44addd", "#E67300", "#AAAA11", "#D576D5", "#E74C3C", "#66AA00"],
+                data: [@freepositontotalbonus[0], @freepositontotalbonus[1], @freepositontotalbonus[2], @freepositontotalbonus[3], @freepositontotalbonus[4], @freepositontotalbonus[5]]
+            }]
+        },
+        options: {
+            title: {
+                display: true,
+                text: 'All Bonus'
+            }
+        }
+    });
+
+    //grouped Bar Chart
+    new Chart(document.getElementById("bar-chart-grouped"), {
+        type: 'bar',
+        data: {
+            labels: [now3, now2, now1, now],
+            datasets: [
+                {
+                    label: "income",
+                    backgroundColor: "#6d78ad",
+                    data: [@yearlybonus[7], @yearlybonus[5], @yearlybonus[3], @yearlybonus[1]]
+                }, {
+                    label: "Bonus",
+                    backgroundColor: "#e9a19b",
+
+                    data: [@yearlybonus[6], @yearlybonus[4], @yearlybonus[2], @yearlybonus[0]]
+                }
+            ]
+        },
+        options: {
+            title: {
+                display: true,
+                position: 'left',
+                text: 'Amount(Y)'
+                //text: 'Yearly Bonus & Income'
+            }
+        }
+    });
+
+    //Line chart
+    new Chart(document.getElementById("line-chart"), {
+        type: 'line',
+        data: {
+            labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "Octomber", "November", "December"],
+            datasets: [{
+                data: [@expectedincome[0],@expectedincome[1], @expectedincome[2], @expectedincome[3], @expectedincome[4], @expectedincome[5], @expectedincome[6], @expectedincome[7], @expectedincome[8], @expectedincome[9], @expectedincome[10], @expectedincome[11]],
+                label: "Expected Profit",
+                borderColor: "#3e95cd",
+                fill: false
+            }, {
+                data: [@expectedincome[12], @expectedincome[13], @expectedincome[14], @expectedincome[15], @expectedincome[16], @expectedincome[17], @expectedincome[18], @expectedincome[19], @expectedincome[20], @expectedincome[21], @expectedincome[22], @expectedincome[23]],
+                label: "Actual Profit",
+                borderColor: "#8e5ea2",
+                fill: false
+            }@*, {
+                data: [@expectedincome[0] - @expectedincome[12], @expectedincome[1] - @expectedincome[13] ,  @expectedincome[2] -  @expectedincome[14], @expectedincome[3] -  @expectedincome[15]
+                , @expectedincome[4] - @expectedincome[16],@expectedincome[5] - @expectedincome[17] , @expectedincome[6] - @expectedincome[18], @expectedincome[7] - @expectedincome[19], @expectedincome[8] - @expectedincome[20]
+                , @expectedincome[9] -   @expectedincome[21] ,@expectedincome[10] - @expectedincome[22],@expectedincome[11] - @expectedincome[23] ],
+                label: "Lost Money",
+                borderColor: "#3cba9f",
+                fill: false
+            }*@
+
+            ]
+        },
+        options: {
+            title: {
+                display: true,
+                text: 'Fake Income and True Income Information'
+            }
+        }
+    });
+</script>

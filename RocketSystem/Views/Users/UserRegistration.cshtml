@@ -1,0 +1,935 @@
+﻿@model RocketSystem.Models.UserLogin
+@{
+
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>User Registration ユーザー登録</title>
+        <meta name="csrf-param" content="authenticity_token" />
+        <meta name="csrf-token" content="0+zyWuBwAWTaCMpAujIDrCwH0jhxesQ1lJ8YVX27EAQpw+IkfzxyeuetF9ESxrH5V/1RkWjGpNuozuBl6+w0KQ==" />
+        <!-- ///****************style sheet*********************** -->
+        <link rel="stylesheet" type="text/css" href="~/vendor/bootstrap/css/bootstrap.min.css">
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <link rel="stylesheet" media="screen" href="~/css/regiform.css" />
+        <!--===============================================================================================-->
+        <link rel="icon" href="~/img/favicon.png" />
+
+    </head>
+    @{
+        int num = 0;
+        var foursshdatalist = ViewBag.foursshdata;
+        if (foursshdatalist == null)
+        {
+            num = 1;
+        }
+
+    }
+    <body data-action="new" data-controller="verticals" data-path="/examples/vertical" onload="onload(@num);">
+
+
+        <div class="container ">
+            <br />
+            @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "submitform" }))
+
+            {
+                @Html.AntiForgeryToken()
+                <br />
+                <div class="d-flex justify-content-center">
+                    <div class="col-md-10">
+                        <div class="formbody">
+                            <div class="panel panel-info">
+                                <div class="panel-heading">
+                                    <div class="panel-title text-center">
+                                        <strong>ユーザー登録フォーム</strong><br />
+                                        <span class="small">全部ご記入ください。</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--**********Main body*****************************-->
+                            <div class="col">
+                                <!--*************Personal Informaton ***********************************-->
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="panel panel-info">
+                                            <div class="panel-heading">
+                                                <div class="panel-title">
+                                                    <strong>個人情報</strong>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <h5 class="text-center"><span>名前を会社か又は，個人か選んでください。</span></h5>
+                                        <!-- ***********CHECK BOX**************** -->
+                                        <div class="form-group radio">
+                                            <div class="row">
+                                                <div class="radiobtn form-group col-xs-6">
+                                                    <input type="checkbox" id="persname" name="check1" value="persname" onclick="onlyOne1(this)" />
+                                                    <label for="persname">個人名</label>
+                                                </div>
+                                                <div class="radiobtn form-group col-xs-6">
+                                                    <input type="checkbox" id="comname" name="check1" value="comname" onclick="onlyOne1(this)" />
+                                                    <label for="comname">会社名</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- ***********COMPANY NAME**************** -->
+                                        <div class="form-group" id="mydiv2" style="display: none;">
+                                            <!-- ***********COMPANY NAME CHECK**************** -->
+                                            <label>
+                                                会社名 :<span class="star" style="font-size: 23px; color:red">*</span>
+                                            </label>
+                                            <h5><span class="" id="comnamereq"></span></h5>
+                                            <!-- *************************** -->
+                                            <div class="form-group radio">
+                                                <div class="radiobtn form-group col-md-4 ">
+                                                    <input type="checkbox" id="brfocom" name="check2" value="brfocom" onclick="onlyOne2(this)" />
+                                                    <label for="brfocom" style="font-size:smaller">先頭に使うとき</label>
+                                                </div>
+                                                <div class="radiobtn form-group col-md-4">
+                                                    <input type="checkbox" id="midcom" name="check2" value="midcom" onclick="onlyOne2(this)" />
+                                                    <label for="midcom" style="font-size:smaller">途中に使うとき</label>
+                                                </div>
+                                                <div class="radiobtn form-group col-md-4">
+                                                    <input type="checkbox" id="aftcom" name="check2" value="aftcom" onclick="onlyOne2(this)" />
+                                                    <label for="aftcom" style="font-size:smaller">末尾に使うとき</label>
+                                                </div>
+                                            </div>
+                                            <!-- *************************** -->
+                                            <div class="form-group">
+                                                <!-- ***************START*********************** -->
+                                                <div class="form-group" id="bcomdiv">
+                                                    <div class="form-group col-xs-6">
+                                                        <input type="text" class="form-control" name="persname1" id="persname1" autocomplete="off" onfocusout="javascript:return companynamevalidate(this)">
+                                                    </div>
+                                                    <div class="form-group col-xs-6">
+                                                        <select id="companytype1" class="form-control">
+                                                            <option value="0">Select type</option>
+                                                            @{
+                                                                foreach (var item in ViewBag.Organisations)
+                                                                {
+                                                                    <option value="@item.CompanyTypeeEnd">@item.CompanyTypeName</option>
+                                                                }
+                                                            }
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <!-- ******************MIDDLE******************** -->
+                                                <div class="form-group" id="midcomdiv" style="display: none;">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="col-md-4">
+                                                                <input type="text" class="form-control" name="midcomname1" id="midcomname1" autocomplete="off" onfocusout="javascript:return companynamevalidate(this)">
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <select id="companytype3" class="form-control">
+                                                                    <option value="0">Select type</option>
+                                                                    @{
+                                                                        foreach (var item in ViewBag.Organisations)
+                                                                        {
+                                                                            <option value="@item.CompanyTypeeMiddle">@item.CompanyTypeName</option>
+
+                                                                        }
+                                                                    }
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <input type="text" class="form-control" name="midcomname2" id="midcomname2" autocomplete="off" onfocusout="javascript:return companynamevalidate(this)">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- *******************END******************* -->
+                                                <div class="form-group" id="acomdiv" style="display: none;">
+                                                    <div class="form-group col-xs-6">
+                                                        <select id="companytype2" class="form-control">
+                                                            <option value="0">Select type</option>
+                                                            @{
+                                                                foreach (var item in ViewBag.Organisations)
+                                                                {
+                                                                    <option value="@item.CompanyTypeStart">@item.CompanyTypeName</option>
+
+                                                                }
+                                                            }
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group col-xs-6">
+                                                        <input type="text" class="form-control" name="persname2" id="persname2" autocomplete="off" onfocusout="javascript:return companynamevalidate(this)">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- *************************** -->
+                                        </div>
+                                        <input type="hidden" id="nameorbanknane" name="name">
+                                        <input type="hidden" id="campanytype" name="companyType">
+                                        <!-- ***********PERSONAL NAME**************** -->
+
+
+
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-md-6" id="mydiv1">
+                                                    <label for="exampleInputName">氏名 : <span class="star" style="font-size: 23px; color:red">*</span></label>
+                                                    <input type="text" class="form-control" name="nameknji" id="namekanji" autocomplete="off" onfocusout="javascript:return namevalidate(this)">
+                                                    <h5><span class="" id="namereq"></span></h5>
+                                                </div>
+                                                <!-- ************ #2 Name KATAKANA H/W **************** -->
+                                                <div class="col-md-6">
+                                                    <label for="exampleInputName">氏名カナ : <span class="star" style="font-size: 23px; color:red">*</span></label>
+                                                    <input type="text" class="form-control" name="katakanaName" id="namekatha" autocomplete="off" onfocusout="javascript:return kananamevalidate(this)">
+                                                    <h5><span class="" id="namekathreq"></span></h5>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <label for="exampleInputName">ニックネーム : <span class="star" style="font-size: 23px;"></span> </label>
+                                                    <input type="text" class="form-control" name="nickName" id="nickname" autocomplete="off" onfocusout="javascript:return nicknamevalidate(this)">
+                                                    <h5><span class="" id="nicknamekathreq"></span></h5>
+                                                </div>
+                                                <!-- ************DATE OF BIRTH **************** -->
+                                                <div class="col-md-6">
+                                                    <label>生年月日（年月日）<span class="star" style="font-size: 23px; color:red">*</span></label>
+                                                    <br />
+                                                    <!-- *****************************YEAR******************************* -->
+                                                    <select id="year" class="form-control col-md-4" onfocusout="birthdayvalnull()"></select>
+                                                    <script type="text/javascript">
+                                                        var year = 1900;
+                                                        var till = 2019;
+                                                        var options = "";
+                                                        options += "<option value='1111'>年</option>";
+                                                        for (var y = year; y <= till; y++) {
+                                                            options += "<option value='" + y + "'>" + y + "年" + "</option>";
+                                                        }
+                                                        document.getElementById("year").innerHTML = options;
+                                                    </script>
+                                                    <!-- *******************************MONTH**************************** -->
+                                                    <select id="month" class="form-control  col-md-3" onfocusout="birthdayvalnull()"></select>
+                                                    <script type="text/javascript">
+                                                        var month = 1;
+                                                        var till = 12;
+                                                        var options = "";
+                                                        options = "<option value='月'>月</option>";
+                                                        for (var m = month; m <= till; m++) {
+                                                            options += "<option value='" + m + "'>" + m + "月" + "</option>";
+                                                        }
+                                                        document.getElementById("month").innerHTML = options;
+                                                    </script>
+                                                    <!-- ************************** DAY ******************************************** -->
+                                                    <select id="day" class="form-control col-lg-3" onfocusout="birthdayvalnull()"></select>
+                                                    <script type="text/javascript">
+                                                        var day = 1;
+                                                        var till = 31;
+                                                        var options = "";
+                                                        options = "<option value='日'>日</option>";
+                                                        for (var d = day; d <= till; d++) {
+                                                            options += "<option value='" + d + "'>" + d + "日" + "</option>";
+                                                        }
+                                                        document.getElementById("day").innerHTML = options;
+                                                    </script>
+                                                    <br /> <br />
+                                                    <!-- ********************************************************************* -->
+                                                    <h5><span class="" id="birthdayreq"></span></h5>
+                                                </div>
+                                                <input type="hidden" id="birthday" name="dateOfBirth" />
+
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <!-- ************ #5 Gender H/W *********************** -->
+                                                <div class="col-md-6">
+                                                    <label for="exampleInputName">性別 :</label>
+                                                    <select class="form-control" name="gender" id="gender" required>
+                                                        <option value="0">性別を選んでください。</option>
+                                                        <option value="1">男性</option>
+                                                        <option value="2">女性</option>
+                                                    </select>
+                                                    <h5><span class="" id="genderreq"></span></h5>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label>郵便番号:</label>
+                                                    <div class="autotabbed" id="example1">
+                                                        <input type="number" name="zip1" size="3" maxlength="3" class="col-md-3 form-control inputs" onChange="checkInput(this)" onKeyup="checkInput(this)" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" id="pos1">
+
+                                                        <input type="number" name="zip2" size="3" maxlength="4"
+                                                               onKeyUp="AjaxZip2.zip2addr('zip1','pref','addr','zip2','strt','aria','pro','pro1');" class="col-md-4 form-control inputs" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" id="pos2">
+
+                                                    </div>
+                                                    <br /><br />
+                                                    <h5> <span name="pro" style="color:red;font-size:12px;" id="pro"></span></h5>
+                                                    <h5> <span name="pro1" id="pro1"></span></h5>
+                                                </div>
+                                                <input type="hidden" id="postalCode" name="postalCode" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group ">
+                                            <div class="row">
+                                                <label class="col-md-12">都道府県</label>
+                                                <div class="col-md-12">
+                                                    <input type="text" name="pref" class="form-control col-md-3" id="pref" readonly>
+                                                    <input type="text" name="addr" class="form-control col-md-3" id="addr" readonly>
+                                                    <input type="text" name="addrnum" class="form-control inputs  col-md-5" id="addrnum">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <input type="hidden" id="address1" name="addressOne" />
+
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <label>携帯電話番号 : <span class="star" style="font-size: 23px; color:red">*</span></label>
+                                                    <div id="example2" class="autotabbed">
+                                                        <input style="width:60px;" type="number" maxlength="3" onChange="checkInput(this)" onKeyup="checkInput(this)" size="3" id="mob1" class="text-center" autocomplete="off" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" />-
+                                                        <input style="width:60px;" type="number" maxlength="4" onChange="checkInput(this)" onKeyup="checkInput(this)" size="3" id="mob2" class="text-center" autocomplete="off" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" />-
+                                                        <input style="width:60px;" type="number" maxlength="4" onChange="checkInput(this)" onKeyup="checkInput(this)" size="3" id="mob3" class="text-center" autocomplete="off" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" onfocusout="mobilevalnull()" />
+
+                                                    </div>
+                                                    <h5><span id="phonevali"></span></h5>
+                                                    <input type="hidden" id="mobileNumber" name="mobileNo" />
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label>電話番号 :  <span class="star" style="font-size: 23px;"></span></label>
+                                                    <div id="example3" class="autotabbed">
+                                                        <input style="width:60px;" type="number" maxlength="3" onChange="checkInput(this)" onKeyup="checkInput(this)" size="3" id="tel1" class="text-center" autocomplete="off" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" />-
+                                                        <input style="width:60px;" type="number" maxlength="3" onChange="checkInput(this)" onKeyup="checkInput(this)" size="3" id="tel2" class="text-center" autocomplete="off" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" />-
+                                                        <input style="width:60px;" type="number" maxlength="4" onChange="checkInput(this)" onKeyup="checkInput(this)" size="3" id="tel3" class="text-center" autocomplete="off" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" onfocusout="tellvalnull()" />
+                                                    </div>
+                                                    <h5><span id="tellvali"></span></h5>
+                                                    <input type="hidden" id="telephoneNumber" name="telephoneNo" />
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label>ファックス番号 :  <span class="star" style="font-size: 23px;"></span> </label>
+                                                    <div id="example4" class="autotabbed">
+                                                        <input style="width:60px;" type="number" maxlength="3" onChange="checkInput(this)" onKeyup="checkInput(this)" size="3" id="fax1" class="text-center" autocomplete="off" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" />-
+                                                        <input style="width:60px;" type="number" maxlength="3" onChange="checkInput(this)" onKeyup="checkInput(this)" size="3" id="fax2" class="text-center" autocomplete="off" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" />-
+                                                        <input style="width:60px;" type="number" maxlength="4" onChange="checkInput(this)" onKeyup="checkInput(this)" size="3" id="fax3" class="text-center" autocomplete="off" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" onfocusout="faxvalnull()" />
+                                                    </div>
+                                                    <h5><span id="faxvali"></span></h5>
+                                                    <input type="hidden" id="faxnumber" name="faxNo" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <!-- **************#11 Web Email Address H/W *********-->
+                                                <div class="col-md-6">
+                                                    <label>ウェブEメールをご記入ください。: <span class="star" style="font-size: 23px; color:red">*</span></label>
+                                                    <input type="text" class="form-control" name="webEmail" id="webemail" autocomplete="off" onfocusout="javascript:return webmailvalidate(this)" />
+                                                    <h5><span class="" id="webmailreq"></span></h5>
+                                                </div>
+                                                <!-- ************#12 Mobile Email Address H/W *********-->
+                                                <div class="col-md-6">
+                                                    <label>携帯電話のEメールをご記入ください。:<span class="star" style="font-size: 23px;"></span></label>
+                                                    <input type="text" class="form-control" name="mobileEmail" id="mobemail" autocomplete="off" onfocusout="javascript:return mobmailvalidate(this)" />
+                                                    <h5><span class="" id="mobemailreq"></span></h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <!--*************Personal Informaton End***********************************-->
+                                <!--*************BANK ***********************************-->
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="panel panel-info">
+                                            <div class="panel-heading">
+                                                <strong>受取口座記入欄   BANK INFORMATION</strong>
+                                            </div>
+                                        </div>
+                                        <h5 class="text-center"><span id="">銀行のタイプを選んでください。</span></h5>
+                                        <div class="form-group radio">
+                                            <div class="row">
+                                                <div class="radiobtn form-group col-xs-6">
+                                                    <input type="checkbox" id="Postb" name="check3" value="Postb" onclick="onlyOne3(this)" />
+                                                    <label for="Postb" class="text-left">ゆうちょ銀行</label>
+                                                </div>
+                                                <div class="radiobtn form-group col-xs-6">
+                                                    <input type="checkbox" id="otherb" name="check3" value="otherb" onclick="onlyOne3(this)" />
+                                                    <label for="otherb">銀行</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- *************************************Yuuchiyo BANK*********************************************** -->
+                                        <div class="" id="yuuchobnk">
+                                            <!-- ****************************************************************** -->
+                                            <div class="form-group ">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <label class="string required" for="user_name">口座名義（カナ）:<span class="star" style="font-size: 23px; color:red"></span></label>
+
+                                                        <input class="form-control fontkana Postbank" type="text" name="accreceipant" id="accreceipant" autocomplete="off" onfocusout="javascript:return accrecipientvalidate(this)" />
+                                                        <h5><span class="" id="accrecekathreq"></span></h5>
+                                                    </div>
+                                                    <div class="col-md-6 ">
+                                                        <br /><br />
+                                                        <h5><span class="" id="cursave"></span></h5>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input radio_buttons " type="radio" value="red" name="redio1" id="saving" onchange="removeerror();" />
+                                                            <label class="form-check-label collection_radio_buttons">普通</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input radio_buttons " type="radio" value="pink" name="redio1" id="current" onchange="removeerror();" />
+                                                            <label class="form-check-label collection_radio_buttons">当座</label>
+                                                        </div>
+                                                    </div>
+                                                    <input type="hidden" id="accountClassification" name="accountClassification" />
+                                                    <input type="hidden" id="accreceipantnumber" name="accountNameKatakana" />
+                                                </div>
+                                            </div>
+                                            <!-- ************************************************************************** -->
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <label>記号 : </label>
+                                                        <div id="example5" class="autotabbed">
+                                                            <input style="width:25px;" type="number" maxlength="1" size="2" id="sym1" class="text-center Postbank" autocomplete="off" onChange="checkInput(this)" onKeyup="checkInput(this)" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" />-
+                                                            <input style="width:25px;" type="number" maxlength="1" size="2" id="sym2" class="text-center Postbank" autocomplete="off" onChange="checkInput(this)" onKeyup="checkInput(this)" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" />-
+                                                            <input style="width:25px;" type="number" maxlength="1" size="2" id="sym3" class="text-center Postbank" autocomplete="off" onChange="checkInput(this)" onKeyup="checkInput(this)" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" />-
+                                                            <input style="width:25px;" type="number" maxlength="1" size="2" id="sym4" class="text-center Postbank" autocomplete="off" onChange="checkInput(this)" onKeyup="checkInput(this)" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" />-
+                                                            <input style="width:25px;" type="number" maxlength="1" size="2" id="sym5" class="text-center Postbank" autocomplete="off" onChange="checkInput(this)" onKeyup="checkInput(this)" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input radio_buttons Otherbank" type="radio" value="red" name="redio2" id="bank" />
+                                                            <label class="form-check-label collection_radio_buttons">銀行</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input radio_buttons Otherbank" type="radio" value="pink" name="redio2" id="agriculture" />
+                                                            <label class="form-check-label collection_radio_buttons">農協</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input radio_buttons Otherbank" type="radio" value="pink" name="redio2" id="credit_association" />
+                                                            <label class="form-check-label collection_radio_buttons">信用 組合</label>
+                                                        </div>
+                                                        <br />
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input radio_buttons Otherbank" type="radio" value="pink" name="redio2" id="labourunion" />
+                                                            <label class="form-check-label collection_radio_buttons">信用 金庫</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input radio_buttons Otherbank" type="radio" value="pink" name="redio2" id="financial" />
+                                                            <label class="form-check-label collection_radio_buttons">労働 金庫</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input radio_buttons Otherbank" type="radio" value="pink" name="redio2" id="fishrmen" />
+                                                            <label class="form-check-label collection_radio_buttons">漁協 </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <label>番号 :</label>
+                                                        <div id="example6" class="autotabbed">
+                                                            <input style="width:25px;" type="number" maxlength="1" size="2" id="no1" class="text-center Postbank" autocomplete="off" onChange="checkInput(this)" onKeyup="checkInput(this)" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" />-
+                                                            <input style="width:25px;" type="number" maxlength="1" size="2" id="no2" class="text-center Postbank" autocomplete="off" onChange="checkInput(this)" onKeyup="checkInput(this)" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" />-
+                                                            <input style="width:25px;" type="number" maxlength="1" size="2" id="no3" class="text-center Postbank" autocomplete="off" onChange="checkInput(this)" onKeyup="checkInput(this)" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" />-
+                                                            <input style="width:25px;" type="number" maxlength="1" size="2" id="no4" class="text-center Postbank" autocomplete="off" onChange="checkInput(this)" onKeyup="checkInput(this)" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" />-
+                                                            <input style="width:25px;" type="number" maxlength="1" size="2" id="no5" class="text-center Postbank" autocomplete="off" onChange="checkInput(this)" onKeyup="checkInput(this)" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" />-
+                                                            <input style="width:25px;" type="number" maxlength="1" size="2" id="no6" class="text-center Postbank" autocomplete="off" onChange="checkInput(this)" onKeyup="checkInput(this)" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" />-
+                                                            <input style="width:25px;" type="number" maxlength="1" size="2" id="no7" class="text-center Postbank" autocomplete="off" onChange="checkInput(this)" onKeyup="checkInput(this)" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" />-
+                                                            <input style="width:25px;" type="number" maxlength="1" size="2" id="no8" class="text-center Postbank" autocomplete="off" onChange="checkInput(this)" onKeyup="checkInput(this)" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" onfocusout="javascript:return accountno22reqnull(this)" />
+
+                                                        </div>
+                                                        <h5><span class="" id="accountno22req"></span></h5>
+                                                        <input type="hidden" id="transferAccountNumber" name="transferAccountNumber" />
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label>銀行コード :<span class="star" style="font-size: 23px; color:red"></span> </label>
+                                                        <div id="example7" class="autotabbed">
+                                                            <input style="width:50px;" type="number" maxlength="1" size="2" id="transferbankcode1" class="text-center Otherbank" autocomplete="off" onChange="checkInput(this)" onKeyup="checkInput(this)" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" />-
+                                                            <input style="width:50px;" type="number" maxlength="1" size="2" id="transferbankcode2" class="text-center Otherbank" autocomplete="off" onChange="checkInput(this)" onKeyup="checkInput(this)" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" />-
+                                                            <input style="width:50px;" type="number" maxlength="1" size="2" id="transferbankcode3" class="text-center Otherbank" autocomplete="off" onChange="checkInput(this)" onKeyup="checkInput(this)" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" />-
+                                                            <input style="width:50px;" type="number" maxlength="1" size="2" id="transferbankcode4" class="text-center Otherbank" autocomplete="off" onChange="checkInput(this)" onKeyup="checkInput(this)" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" />
+
+                                                        </div>
+                                                        <input type="hidden" id="transferdestinationbankcode" name="transferDestinationBank" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- *************************************OTHERS BANK*********************************************** -->
+                                        <div class="" id="Otherbnk">
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <!-- ***************************Bank Name*************************************** -->
+                                                    <div class="col-md-6">
+                                                        <label class="string" for="">金融機関名 （カナ）:<span class="star" style="font-size: 23px; color:red">*</span></label>
+                                                        <input class="form-control fontkana Otherbank" type="text" name="bankName" id="bankname" autocomplete="off" onfocusout="javascript:return banknamevalidate(this)" />
+                                                        <h5><span class="" id="bankreq"></span></h5>
+                                                    </div>
+                                                    <!-- ***************************Bank account number*************************************** -->
+                                                    <div class="col-md-6">
+                                                        <label class="string required" for="user_name">銀行口座番号 : <span class="star" style="font-size: 23px; color:red"></span></label>
+                                                        <input type="number" class="form-control Otherbank" name="names" id="accountno" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" autocomplete="off" onfocusout="javascript:return accountnoreqnull(this)" />
+                                                        <h5><span class="" id="accountnoreq"></span></h5>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <input type="hidden" id="banknameconcat" name="bankNameKatakana" />
+                                            <input type="hidden" id="accountClassification2" name="accountClassification2" />
+                                            <div class="form-group ">
+                                                <div class="row">
+                                                    <!-- ***************************RECIPIENT NAME*************************************** -->
+                                                    <div class="col-md-6">
+                                                        <label class="string required" for="user_name">口座名義 :<span class="star" style="font-size: 23px; color:red"></span></label>
+                                                        <input class="form-control fontkana Otherbank" type="text" name="receipantname" id="receipant" autocomplete="off" onfocusout="javascript:return recipientvalidate(this)" />
+                                                        <h5><span class="" id="recekathreq"></span></h5>
+                                                    </div>
+                                                    <!-- *******************************Branch code********************************************** -->
+                                                    <div class="col-md-6">
+                                                        <label>支店コード : <span class="star" style="font-size: 23px; color:red">*</span></label>
+                                                        <div id="example8" class="autotabbed">
+                                                            <input style="width:50px;" type="number" maxlength="1" size="2" id="bra1" class="text-center Otherbank" autocomplete="off" onChange="checkInput(this)" onKeyup="checkInput(this)" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" />-
+                                                            <input style="width:50px;" type="number" maxlength="1" size="2" id="bra2" class="text-center Otherbank" autocomplete="off" onChange="checkInput(this)" onKeyup="checkInput(this)" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" />-
+                                                            <input style="width:50px;" type="number" maxlength="1" size="2" id="bra3" class="text-center Otherbank" autocomplete="off" onChange="checkInput(this)" onKeyup="checkInput(this)" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" onfocusout="bravalnull()" />
+                                                        </div>
+                                                        <h5><span class="" id="branchcodereq"></span></h5>
+                                                        <input type="hidden" id="transferBranchCode" name="transferDestinationBranchCode" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <!-- ***************************Branch name****************************************** -->
+                                                    <div class="col-md-6">
+                                                        <label class="string required" for="user_name">支店名 :<span class="star" style="font-size: 23px; color:red">*</span></label>
+                                                        <input class="form-control Otherbank" type="text" name="branchNameKatakana" id="branchname" autocomplete="off" onfocusout="javascript:return branchvalidate(this)" />
+                                                        <h5><span class="" id="branchreq"></span></h5>
+                                                    </div>
+                                                    <!-- ***************************Other Bank account number*************************************** -->
+                                                    <div class="col-md-6">
+                                                        <label class="string required" for="user_name">その他の銀行番号 :<span class="star" style="font-size: 23px; color:red"></span></label>
+                                                        <input type="number" class="form-control Otherbank" name="otheraccountno" id="otheraccountno" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" autocomplete="off" onfocusout="javascript:return otherbanknumreqnull(this)" />
+                                                        <h5><span class="" id="Otherbankreq"></span></h5>
+                                                    </div>
+                                                    <input type="hidden" id="foursshmem" name="foursshMember" />
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--*************BANK  End***********************************-->
+                                <!--*************User Login  ***********************************-->
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="panel panel-info">
+                                            <div class="panel-heading">
+                                                <strong>
+                                                    ユーザーログイン情報 - User Login
+                                                </strong> <br />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <label style="color: blue">セキュリティの質問 1</label>
+
+                                                    <select class="form-control " name="questionOne" id="questionOne" onfocusout="allnulluserlogins(this)">
+                                                        <option value="0">Select questionOne</option>
+                                                        <option value="1">あなたが最初に飼ったペットの名前は何ですか。</option>
+                                                        <option value="2"> あなたが最初に通った学校はどこですか？</option>
+                                                        <option value="3">あなたの母親の旧姓は何ですか？</option>
+                                                        <option value="4">あなたの好きな車のモデルは何ですか？</option>
+                                                    </select>
+                                                    <h5><span class="" id="questionOnereq"></span></h5>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label>答え１</label>
+
+                                                    <input class="form-control" name="answerOne" id="answerOne" onfocusout="allnulluserlogins(this)">
+                                                    <h5><span class="" id="answerOnereq"></span></h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <label style="color: blue">セキュリティの質問 2</label>
+
+                                                    <select class="form-control " name="questionTwo" id="questionTwo" onfocusout="allnulluserlogins(this)">
+                                                        <option value="0">Select questionTwo </option>
+                                                        <option value="5">あなたの最初の仕事の会社の名前は何ですか？</option>
+                                                        <option value="6">あなたが子供の頃に住んでいた番地と道の名前は何ですか？</option>
+                                                        <option value="7">あなたのお母さんとお父さんはどの町で出会いましたか？</option>
+                                                        <option value="8">あなたの最初のフルタイムの仕事はどの町や市ででしたか？</option>
+                                                    </select>
+                                                    <h5><span class="" id="questionTworeq"></span></h5>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label>答え2</label>
+
+                                                    <input class="form-control " name="answerTwo" id="answerTwo" onfocusout="allnulluserlogins(this)">
+                                                    <h5><span class="" id="answerTworeq"></span></h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- *************#24 User Name ************************************************************* -->
+                                        @*<div class="form-group">
+                                                <div class="row">
+                                                    <label class="col-md-12">ユーザー名をご記入ください。 : <span class="star" style="font-size: 23px; color:red">*</span><br /><font color="red" font size="2">(最初のログインのために一時的に使用されます。| ユーザー名のみを英数字で入力します)</font></label>
+                                                    <div class="col-md-6">
+
+                                                        <input class="form-control string required" type="text" name="userName" id="username" autocomplete="off" onfocusout="javascript:return usernamevalidate(this)" onkeyup="findUser(this);" />
+                                                        <h5><span class="" id="usernamereq"></span></h5>
+                                                    </div>
+                                                </div>
+                                            </div>*@
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <label class="col-md-12"><span style="font-size:12px; color:red">(パスワードには文字が8個必要です)</span></label>
+                                                <!-- *************#25 Password ************************************************************* -->
+                                                <div class="col-md-6" ]>
+                                                    <label class="string required" for="user_name">パスワードをご記入ください。 : <span class="star" style="font-size: 23px; color:red">*</span></label>
+                                                    <input class="form-control string required" type="password" name="password" id="password" autocomplete="off" onfocusout="javascript:return passwordvalidate(this)" />
+                                                    <h5><span class="" id="passwordreq"></span></h5>
+                                                </div>
+                                                <!-- *************#26 Confirm Password ************************************************************* -->
+                                                <div class="col-md-6">
+                                                    <label class="string required" for="user_name">パスワードを確認してください。 : <span class="star" style="font-size: 23px; color:red">*</span></label>
+                                                    <input class="form-control string required" type="password" name="confirmpassword" id="confirmpassword" autocomplete="off" onfocusout="javascript:return conpasswordvalidate(this)" />
+                                                    <h5><span class="" id="conpasswordreq"></span></h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br />
+                                        <div class="d-flex justify-content-center">
+                                            <div class="form-group">
+                                                <button type="button" name="commit" class="btn btn-primary" onclick="GrpValidate(0)">提出</button>
+                                                @* <input type="button" name="commit" value="提出" class="btn btn-primary" onclick="GrpValidate(0)" />*@
+                                                <button type="button" class="btn btn-success" onclick="GoBack()">戻る</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--*************User Login  End***********************************-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <!-- ************************************     z******************JAVASCRIPT OTHER FUNCTION **************************************** -->
+        <script src="~/js/reg_form/regformdetails.js"></script>
+        <script src="~/js/reg_form/reg.js"></script>
+        <script src="~/js/reg_form/autotab.js"></script>
+
+        <script src="http://www.google-analytics.com/urchin.js" type="text/javascript"></script>
+        <script type="text/javascript">_uacct = "UA-835919-3"; urchinTracker();</script>
+        <script src="~/js/reg_form/ajaxzip2.js" charset="UTF-8"></script>
+        <script>AjaxZip2.JSONDATA = '../data';</script>
+        <script>
+            function GoBack() {
+            window.location.replace('@Url.Action("index", "Home")')
+        }
+        </script>
+
+        <!-- *************************************************** GET DATA FUNCTIONS INTO THE FORM*************************************** -->
+        <script>
+
+            var values =@Html.Raw(Json.Encode(foursshdatalist));
+            var add = values.address1;
+
+            var res = add.split("");
+            var tex = "";
+            for (var x = 0; x < res.length;x++) {
+                if (res[x] == "都") {
+
+                    tex += res[x];
+                    break;
+                }
+                else if (res[x] == "道") {
+                    tex += res[x];
+                    break;
+                }
+                else if (res[x] == "府") {
+                    tex += res[x];
+                    break;
+                }
+                else if (res[x] == "県") {
+                    tex += res[x];
+                    break;
+                }
+                tex += res[x];
+            }
+             // =======GET ADDRESS ========//
+            var add3 = values.address1.split(tex);
+            var addnum3 = add3[1].split("^");
+            document.getElementById("pref").value = tex;
+            document.getElementById("addr").value = addnum3[0];
+            var addnumber = addnum3[1];
+            if (addnum3[1] == undefined){
+                addnumber = "Novalue";
+            }
+            document.getElementById("addrnum").value = addnumber;
+
+              // =======GET dateOfBirth ========//
+            var bday1 = values.birthday;
+            var bday2 = bday1.split(" ");
+            @{
+                string year = "1111";
+                string month = "11";
+                string day = "11";
+
+                if (foursshdatalist != null)
+                {
+                    DateTime time = Convert.ToDateTime(foursshdatalist.birthday);// Use current time.
+                    year = time.Year.ToString();
+                    month = time.Month.ToString();
+                    day = time.Day.ToString();
+                    string format = "yyyy-MM-dd";   // Use this format.
+                    string dt = time.ToString(format);
+                }
+            }
+            document.getElementById("year").value=@year;
+            document.getElementById("month").value=@month;
+            document.getElementById("day").value =@day;
+
+            document.getElementById("nickname").value = values.gender;
+
+             // =======GET NAME AND COMPANY NAME ========//
+            if (values.companyType == 1 || values.companyType == 2 || values.companyType == 3) {
+
+                document.getElementById("comname").checked = true;
+                document.getElementById("mydiv1").style.display = "none";
+                document.getElementById("mydiv2").style.display = "block";
+                var cx = document.getElementById("bcomdiv");
+                var cy = document.getElementById("acomdiv");
+                var cz = document.getElementById("midcomdiv");
+
+                if (values.companyType == 1) {
+                    var nametype = values.name.split("（");
+
+                    document.getElementById("persname1").value = nametype[0];
+                    document.getElementById("companytype1").value = "（" + nametype[1];
+                    document.getElementById("brfocom").checked = true;
+                    if (cx.style.display === "none") {
+                        cx.style.display = "block";
+                        cy.style.display = "none";
+                        cz.style.display = "none";
+                    }
+                } else if (values.companyType == 2) {
+                    var nametype = values.name.split("）");
+
+                    document.getElementById("persname2").value = nametype[1];
+                    document.getElementById("companytype2").value = nametype[0]+"）";
+                    document.getElementById("aftcom").checked = true;
+                    if (cy.style.display === "none") {
+                        cy.style.display = "block";
+                        cx.style.display = "none";
+                        cz.style.display = "none";
+                    }
+                } else if (values.companyType == 3) {
+                    var nametype = values.name.split("（");
+                    var nametype2 = nametype[1].split("）");
+
+                    var comtype1 = nametype[0];
+                    var comtype2 = nametype2[0];
+                    var comtype3 = nametype2[1];
+
+                    document.getElementById("midcomname1").value = comtype1;
+                    document.getElementById("companytype3").value = "（" +comtype2 + "）";
+                    document.getElementById("midcomname2").value = comtype3;
+                    document.getElementById("midcom").checked = true;
+
+                    if (cz.style.display === "none") {
+                        cz.style.display = "block";
+                        cx.style.display = "none";
+                        cy.style.display = "none";
+                    }
+                }
+
+            } else if (values.name != "NoValue") {
+
+                document.getElementById("mydiv2").style.display = "none";
+                document.getElementById("persname").checked = true;
+                document.getElementById("namekanji").value = values.name;
+            }
+
+            // =======GET nickName ========//
+            if (values.nickName != "NoValue") {
+                document.getElementById("nickname").value = values.nickName;
+            }
+            // =======GET katakanaName ========//
+            if (values.nameInKana != "NoValue") {
+                document.getElementById("namekatha").value = values.nameInKana;
+            }
+             // =======GET postalCode ========//
+            var add = values.postalNo;
+            var res = add.split("-");
+            document.getElementById("pos1").value = res[0];
+            document.getElementById("pos2").value = res[1];
+
+            // =======GET mobileNo ========//
+            var mobile = values.mobileNo;
+            if (mobile != "NoValue") {
+                var mobile2 = mobile.split("-");
+                document.getElementById("mob1").value = mobile2[0];
+                document.getElementById("mob2").value = mobile2[1];
+                document.getElementById("mob3").value = mobile2[2];
+            }
+            // =======GET telephoneNo ========//
+            var tele = values.telephoneNo;
+            if (tele!= "NoValue") {
+                var tele2 = tele.split("-");
+                document.getElementById("tel1").value = tele2[0];
+                document.getElementById("tel2").value = tele2[1];
+                document.getElementById("tel3").value = tele2[2];
+            }
+            // =======GET faxNo ========//
+            var fax = values.faxNo;
+            if (tele != "NoValue") {
+                var fax2 = fax.split("-");
+                document.getElementById("fax1").value = fax2[0];
+                document.getElementById("fax2").value = fax2[1];
+                document.getElementById("fax3").value = fax2[2];
+            }
+            // =======GET webEmail ========//
+            if (values.email != "NoValue") {
+                document.getElementById("webemail").value = values.webEmail;
+            }
+            // =======GET mobileEmail ========//
+            if (values.email != "NoValue") {
+                document.getElementById("mobemail").value = values.mobileEmail;
+            }
+            // =======GET transferbankcode ========//
+            var transferBankCode = values.transferDestinationBankCode;
+
+            if (transferBankCode != "Noval") {
+                var transferBankCode2 = transferBankCode.split("");
+
+                document.getElementById("transferbankcode1").value = transferBankCode2[0];
+                document.getElementById("transferbankcode2").value = transferBankCode2[1];
+                document.getElementById("transferbankcode3").value = transferBankCode2[2];
+                document.getElementById("transferbankcode4").value = transferBankCode2[3];
+
+            }
+             // =======GET Branch Name Katakana ========//
+            if (values.branchNameKana!= "NoValue")
+            {
+                document.getElementById("branchname").value = values.branchNameKana;
+            }
+             // =======GET Account Name Katakana ========//
+            if (values.recipientNameInKatakana != "NoValue")
+            {
+                if (values.bankNameKana != "NoValue" && values.bankNameKana == "ﾕｳﾁﾖ") {
+                    document.getElementById("accreceipant").value = values.recipientNameInKatakana;
+
+                } else if (values.bankNameKana != "NoValue" && values.bankNameKana != "ﾕｳﾁﾖ") {
+                    document.getElementById("receipant").value = values.recipientNameInKatakana;
+                }
+            }
+             // =======GET Bank Name Katakana ========//
+            if (values.bankNameKana != "NoValue")
+            {
+                if (values.bankNameKana == "ﾕｳﾁﾖ") {
+                    document.getElementById("Postb").checked = true;
+                    $(".Otherbank").attr("disabled", true);
+                    $('.Postbank').removeAttr("disabled");
+
+                } else {
+                    document.getElementById("otherb").checked = true;
+                    $(".Postbank").attr("disabled", true);
+                    $('.Otherbank').removeAttr("disabled");
+                    document.getElementById("bankname").value = values.bankNameKana;
+                }
+            }
+             // =======GET BranchCode ========//
+            var brncode = values.transferDestinationBranchCode;
+            if (brncode != "NoValue")
+            {
+                var bra = brncode.split("");
+                document.getElementById("bra1").value = bra[0];
+                document.getElementById("bra2").value = bra[1];
+                document.getElementById("bra3").value = bra[2];
+            }
+
+             // =======GET BranchCode ========//
+            if (values.transferAccountNumber != "NoValue") {
+
+                if (values.bankNameKana == "ﾕｳﾁﾖ") {
+
+                    var bnk = values.transferAccountNumber;
+                    var bnk2 = bnk.split("-");
+                    var sym = bnk2[0].split("");
+                    var no = bnk2[1].split("");
+                    document.getElementById("sym1").value = sym[0];
+                    document.getElementById("sym2").value = sym[1];
+                    document.getElementById("sym3").value = sym[2];
+                    document.getElementById("sym4").value = sym[3];
+                    document.getElementById("sym5").value = sym[4];
+
+                    document.getElementById("no1").value = no[0];
+                    document.getElementById("no2").value = no[1];
+                    document.getElementById("no3").value = no[2];
+                    document.getElementById("no4").value = no[3];
+                    document.getElementById("no5").value = no[4];
+                    document.getElementById("no6").value = no[5];
+                    document.getElementById("no7").value = no[6];
+                    document.getElementById("no8").value = no[7];
+                }
+                else if (values.accountClassification2 == 1) {
+
+                    document.getElementById("accountno").value = values.transferAccountNumber;
+                } else {
+                    document.getElementById("otheraccountno").value = values.transferAccountNumber;
+                }
+            }
+
+            var accClassify = values.accountClassification;
+            var accClassify2 = values.accountClassification2;
+            // redio  buttons 1
+            if (accClassify == 1) {
+                document.getElementById("saving").checked = true;
+            }
+            else if (accClassify == 2) {
+                document.getElementById("current").checked = true;
+            }
+             // redio  buttons 2
+            if (accClassify2 == 1) {
+                document.getElementById("bank").checked = true;
+            }
+            else if (accClassify2 == 2) {
+                document.getElementById("agriculture").checked = true;
+            }
+            else if (accClassify2 == 3) {
+                document.getElementById("credit_association").checked = true;
+            }
+            else if (accClassify2 == 4) {
+                document.getElementById("labourunion").checked = true;
+            }
+            else if (accClassify2 == 5) {
+                document.getElementById("financial").checked = true;
+            }
+            else if (accClassify2 == 6) {
+                document.getElementById("fishrmen").checked = true;
+            }
+            var foursshmem= values.MemberNo;
+            document.getElementById("foursshmem").value = foursshmem;
+
+            if (values.MemberNo != "NoValue") {
+                document.getElementById("username").value = values.MemberNo;
+            }
+            if (values.password != "NoValue") {
+                document.getElementById("password").value = values.password;
+                document.getElementById("confirmpassword").value = values.password;
+            }
+        </script>
+        <!-- *************************************************** GET DATA FUNCTIONS INTO THE FORM  END ********************************** -->
+    </body>
+</html>
+

@@ -1,0 +1,177 @@
+﻿@model IEnumerable<RocketSystem.Models.User>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.membershipNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dateOfBirth)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.telephoneNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.mobileNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.postalCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.katakanaName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nickName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.gender)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.addressOne)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.addressTwo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.addressThree)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.faxNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.webEmail)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.mobileEmail)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.accountName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.accountNameKatakana)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.bankNameKatakana)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.transferDestinationBank)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.branchNameKatakana)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.transferDestinationBranchCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.accountClassification)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.transferAccountNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.userName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.password)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.membershipNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.dateOfBirth)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.telephoneNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.mobileNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.postalCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.katakanaName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.nickName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.gender)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.addressOne)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.addressTwo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.addressThree)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.faxNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.webEmail)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.mobileEmail)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.accountName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.accountNameKatakana)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.bankNameKatakana)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.transferDestinationBank)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.branchNameKatakana)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.transferDestinationBranchCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.accountClassification)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.transferAccountNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.userName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.password)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.userId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.userId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.userId })
+        </td>
+    </tr>
+}
+
+</table>

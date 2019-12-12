@@ -1,0 +1,690 @@
+﻿@*@model IEnumerable<RocketSystem.Models.StageOne>*@
+@{
+    //ViewBag.Title = "Index";
+    Layout = null;
+    //Layout = "~/Views/Shared/SideBar.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Main Page</title>
+    <!-- Custom fonts for this template-->
+    <link href="~/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <!-- tipp.js library -->
+    <script src="https://unpkg.com/popper.js@1"></script>
+    <script src="https://unpkg.com/tippy.js@4"></script>
+
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
+    <!-- tipp.js library -->
+    <link href="~/css/creative.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="~/css/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="~/fonts/font-awesome-4.2.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="~/css/demo.css" />
+    <link rel="stylesheet" type="text/css" href="~/css/set1.css" />
+    <!-- Custom styles for this template-->
+    <link rel="stylesheet" type="text/css" href="~/css/style.css">
+    <link href="~/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="~/css/sb-admin-2.css" rel="stylesheet">
+    <link href="~/css/popup.css" rel="stylesheet">
+
+    <style>
+        div#pak {
+            margin: -5px;
+        }
+
+        .priority {
+            width: 25px;
+            height: 25px;
+            color: red;
+        }
+        #rowid {
+            font-size: 30px;
+            background-color: #efecec;
+        }
+        .setpadding {
+            padding:6px !important;
+        }
+    </style>
+</head>
+<body id="page-top">
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+        <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href='@Url.Action("Index", "Trees")'>
+                <div class="sidebar-brand-icon">
+                    <img src="~/img/logo/logo.png" />
+                </div>
+                <div class="sidebar-brand-text mx-3"> <!-- <sup>2</sup> --></div>
+            </a>
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+            <!-- Nav Item - Dashboard -->
+            @*<li class="nav-item active">
+            <a class="nav-link" href='@Url.Action("StageOne", "Trees")'>
+                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <span>Tree view</span>
+            </a>
+        </li>*@
+            <li class="nav-item active">
+                <a class="nav-link" href='@Url.Action("index", "Trees")'>
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>ホーム</span>
+                </a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href='@Url.Action("TreeTable", "Trees")'>
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>テーブル　ビュー</span>
+                </a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href='@Url.Action("ViewMyPositions", "Trees")'>
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Cooling Off</span>
+                </a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href='@Url.Action("Bonusview", "Trees", new { bcvalue1 = 0, jumphistory=0 })'>
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>ボーナス　ビュー</span>
+                </a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href='@Url.Action("UserProfile", "Trees")'>
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>ユーザー　プロファイル</span>
+                </a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href='@Url.Action("Rules", "Trees")'>
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>ルール</span>
+                </a>
+            </li>
+            <hr class="sidebar-divider my-0">
+            <br>
+            <li class="nav-item active">
+                <a class="nav-link" href='@Url.Action("StageOne", "Trees", new { @bcnumval = 0 })'>
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>ステージ　1</span>
+                </a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href='@Url.Action("StageTwo", "Trees", new { @bcnumval = 0 })'>
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>ステージ　2</span>
+                </a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href='@Url.Action("StageThree", "Trees", new { @bcnumval = 0 })'>
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>ステージ　3</span>
+                </a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href='@Url.Action("StageFour", "Trees", new { @bcnumval = 0 })'>
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>ステージ　4</span>
+                </a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href='@Url.Action("StageFive", "Trees", new { @bcnumval = 0 })'>
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>ステージ　5</span>
+                </a>
+            </li>
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
+            <!-- Sidebar Toggler (Sidebar) -->
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            </div>
+        </ul>
+        <!-- End of Sidebar -->
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+            <!-- Main Content -->
+            <div id="content">
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+                    <h2>Membership No: @Session["membershipNo"].ToString()&nbsp;&nbsp;</h2>
+                    <h2>&nbsp;&nbsp;Your api member Coin: @Session["coin"].ToString()</h2>
+                    <h2>&nbsp;&nbsp;Your api total Coin: @Session["apitotalcoin"].ToString()</h2>
+                    <!-- Sidebar Toggle (Topbar) -->
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                        <i class="fa fa-bars"></i>
+                    </button>
+                    <!-- Topbar Search -->
+                    <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                        <div class="input-group">
+                            <div class="input-group-append">
+                                <!-- Start Navigation -->
+                                <!-- End Navigation -->
+                            </div>
+                        </div>
+                    </form>
+                    <!-- Topbar Navbar -->
+                    <ul class="navbar-nav ml-auto">
+                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+                        <li class="nav-item dropdown no-arrow d-sm-none">
+                            <!-- Dropdown - Messages -->
+                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
+                                <form class="form-inline mr-auto w-100 navbar-search">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary" type="button">
+                                                <i class="fas fa-search fa-sm"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </li>
+
+                        <div class="topbar-divider d-none d-sm-block"></div>
+                        <!-- Nav Item - User Information -->
+                        <li class="nav-item dropdown no-arrow">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">@Session["memberName"].ToString()</span>
+                                <img class="img-profile rounded-circle" src="img/user.jpg">
+                            </a>
+                            <!-- Dropdown - User Information -->
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                                <a class="dropdown-item" href='@Url.Action("Index", "Home")'>
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Logout
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </nav>
+                <!-- End of Topbar -->
+                <!-- Begin Page Content -->
+                <!-- <div class="col-md-12"> -->
+                <div class="col-md-12">
+                    <a class="btn btn-secondary btn-block btn-lg" href="#about" data-toggle="modal" data-target="#myModal2"> 新しいポジションを加える</a>
+                </div>
+                <br />
+                <div class="container">
+                    @{var details = ViewBag.posidetails;
+
+                        foreach (var a in details)
+                        {
+                            <div class="alert alert-primary alert-dismissible fade show" id="closeid+@a.positionId">
+                                <button type="button" class="close" onclick="closestatus(@a.positionId);">&times;</button>
+                                <b>Applied Position: &nbsp;&nbsp; </b><strong>Registered Date: </strong>@a.registerDate.ToString("yyyy/MM/dd") <strong>&nbsp;&nbsp; | &nbsp;&nbsp; Deposited Date:</strong> @a.depositDate.ToString("yyyy/MM/dd") <strong>&nbsp;&nbsp; | &nbsp;&nbsp; Status: </strong>@a.positionStatus
+                            </div>
+                        }
+                        if (Enumerable.Count(ViewBag.posidetails) > 0)
+                        {
+                            <p style="font-size: large">Please wait for a maximum of 3 days for your position to be added to our system</p>
+                        }
+                    }
+                </div>
+            </div>
+
+            <!-- Modal start -->
+            <!-- Modal 1 -->
+            <div class="modal fade" id="myModal" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+
+                        <div class="modal-body">
+
+                            <div class="container-fluid">
+                                <section class="content bgcolor-4" align="center">
+                                    <h2 style="color: white !important;">Enter Your <br>Promo Code</h2>
+
+                                    <span class="input input--kuro">
+
+                                        <input class="input__field input__field--kuro" type="text" onkeydown="limit(this);" onkeyup="limit(this); id=" input-7 tbNumbers value=""
+                                               onkeypress="javascript:return isNumber(event)" />
+                                        <label class="input__label input__label--kuro" for="input-7">
+                                            <span class="input__label-content input__label-content--kuro">Promo Code</span>
+                                        </label> <br><br><br><br>
+
+                                        <div class="btn btn-lg">
+                                            <button type="button" class="btn btn-dark btn-lg" href="#about" data-toggle="modal" data-dismiss="modal" data-target="#myModal2" id="submit1">Submit</button>
+                                        </div>
+                                        <div class="btn btn-lg">
+                                            <button type="button" class="btn btn-dark btn-lg" id="close1" data-dismiss="modal" aria-hidden="true">Close</button>
+                                        </div>
+                                    </span>
+                                </section>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- start Modal 2 -->
+
+            @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "createpack" }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="modal fade" id="myModal2" role="dialog">
+
+                    <div class="modal-dialog">
+                        <!-- Modal content-->
+                        <div class="modal-content">
+
+                            <div class="modal-body">
+
+                                <div class="container-fluid">
+                                    <!-- Inner Model form HTML -->
+                                    <div class="form-style-5">
+
+                                        <form>
+                                            <fieldset>
+                                                <legend>CUSTOMER DEPOSIT INFO</legend>
+                                                @if (Convert.ToInt32(Session["posicount"]) == 0)
+                                                {
+                                                    <div class="form-group">
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <label>Introduce No</label>
+                                                                <input type="number" placeholder="Introduce No" name="membershipNo">
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <label>Bank Deposit date: </label>
+                                                                <input type="text" id="demoDate" placeholder="Select Date" name="depositDate" readonly>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                }
+                                                else
+                                                {
+                                                    <input type="hidden" name="membershipNo" value="@Session["membershipNo"].ToString()" />
+                                                    <div class="col-md-12">
+                                                        <label>Deposit date: </label>
+                                                        <input type="text" id="demoDate" placeholder="Select Date" name="depositDate" readonly>
+                                                    </div>
+                                                }
+
+                                                <div class="container">
+                                                    <div class="row radio" id="pak">
+                                                        <br />
+                                                    </div>
+                                                    <br />
+
+
+
+                                                    <div class="row">
+
+
+                                                        <div class="form-group">
+
+                                                            <div class="col-md-10">
+                                                                <input type="hidden" name="package" id="package" value="" />
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                    <div id="priority" style="display:none;">
+                                                    </div>
+                                                </div>
+
+                                                <label for="Deposite">Deposit Amount:</label><br>
+                                                <input type="text" id="tamount" name="acceptedamount" placeholder="Deposit Amount" required />
+                                            </fieldset>
+
+                                            <fieldset></fieldset>
+                                            <fieldset>
+                                                <div class="gif">
+                                                    <div class="container-fluid">
+                                                        <div class="row" align="center">
+                                                            <br>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="d-flex justify-content-center">
+                                                    <div class="btn btn-lg">
+                                                        <button type="button" value="Submit" class="btn btn-primary btn-lg" id="submit2" onclick="asignval(2)">Submit</button>
+                                                    </div>
+                                                    <div class="btn btn-lg">
+                                                        <button type="button" class="btn btn-danger btn-lg" id="close" data-dismiss="modal" aria-hidden="true">Close</button>
+                                                    </div>
+                                                </div>
+                                            </fieldset>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        <!-- End of Page Wrapper -->
+        <!-- Scroll to Top Button-->
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
+
+        <!-- Bootstrap core JavaScript-->
+        <script src="~/vendor/jquery/jquery.min.js"></script>
+        <script src="~/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <!-- Core plugin JavaScript-->
+        <script src="~/vendor/jquery-easing/jquery.easing.min.js"></script>
+        <!-- Custom scripts for all pages-->
+        <script src="~/js/sb-admin-2.min.js"></script>
+        <!-- Page level plugins -->
+        <script src="~/vendor/chart.js/Chart.min.js"></script>
+        <!-- Page level custom scripts -->
+        <script src="~/js/demo/chart-area-demo.js"></script>
+        <script src="~/js/demo/chart-pie-demo.js"></script>
+        <!-- Jquery UI calender plugins -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+        <link href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/i18n/jquery-ui-i18n.min.js"></script>
+        <!-- Jquery UI calender plugins -->
+        <script type="text/javascript">
+            var packagelist = [];
+            var round = 0;
+            var price = [];
+            $(document).ready(function () {
+                var serviceURL = '/PositionDetails/getCurrentPackages';
+                $.ajax({
+                    type: "POST",
+                    url: serviceURL,
+                    data: param = "",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: successFunc,
+                    error: errorFunc
+                });
+
+                function successFunc(data, status) {
+                    round = data.length;
+                    document.getElementById("submit1").setAttribute("onclick", "asignval(" + data.length + ")");
+                    for (var x = 0; x < data.length; x++) {
+                        var node0 = document.createElement("label");
+                        node0.setAttribute("class", "control-label");
+                        var textnode = document.createTextNode(data[x].packageName);
+                        node0.appendChild(textnode);
+                        var node2 = document.createElement("DIV");
+                        node2.setAttribute("class", "");
+                        var node = document.createElement("INPUT");
+                        node.setAttribute("type", "checkbox");
+                        node.setAttribute("onclick", "viewradio();");
+                        node.setAttribute("id", "pack" + x);
+                        node.setAttribute("style", "margin-bottom: 20px;");
+                        node.setAttribute("class", "form-control text-box single-line");
+                        node3 = document.createElement("DIV");
+                        packagelist.push(data[x].packageId);
+                        price.push(data[x].packagePrize);
+                        node2.appendChild(node);
+                        var divnode0 = document.createElement("div");
+                        divnode0.setAttribute("id", "setval" + x)
+                        divnode0.setAttribute("class", "col")
+                        document.getElementById("pak").appendChild(divnode0);
+                        node3.appendChild(node0);
+                        node3.appendChild(node2);
+                        document.getElementById("setval" + x).appendChild(node3);
+
+                        var packnode = document.createElement("SELECT");
+                        for (var op = 0; op <= 100; op++) {
+                            node4 = document.createElement("option");
+                            node4.setAttribute("value", op);
+                            node4.setAttribute("label", op);
+                            packnode.appendChild(node4);
+                        }
+                        packnode.setAttribute("name", "packagestyle" + x);
+                        packnode.setAttribute("id", "packcount" + x);
+                        packnode.setAttribute("class", "setpadding");
+                        packnode.setAttribute("style", "display:none;");
+                        var divnode1 = document.createElement("span");
+
+                        divnode1.setAttribute("id", "spanx" + x);
+                        divnode1.setAttribute("style", "display:none;");
+
+                        document.getElementById("setval" + x).appendChild(divnode1);
+
+                        document.getElementById("setval" + x).appendChild(packnode);
+                        document.getElementById("spanx" + x).innerHTML = "No. of Positions";
+
+                        if (data.length > 1) {
+                            var pakradiorow = document.createElement("div");
+                            pakradiorow.setAttribute("id", "rowid");
+                            pakradiorow.setAttribute("class", "row");
+                            document.getElementById("priority").appendChild(pakradiorow);
+                            var pakradio = document.createElement("div");
+                            pakradio.setAttribute("class", "col");
+                            pakradio.setAttribute("id", "packr" + x);
+                            document.getElementById("rowid").appendChild(pakradio);
+                            var label = document.createElement('label');
+                            label.setAttribute("id", "label" + x)
+
+                            document.getElementById("packr" + x).appendChild(label);
+                            label.innerHTML = "<b>Package</b>" + (x + 1);
+                            var packnode2 = document.createElement("INPUT");
+                            packnode2.setAttribute("type", "radio");
+                            packnode2.setAttribute("name", "priority");
+                            packnode2.setAttribute("id", "priority" + x);
+                            packnode2.setAttribute("class", "priority");
+                            packnode2.setAttribute("value", x);
+                            document.getElementById("label" + x).appendChild(packnode2);
+                        }
+
+                    }
+                }
+
+                function errorFunc() {
+                    alert('error');
+                }
+            });
+            function viewradio() {
+                if (document.getElementById("pack0").checked && document.getElementById("pack1").checked) {
+                    document.getElementById("priority").style.display = "block";
+                }
+                else {
+                    document.getElementById("priority").style.display = "none";
+                }
+
+                if (document.getElementById("pack0").checked) {
+                    document.getElementById("spanx0").style.display = "block";
+                    document.getElementById("packcount0").style.display = "block";
+                }
+                else {
+                    document.getElementById("spanx0").style.display = "none";
+                    document.getElementById("packcount0").style.display = "none";
+                }
+                if (document.getElementById("pack1").checked) {
+                    document.getElementById("spanx1").style.display = "block";
+                    document.getElementById("packcount1").style.display = "block";
+                }
+                else {
+                    document.getElementById("spanx1").style.display = "none";
+                    document.getElementById("packcount1").style.display = "none";
+                }
+            }
+            function asignval(xs) {
+                var valuex = "";
+                var dp = 0;
+                var total = 0;
+                for (var xx = 0; xx < round; xx++) {
+                    var txt = document.getElementById("packcount" + xx).value;
+                    if (txt == 0) {
+                        continue;
+                    }
+                    var pio = "";
+                    if (document.getElementById("priority" + xx).checked) {
+                        pio = "1";
+                    }
+                    else {
+                        pio = "2";
+                    }
+
+                    total += txt * price[xx];
+                    if (txt != null) {
+                        if (valuex != "" && txt != "") {
+                            valuex = valuex + "," + packagelist[xx] + "-" + txt + "-" + pio;
+                        }
+                        else {
+                            if (txt != "") {
+                                valuex = packagelist[xx] + "-" + txt + "-" + pio;
+                            }
+                        }
+                    }
+                }
+
+                if (valuex != "") {
+                    var s = document.getElementById("package").value = valuex;
+
+                    dp = document.getElementById("tamount").value;
+                    var tx = "true";
+                    var tdouble = parseFloat(total);
+                   // alert(tdouble);
+                    if (document.getElementById("pack0").checked && document.getElementById("pack1").checked && !document.getElementById("priority0").checked && !document.getElementById("priority1").checked) {
+                        alert("please check the radio");
+                    }
+                    else {
+                        if (dp >= tdouble) {
+
+                            document.getElementById("createpack").submit();
+                        }
+                        else {
+                            alert("your deposit amount is not enough");
+                        }
+                    }
+
+                }
+                else {
+                    alert("please check the package and amount");
+                }
+            }
+            function closestatus(xvalue) {
+                var con = confirm("do You want to cansel this status?");
+                if (con) {
+
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/trees/deletePosition/" + xvalue,
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: successFunc,
+                        error: errorFunc
+                    });
+                    function successFunc(data, status) {
+                        document.getElementById("closeid+" + xvalue).style.display = "none";
+
+                    } function errorFunc() {
+                        //document.getElementById("usernamereq").innerHTML = "";
+                    }
+
+
+
+
+
+
+                }
+                else {
+
+                }
+            }
+        </script>
+        <script>
+            $(function () {
+                $('#demoDate').datepicker($.extend({
+                    showMonthAfterYear: true,
+                    changeYear: true,
+                    changeMonth: true,
+                    yearRange: "1900:2019",
+                    dateFormat: 'd MM, y'
+                },
+                    $.datepicker.regional['ja']
+                ));
+
+            });
+
+        </script>
+        <!--  pop-up  -->
+        <!-- end of pop-up -->
+
+        <script type="text/javascript">
+
+            function getPackageStyle() {
+                if (document.getElementById("specialradio").checked) {
+                    document.getElementById("special").value = document.getElementById("special").value;
+
+                }
+                else {
+                    document.getElementById("special").value = 0;
+                }
+
+                if (document.getElementById("defaultradio").checked) {
+                    document.getElementById("default").value = document.getElementById("default").value;
+                }
+                else {
+                    document.getElementById("default").value = 0;
+                }
+            }
+        </script>
+
+        <script type="text/javascript">
+            $(function () {
+                var $select = $("#bcno");
+                for (i = 1; i <= 100; i++) {
+                    $select.append($('<option>BC NOOO</option>').val(i).html(i))
+                }
+            });
+        </script>
+        <script>
+
+            tippy('#tooltip', {
+                trigger: 'click',
+                placement: 'right',
+                theme: 'dark',// or 'focus'
+                content: '<span style="color: aqua;">BC No <br> Membership No <br> Tree ID </span>'
+            })
+
+
+        </script>
+
+        <script>
+            // WRITE THE VALIDATION SCRIPT.
+            function isNumber(evt) {
+                var iKeyCode = (evt.which) ? evt.which : evt.keyCode
+                if (iKeyCode != 46 && iKeyCode > 31 && (iKeyCode < 48 || iKeyCode > 57))
+                    return false;
+                return true;
+            }
+        </script>
+        <script type="text/javascript">
+            function limit(element) {
+                var max_chars = 6,
+                    regexp = /^\d+$/gs;
+
+                if (element.value.length > max_chars) {
+                    element.value = element.value.substr(0, max_chars);
+                }
+                if (!regexp.test(element.value)) {
+
+                    return false;
+                }
+            }
+        </script>
+        <!-- popup modal-->
+
+</body>
+</html>

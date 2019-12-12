@@ -1,0 +1,106 @@
+﻿@model RocketSystem.Models.StageOne
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>StageOne</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.membershipNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.membershipNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.bcNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.bcNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.treeLevel)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.treeLevel)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.treeColumn)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.treeColumn)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.jump)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.jump)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.positionCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.positionCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.introducePromoCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.introducePromoCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.entryDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.entryDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.package)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.package)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.freeStatus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.freeStatus)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.jumpHistory)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.jumpHistory)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.treeId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

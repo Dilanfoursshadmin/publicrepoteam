@@ -1,0 +1,89 @@
+/* ==========================================================================
+   Form Body Style
+   ========================================================================== */
+#wrapper {
+    width: 80%;
+    height: 70%;
+    margin: 0 auto;
+}
+form {
+    background: transparent;
+}
+.divInformation {
+    width: 97%;
+    height: 80px;
+}
+.divInformation div {
+    width: 51%;
+    height: 25%;
+    float: right;
+}
+.label {
+    color: #000000;
+    height: 30%;
+    font-weight: bold;
+    font-size: 20px;
+}
+.input {
+    margin-top: 2px;
+    border-radius: 3px;
+    text-align: center;
+    height: 38%;
+    width: 60%;
+    float: right;
+    background-color: white;
+    border: 1px solid grey;
+    /*font-size: 18px;*/
+}
+#submit {
+    border-top: none;
+    text-align: center;
+}
+
+#submitBtn {
+    background-color: #3CB371;
+    height: 50px;
+    width: 150px;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 10px;
+    border: none;
+}
+
+#submitBtn:hover {
+    background-color: #319a60;
+   
+}
+
+#submitBtn:hover {
+    cursor: pointer;
+}
+
+@media screen and (max-width: 750px) {
+    .label {
+        font-size: 12px;
+    }
+    #submitBtn {
+        font-size: 14px;
+        height: 40px;
+        width: 120px;
+    }
+    .input {
+        width: 95%;
+        height: 38%;
+        font-size: 12px;
+    }
+    .divInformation div {
+        width: 100%;
+        height: 50%;
+    }
+    .divInformation {
+    width: 97%;
+    height: 80px;
+}
+    #wrapper {
+        width: 100%;
+        margin: 0 auto;
+    }
+}

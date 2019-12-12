@@ -1,0 +1,260 @@
+﻿@model IEnumerable<RocketSystem.Models.StageOne>
+@{
+    //ViewBag.Title = "StageOne";
+    ViewBag.StageTitle = "ステージ2";
+    Layout = "~/Views/Shared/StageSideBar.cshtml";
+    <!-- Bootstrap CSS -->
+
+}
+
+
+@ViewBag.ab
+@{
+    var select = "".ToString();
+    int BC = Convert.ToInt32(Session["bcnum"]);
+}
+@using (Html.BeginForm())
+{
+    //****************************************BC NUMBER DROPDOWN CLICK *********************************/
+
+    if (ViewBag.nodata == 0)
+    {
+        <div class="form-group">
+            <br />
+            <div class="form-group text-center" style="color:red">No Data To Display</div>
+        </div>
+    }
+    else
+    {
+        <div class="form-group cont">
+            <div class="col-md-3">
+                <select id="bcnum" name="bcnum" class="form-control" onchange="submitform(this);">
+                    <option value="0">BCを選んでください。</option>
+                    @{
+                        foreach (var item in ViewBag.BcnumberList)
+                        {
+                            if (@item.treeId == BC) { select = "selected".ToString(); } else { select = "".ToString(); }
+                            <option value="@item.treeId" @select>@item.jumpHistory Stage - @item.bcNo BC</option>
+                        }
+                    }
+                </select>
+            </div>
+        </div>
+    }
+    //****************************************BC NUMBER DROPDOWN CLICK  END*********************************/
+    <button name="bcnum" type="submit" id="bcbtnsubmit" hidden></button>
+    <div class="tree cont" id="tree">
+    </div>
+}
+
+@**********************************************pop up open*************************@
+    <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <!--Content-->
+            <div class="modal-content form-elegant">
+                <!--Header-->
+                <div class="container-contact100">
+                    <div class="wrap-contact100">
+                        <span class="contact100-form-title">
+                            メンバー詳細
+                        </span>
+
+                        <div class="wrap-input100 validate-input">
+                            <span class="label-input100"> 名前</span>
+                            <input class="input100" type="text" name="name" id="name" disabled>
+                            <span class="focus-input100"></span>
+                        </div>
+
+                        <div class="wrap-input100 validate-input">
+                            <span class="label-input100">会員番号</span>
+                            <input class="input100" type="text" name="membershipNo" id="membershipNo" disabled>
+                            <span class="focus-input100"></span>
+                        </div>
+
+                        <div class="wrap-input100 validate-input">
+                            <span class="label-input100">ニックネーム</span>
+                            <input class="input100" type="text" name="nickName" id="nickName" disabled>
+                            <span class="focus-input100"></span>
+                        </div>
+
+                        <div class="wrap-input100 validate-input">
+                            <span class="label-input100">携帯電話番号</span>
+                            <input class="input100" type="text" name="telephone" id="telephone" disabled>
+                            <span class="focus-input100"></span>
+                        </div>
+
+                        <div class="wrap-input100 validate-input">
+                            <span class="label-input100">システムに御登録日</span>
+                            <input class="input100" type="text" name="depositdate" id="depositdate" disabled>
+                            <span class="focus-input100"></span>
+                        </div>
+
+                        <div class="wrap-input100 validate-input">
+                            <span class="label-input100">ポジション</span>
+                            <input class="input100" type="text" name="position" id="position" disabled>
+                            <span class="focus-input100"></span>
+                        </div>
+
+                        <div class="container-contact100-form-btn">
+                            <div class="wrap-contact100-form-btn">
+                                <div class="contact100-form-bgbtn"></div>
+                                <button class="contact100-form-btn" data-dismiss="modal">
+                                    <span>
+                                        閉じる
+                                        <i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
+                                    </span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="dropDownSelect1"></div>
+                <!--Footer-->
+            </div>
+            <!--/.Content-->
+        </div>
+    </div>
+<!-- Modal -->
+@****************************tree view javascript*****************************@
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript">
+
+
+    $.getJSON("/Trees/Index2/2", {},
+        function (data) {
+            for (var x = 0; x <= data.length - 1; x++) {
+                //  alert(data.length+" - "+ x);
+                if (x == 0) {
+                    var node = document.createElement("UL");
+                    node.setAttribute("class", "ulset");
+                    node.setAttribute("id", "ul" + (data[x].yy));
+                    var node2 = document.createElement("LI");
+                    node2.setAttribute("id", "idl" + (data[x].yy) + "cl" + data[x].xx);
+                    node2.setAttribute("class", "li");
+                    var node3 = document.createElement("A");
+                    node3.setAttribute("data-toggle", "modal");
+                    node3.setAttribute("data-target", "#modal");
+                    node3.setAttribute("onclick", "mycall(" + data[x].tid + ")");
+                    node3.setAttribute("id", "aidl" + (x) + "cl" + data[x].xx);
+                    var textnode = document.createTextNode(data[x].mn);
+                    if (data[x].jp == 3) {
+
+                        node3.setAttribute("class", "jumpingcss");
+                    }
+                  
+                    if (data[x].jp == 4) {
+
+                        node3.setAttribute("class", "jumping4css");
+                    }
+                    if (data[x].jp == 5) {
+
+                        node3.setAttribute("class", "jumping5css");
+                    }
+                   
+                    node3.appendChild(textnode);
+                    node2.appendChild(node3);
+                    node.appendChild(node2);
+                    document.getElementById("tree").appendChild(node);
+                    continue;
+                }
+                if ((data[x].xx % 2) == 1) {
+                    var node = document.createElement("UL");
+                    node.setAttribute("class", "ulset");
+                    node.setAttribute("id", "ul" + (data[x].yy));
+                }
+
+                var node2 = document.createElement("LI");
+                node2.setAttribute("id", "idl" + (data[x].yy) + "cl" + data[x].xx);
+                node2.setAttribute("class", "li");
+                var node3 = document.createElement("A");
+                node3.setAttribute("data-toggle", "modal");
+                node3.setAttribute("data-target", "#modal");
+                node3.setAttribute("onclick", "mycall(" + data[x].tid + ")");
+                node3.setAttribute("id", "aidl" + (x) + "cl" + data[x].xx);
+                if (data[x].jp == 3) {
+
+                    node3.setAttribute("class", "jumpingcss");
+                }
+                if (data[x].jp == 2) {
+
+                    node3.setAttribute("class", "jumping2css");
+                }
+                if (data[x].jp == 4) {
+
+                    node3.setAttribute("class", "jumping4css");
+                }
+                if (data[x].jp == 5) {
+
+                    node3.setAttribute("class", "jumping5css");
+                }
+                if (data[x].ft == 3) {
+                    node3.setAttribute("class", "stage3free");
+                }
+                var textnode = document.createTextNode(data[x].mn);
+                node3.appendChild(textnode);
+                node2.appendChild(node3);
+                node.appendChild(node2);
+                document.getElementById("idl" + (data[x].yy - 1) + "cl" + (Math.round(data[x].xx / 2))).appendChild(node);
+            }
+        }
+    );
+
+
+</script>
+
+<script type="text/javascript">
+    function submitform(thiss) {
+        //var bcnum = thiss.value;
+        //document.getElementById("bcbtnsubmit").value = bcnum;
+        $('form').submit();
+    }
+</script>
+
+@****************************popup view javascript*****************************@
+<script type="text/javascript">
+    function mycall(treeid) {
+
+        $(document).ready(function () {
+            var val1 = treeid;
+            var val2 = 2;
+            //var serviceURL = '/AllStages/popupAjax/';
+            $.ajax({
+                type: "POST",
+                url: "/Trees/popupAjax",
+                data: JSON.stringify({ 'treeid': val1, 'stage': val2 }),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: successFunc,
+                error: errorFunc
+            });
+            function successFunc(data, status) {
+
+                document.getElementById("name").value = data[0].name;
+                document.getElementById("membershipNo").value = data[0].membershipNo;
+                document.getElementById("nickName").value = data[0].nickName;
+                document.getElementById("telephone").value = data[0].mobileNo;
+                var date = new Date(parseInt(data[0].entryDate.substr(6)));
+                document.getElementById("depositdate").value = date.toISOString().split('T')[0];
+                var lr = "";
+                if (data[0].treeColumn % 2 == 1) {
+                    lr = "L"
+                }
+                else {
+                    lr = "R"
+                }
+                var meml=@ViewBag.getl;
+                document.getElementById("position").value = (data[0].treeLevel - meml) + "L-" + lr + " - " + data[0].bcNo + "BC";
+            }
+            function errorFunc() {
+                alert('error');
+            }
+        });
+    }
+</script>
+
+<script type="text/javascript">
+    myFunction();
+</script>
+

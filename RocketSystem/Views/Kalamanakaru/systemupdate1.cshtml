@@ -1,0 +1,97 @@
+﻿@{
+    Layout = "~/Views/Shared/AdminPanel.cshtml";
+    var positiondetail = ViewBag.list1;
+}
+
+<style type="text/css">
+
+    .nav-pills > li.active > a, .nav-pills > li.active > a:focus, .nav-pills > li.active > a:hover {
+        color: #fff;
+        background-color: #00c292;
+    }
+
+    a {
+        color: #686869;
+    }
+
+        a:hover {
+            color: #067538;
+        }
+</style>
+
+<!-- Breadcomb area Start-->
+<div class="breadcomb-area">
+    <div class="container-fluid">
+
+        <ul class="nav nav-pills nav-justified">
+            <li><a href='@Url.Action("temporaryposition", "Kalamanakaru")'>All transaction</a></li>
+            <li> <a href='@Url.Action("allpaid", "Kalamanakaru")'>All Paid</a></li>
+            <li class="active"><a href='@Url.Action("systemupdate1", "Kalamanakaru")'>System Update All</a></li>
+            <li><a href='@Url.Action("systemupdate2", "Kalamanakaru")'>No Payment</a></li>
+            <li><a href='@Url.Action("remainingSystemUpdate", "Kalamanakaru")'>Remaining System Update</a></li>
+            <li><a href='@Url.Action("remainingPayment", "Kalamanakaru")'>remaining Payment</a></li>
+            <li><a href='@Url.Action("systemupdate3", "Kalamanakaru")'>No System Update</a></li>
+            <li><a href="@Url.Action("nopayment", "Kalamanakaru" )">No Payment and System Update</a></li>
+            <li><a href="@Url.Action("rejected", "Kalamanakaru" )">Rejected position</a></li>
+            <li><a href="@Url.Action("rejectedCsv", "Kalamanakaru" )">Rejected Csv</a></li>
+        </ul>
+
+    </div>
+</div>
+<!-- Breadcomb area End-->
+
+<div class="data-table-area">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="data-table-list">
+                    <div class="basic-tb-hd">
+                        <h1>System update all</h1>
+                    </div>
+                    <div class="table-responsive">
+                        <table id="myTable" class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Membership No</th>
+                                    <th>Register date</th>
+                                    <th>Deposit Date</th>
+                                    <th>Package</th>
+                                    <th>position Count</th>
+
+                                    <th>payment status</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                    foreach (var a in positiondetail)
+                                    {
+                                        var az = "Apply All Position Pay";
+                                        var az1 = "Aplly All Position Not Pay";
+                                        <tr>
+
+                                            <td>@a.membershipNo</td>
+                                            <td>@a.registerDate</td>
+                                            <td>@a.depositDate</td>
+                                            <td>@a.package</td>
+                                            <td>@a.positionCount</td>
+                                            <td align="center">
+                                                <button type="button" class="btn btn-success btn-sm">
+                                                    @if (@a.paymentStatus == a.positionCount)
+                                                    {@az }
+                                                else
+                                                {@az1}
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Data Table area End-->

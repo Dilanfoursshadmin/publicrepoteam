@@ -1,0 +1,244 @@
+﻿@{
+    /**/
+
+    Layout = "~/Views/Shared/AdminPanel.cshtml";
+    var listbonusview = ViewBag.listbonus;
+    var listgraph = ViewBag.paidbonuschart;
+    var listpvrfitchart = ViewBag.profitchart;
+}
+
+
+<div class="col-md-12">
+
+    <div class="col-lg-8">
+        @using (Html.BeginForm())
+        {
+            <div class="controls form-inline" style="float:right;">
+
+
+
+                <div class="controls form-inline" style="float:right;">
+                    <div><h5>Generate position Bonus Cartwise</h5></div>
+                    @using (Html.BeginForm())
+                    {
+                        <select class="form-control formstylz" name="bcvalue1">
+                            <option value="1">month first cart</option>
+                            <option value="2">month second cart</option>
+                        </select>
+                        <input type="text" class="form-control formstylz" placeholder="Enter Security Code" name="bcvalue2" id="inputValue">
+
+                        <button class="btn btn-success notika-btn-success" type="submit" value="securitycode">Generate</button>
+                    }
+                </div>
+
+                <br />
+
+            </div>
+        }
+
+    </div>
+
+    @using (Html.BeginForm())
+    {
+        <div class="controls form-inline" style="float:right;">
+
+
+
+            <div class="controls form-inline" style="float:right;">
+                <div><h5>Generate Month End Bonus</h5></div>
+                @using (Html.BeginForm())
+                {
+
+                    <input type="text" class="form-control formstylz" placeholder="Enter Security Code" name="bcvalue1" id="inputValue">
+
+                    <button class="btn btn-success notika-btn-success" type="submit" value="securitycode">Generate</button>
+                }
+            </div>
+
+            <br />
+
+        </div>
+    }
+
+</div>
+@*strt*@
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script>
+    function submitform(thiss) {
+        $('form').submit();
+    }
+</script>
+
+<!-- Data Table area Start-->
+
+<br><br>
+
+<!-- Data Table area Start-->
+<div class="data-table-area">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="data-table-list">
+                    <div class="basic-tb-hd">
+                        <h1>Paid Bonus</h1>
+                        <!-- <p>It's just that simple. Turn your simple table into a sophisticated data table and offer your users a nice experience and great features without any effort.</p> -->
+                    </div>
+                    <div class="table-responsive" style="overflow:auto; height:280px;">
+                        <table id="myTable" class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Member ID</th>
+                                    <th>BC NO</th>
+                                    <th>Registered Stage</th>
+                                    <th>Registered Date</th>
+                                    <th>Position Bonus</th>
+                                    <th>Introduced Bonus</th>
+                                    <th>Profit Percentage Bonus</th>
+                                    <th>3rd Stage Bonus</th>
+                                    <th>5th Stage Bonus</th>
+                                    <th>Share Bonus</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                    foreach (var a in listbonusview)
+                                    {
+
+                                        if (a.complteorno == 1)
+                                        {
+                                            <tr style="background-color:palegreen">
+                                                <td>@a.memberId</td>
+                                                <td>@a.bcNumber</td>
+                                                <td>@a.positionHistory</td>
+                                                <td>@a.paidBonusDateTime.ToString("yyyy/MM/dd")</td>
+                                                <td>@a.paidpositionBonus</td>
+                                                <td>@a.paidIntoduceBonus</td>
+                                                <td>@a.paidPresentageBonus</td>
+                                                <td>@a.paidThirdStageBonus</td>
+                                                <td>@a.paidFifthStageBonus</td>
+                                                <td>@a.paidshareBonus</td>
+                                            </tr>
+                                        }
+                                        else
+                                        {
+                                            <tr>
+                                                <td>@a.memberId</td>
+                                                <td>@a.bcNumber</td>
+                                                <td>@a.positionHistory</td>
+                                                <td>@a.paidBonusDateTime.ToString("yyyy/MM/dd")</td>
+                                                <td>@a.paidpositionBonus</td>
+                                                <td>@a.paidIntoduceBonus</td>
+                                                <td>@a.paidPresentageBonus</td>
+                                                <td>@a.paidThirdStageBonus</td>
+                                                <td>@a.paidFifthStageBonus</td>
+                                                <td>@a.paidshareBonus</td>
+                                            </tr>
+                                        }
+                                    }
+                                }
+
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br>
+<div class="google-map-area">
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <h2 style="text-align: center;">Paid Bonus</h2>
+                <div class="google-map-single mg-t-30">
+                    <canvas id="chDonut3"></canvas>
+                </div>
+            </div>
+
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <h2 style="text-align: center;">Profit Precentage</h2>
+                <div class="google-map-single mg-t-30">
+                    <canvas id="chDonut4"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <br><br><br><br>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('table.display').DataTable();
+    });
+</script>
+
+<script type="text/javascript">
+
+    /* chart.js chart examples */
+
+    // chart colors
+    var colors = ['#AAAA11', '#E67300', '#44addd', '#E74C3C', '#66AA00', '#D576D5'];
+    var colors1 = ['#e9a19b', '#55cea2'];
+
+    /* 3 donut charts */
+    var donutOptions = {
+        cutoutPercentage: 0,
+        legend: { position: 'bottom', padding: 5, labels: { pointStyle: 'circle', usePointStyle: true } }
+    };
+
+    var donutOptions2 = {
+        cutoutPercentage: 40,
+        legend: { position: 'bottom', padding: 5, labels: { pointStyle: 'circle', usePointStyle: true } }
+    };
+
+
+
+    // donut 3
+    var chDonutData3 = {
+        labels: ['Profit Percentage Bonus', 'Position Bonus', 'Introduced Bonus','3rd Stage Bonus', '5th Stage Bonus','Share Bonus'],
+        datasets: [
+            {
+                backgroundColor: colors.slice(0, 6),
+                borderWidth: 0,
+                data: [@listgraph[2],@listgraph[1], @listgraph[0], @listgraph[3],@listgraph[4],@listgraph[5]]
+            }
+        ]
+    };
+    var chDonut3 = document.getElementById("chDonut3");
+    if (chDonut3) {
+        new Chart(chDonut3, {
+            type: 'pie',
+            data: chDonutData3,
+            options: donutOptions2
+        });
+    }
+
+
+    // donut 4
+    var chDonutData4 = {
+        labels: [ 'Total Paid Bonus', 'Actual Profit'],
+        datasets: [
+            {
+                backgroundColor: colors1.slice(0, 2),
+                borderWidth: 0,
+                data: [@*@listpvrfitchart[0],*@ @listpvrfitchart[1], @listpvrfitchart[2]]
+            }
+        ]
+    };
+    var chDonut4 = document.getElementById("chDonut4");
+    if (chDonut4) {
+        new Chart(chDonut4, {
+            type: 'pie',
+            data: chDonutData4,
+            options: donutOptions
+        });
+    }
+</script>

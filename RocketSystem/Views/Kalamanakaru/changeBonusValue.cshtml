@@ -1,0 +1,349 @@
+﻿@{
+    Layout = "~/Views/Shared/AdminPanel.cshtml";
+    var data = ViewBag.list1;
+    int bek = 0;
+}
+
+<style type="text/css">
+
+
+    .nav-pills > li.active > a, .nav-pills > li.active > a:focus, .nav-pills > li.active > a:hover {
+        color: #fff;
+        background-color: #00c292;
+    }
+
+    a {
+        color: #686869;
+    }
+
+        a:hover {
+            color: #067538;
+        }
+
+    .btn-success {
+        color: #fff;
+        background-color: #00c292;
+    }
+</style>
+
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    /* Full-width input fields */
+    input[type=text], input[type=password] {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+    }
+
+    /* Set a style for all buttons */
+    button {
+        background-color: #00c292;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+    }
+
+        button:hover {
+            opacity: 0.8;
+        }
+
+    /* Extra styles for the cancel button */
+    .cancelbtn {
+        width: auto;
+        padding: 10px 18px;
+        background-color: #f44336;
+    }
+
+    /* Center the image and position the close button */
+    .imgcontainer {
+        text-align: center;
+        margin: 24px 0 12px 0;
+        position: relative;
+    }
+
+    img.avatar {
+        width: 40%;
+        border-radius: 50%;
+    }
+
+    .container {
+        padding: 16px;
+    }
+
+    span.psw {
+        float: right;
+        padding-top: 16px;
+    }
+
+    /* The Modal (background) */
+    .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        padding-top: 60px;
+    }
+
+    /* Modal Content/Box */
+    .modal-content {
+        background-color: #fefefe;
+        margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+        border: 1px solid #888;
+        width: 80%; /* Could be more or less, depending on screen size */
+    }
+
+    /* The Close Button (x) */
+    .close {
+        position: absolute;
+        right: 25px;
+        top: 0;
+        color: #000;
+        font-size: 35px;
+        font-weight: bold;
+    }
+
+        .close:hover,
+        .close:focus {
+            color: red;
+            cursor: pointer;
+        }
+
+    /* Add Zoom Animation */
+    .animate {
+        -webkit-animation: animatezoom 0.6s;
+        animation: animatezoom 0.6s
+    }
+
+    @@-webkit-keyframes animatezoom {
+        from {
+            -webkit-transform: scale(0)
+        }
+
+        to {
+            -webkit-transform: scale(1)
+        }
+    }
+
+    @@keyframes animatezoom {
+        from {
+            transform: scale(0)
+        }
+
+        to {
+            transform: scale(1)
+        }
+    }
+
+    /* Change styles for span and cancel button on extra small screens */
+    @@media screen and (max-width: 300px) {
+        span.psw {
+            display: block;
+            float: none;
+        }
+
+        .cancelbtn {
+            width: 100%;
+        }
+    }
+</style>
+
+<!-- Breadcomb area Start-->
+<div class="breadcomb-area">
+    <div class="container">
+        <ul class="nav nav-pills nav-justified">
+            <li class="active"><a href='@Url.Action("changeBonusValue", "kalamanakaru")'>Change Bonus 1</a></li>
+            <li> <a href='@Url.Action("issueBonusValue", "kalamanakaru")'>Change Bonus 2</a></li>
+        </ul>
+    </div>
+</div>
+<!-- Breadcomb area End-->
+<br />
+
+
+<div class="data-table-area">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="data-table-list">
+                    <div class="basic-tb-hd">
+                        <h1>Bonus</h1>
+                        @*Year and month area*@
+                        <div class="container">
+                            <div class="col-md-6">
+                                <select class="form-control" id="year">
+                                    <option value="2015">2015</option>
+                                    <option value="2016">2016</option>
+                                    <option value="2017">2017</option>
+                                    <option value="2018">2018</option>
+                                </select>
+
+                            </div>
+                            <div class="col-md-6">
+                                <select class="form-control" id="month">
+                                    <option value="1">January</option>
+                                    <option value="2">February</option>
+                                    <option value="3">March</option>
+                                    <option value="4">April</option>
+                                    <option value="5">May</option>
+                                    <option value="6">June</option>
+                                    <option value="7">July</option>
+                                    <option value="8">August</option>
+                                    <option value="9">September</option>
+                                    <option value="10">October</option>
+                                    <option value="11">November</option>
+                                    <option value="12">December</option>
+                                </select>
+                            </div>
+                        </div>
+                        @*Year and month area*@
+                    </div>
+                    <div class="table-responsive">
+                        <table id="data-table-basic" class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Membership No</th>
+                                    <th>Register date</th>
+                                    <th>paidBonusId</th>
+                                    <th>Bc Numbser</th>
+                                    <th>Position Count</th>
+                                    <th>Action</th>
+
+                                </tr>
+                            </thead>
+                            @{
+                                foreach (var a in data)
+                                {
+                                    var memberid = @a.paidIntoduceBonus + "#" + a.paidPresentageBonus + "#" + a.paidThirdStageBonus + "#" + a.paidFifthStageBonus + "#" + a.paidpositionBonus + "#" + a.paidshareBonus + "#" + a.paidBonusId + "#";
+
+                                    <tbody>
+                                        <tr id="model">
+                                            <td class="ssss">@a.memberId</td>
+                                            <td>@a.paidBonusDateTime</td>
+                                            <td>@a.paidBonusId</td>
+                                            <td>@a.bcNumber</td>
+                                            <td>@a.positionHistory</td>
+                                            <td align="center">
+                                                <button onclick="document.getElementById('id01').style.display='block'" value=@memberid ; style="width:auto;" type="button" class="btn btn-success btn-lg"><i class="fas fa-plus-square"></i></button>
+                                            </td>
+
+                                        </tr>
+
+                                    </tbody>
+                                }
+                            }
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Data Table area End-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script>
+    $("button").click(function () {
+        var fired_button = $(this).val();
+        //alert(fired_button);
+        var result = fired_button.split('#');
+        //var x = result[1];
+        //alert(x);
+        //var concatclassname = '.memberids' + fired_button;
+        //alert(concatclassname);
+        //var r = $(".ssss").text();
+        //alert(r);
+        $("#fifteenlevel").val(result[0]);
+        $("#positionbonus").val(result[4]);
+        $("#presentagebonus").val(result[1]);
+        $("#sharebonus").val(result[5]);
+        $("#thirdrocket").val(result[2]);
+        $("#fifthrocket").val(result[3]);
+        $("#id").val(result[6]);
+    });
+
+</script>
+@{
+    var x = bek;
+}
+
+<div id="id01" class="modal">
+
+    <form class="modal-content animate" method="post">
+        <div class="imgcontainer">
+            <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+            <img src="~/img/bonusicon.png" alt="Avatar" width="180" height="180">
+            <h2>Last Month Bonus</h2>
+        </div>
+        @using (Html.BeginForm())
+        {
+            <div class="container">
+                <label for="level1"><b>15 Level Up Bonus</b></label>
+                <input type="text" placeholder="name" id="fifteenlevel" name="fifteenlevel" required>
+
+                <label for="level2"><b>Introduce Bonus</b></label>
+                <input type="text" placeholder="Enter Level 2" id="positionbonus" name="positionbonus" required>
+
+                <label for="level3"><b>Profit Presentage Bonus</b></label>
+                <input type="text" placeholder="Enter Level 3" id="presentagebonus" name="presentagebonus" required>
+
+                <label for="level4"><b>Share Bonus</b></label>
+                <input type="text" placeholder="Enter Level 4" id="sharebonus" name="sharebonus" required>
+
+                <label for="level5"><b>Third Rocket Bonus</b></label>
+                <input type="text" placeholder="Enter Level 5" id="thirdrocket" name="thirdrocket" required>
+
+                <label for="level5"><b>Fifth Rocket Bonus</b></label>
+                <input type="text" placeholder="Enter Level 5" id="fifthrocket" name="fifthrocket" required>
+
+                <input type="hidden" placeholder="Enter Level 5" id="id" name="id" required>
+                <button type="submit">Apply</button>
+            </div>
+        }
+
+    </form>
+
+</div>
+
+<script>
+    function submitform(thiss) {
+        $('form').submit();
+    }
+</script>
+
+<script>
+    // Get the modal
+    var modal = document.getElementById('id01');
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
+
+<script>
+    $(document).ready(function () {
+        var d = new Date();
+        var month = d.getMonth() + 1;
+        var year = d.getFullYear();
+
+        $("#month").val(month);
+        $("#year").val(year);
+    });
+</script>

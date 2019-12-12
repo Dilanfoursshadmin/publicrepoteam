@@ -1,0 +1,189 @@
+/*Start Radio Button Styles*/
+
+.form-control {
+    margin-right: 10px !important;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+body {
+    background-image: radial-gradient(circle at 30% 30%, #448fb4, #bce8f1 20%, #8cd8fe);
+    /*background-image: linear-gradient(-80deg, #0163ff, #05efff);*/
+    /*background-image: -webkit-linear-gradient( 136deg, rgb(116,235,213) 50%, rgb(63,43,150) 110%);*/
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.panel-info > .panel-heading {
+    background-image: radial-gradient(circle at 25% 30%, #4CB2D4, #0563bf 20%, #4CB2D4);
+    color: #ffffff;
+    /*background-color: #8768f5;*/
+    border-color: #000000;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #a64bf4; /*#428bca*/
+    border-color: #357ebd;
+}
+
+.formbody {
+    background-color: #fff; /*#428bca*/
+    border: 1px solid transparent;
+}
+
+
+
+
+.radiobtn {
+    position: relative;
+    display: block;
+}
+
+.radiobtn label {
+        display: block;
+        background: #ffffff;
+        color: #444;
+        border-radius: 2px;
+        padding: 2px 5px;
+        border: 2px solid #dbf5ff;
+        margin-bottom: 5px;
+        cursor: pointer;
+    }
+
+ .radiobtn label:after, .radiobtn label:before {
+            content: "";
+            position: absolute;
+            right: 19px;
+            top: 3px;
+            width: 20px;
+            height: 20px;
+            border-radius: 3px;
+            background: #57cbf7;
+        }
+
+ .radiobtn label:before {
+            background: transparent;
+            transition: 0.1s width cubic-bezier(0.075, 0.82, 0.165, 1) 0s, 0.3s height cubic-bezier(0.075, 0.82, 0.165, 2) 0.1s;
+            z-index: 2;
+            overflow: hidden;
+            background-repeat: no-repeat;
+            background-size: 13px;
+            background-position: center;
+            width: 0;
+            height: 0;
+            background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNS4zIDEzLjIiPiAgPHBhdGggZmlsbD0iI2ZmZiIgZD0iTTE0LjcuOGwtLjQtLjRhMS43IDEuNyAwIDAgMC0yLjMuMUw1LjIgOC4yIDMgNi40YTEuNyAxLjcgMCAwIDAtMi4zLjFMLjQgN2ExLjcgMS43IDAgMCAwIC4xIDIuM2wzLjggMy41YTEuNyAxLjcgMCAwIDAgMi40LS4xTDE1IDMuMWExLjcgMS43IDAgMCAwLS4yLTIuM3oiIGRhdGEtbmFtZT0iUGZhZCA0Ii8+PC9zdmc+);
+        }
+
+ .radiobtn input[type="checkbox"] {
+        display: none;
+        position: absolute;
+        width: 100%;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+    }
+
+.checkbox input[type="checkbox"]:checked + label {
+    background: #57cbf7;
+    -webkit-animation-name: blink;
+    animation-name: blink;
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    border-color: #57cbf7;
+}
+
+.radiobtn input[type="checkbox"]:checked + label:after {
+    background: #06a2c9;
+}
+
+ .radiobtn input[type="checkbox"]:checked + label:before {
+                width: 20px;
+                height: 20px;
+            }
+
+@-webkit-keyframes blink {
+    0% {
+        background-color: #dbf5ff;
+    }
+
+    10% {
+        background-color: #dbf5ff;
+    }
+
+    11% {
+        background-color: #dbf5ff;
+    }
+
+    29% {
+        background-color: #dbf5ff;
+    }
+
+    30% {
+        background-color: #dbf5ff;
+    }
+
+    50% {
+        background-color: #dbf5ff;
+    }
+
+    45% {
+        background-color: #dbf5ff;
+    }
+
+    50% {
+        background-color: #dbf5ff;
+    }
+
+    100% {
+        background-color: #dbf5ff;
+    }
+}
+
+@keyframes blink {
+    0% {
+        background-color: #dbf5ff;
+    }
+
+    10% {
+        background-color: #dbf5ff;
+    }
+
+    11% {
+        background-color: #dbf5ff;
+    }
+
+    29% {
+        background-color: #dbf5ff;
+    }
+
+    30% {
+        background-color: #dbf5ff;
+    }
+
+    50% {
+        background-color: #dbf5ff;
+    }
+
+    45% {
+        background-color: #dbf5ff;
+    }
+
+    50% {
+        background-color: #dbf5ff;
+    }
+
+    100% {
+        background-color: #dbf5ff;
+    }
+}
+
+/*End Radio button styles*/

@@ -1,0 +1,488 @@
+﻿@{
+    Layout = "~/Views/Shared/AdminPanel.cshtml";
+    var issubonus = ViewBag.isuebonusvalue;
+}
+
+<style type="text/css">
+
+
+    .nav-pills > li.active > a, .nav-pills > li.active > a:focus, .nav-pills > li.active > a:hover {
+        color: #fff;
+        background-color: #00c292;
+    }
+
+    a {
+        color: #686869;
+    }
+
+        a:hover {
+            color: #067538;
+        }
+
+    .btn-success {
+        color: #fff;
+        background-color: #00c292;
+    }
+
+        .btn-success:hover {
+            color: #fff;
+            background-color: #0e9e7b;
+        }
+</style>
+
+<!-- Breadcomb area Start-->
+<div class="breadcomb-area">
+    <div class="container">
+
+        <ul class="nav nav-pills nav-justified">
+            <li><a href='@Url.Action("changeBonusValue", "kalamanakaru")'>Change Bonus 1</a></li>
+            <li class="active"> <a href='@Url.Action("issueBonusValue", "kalamanakaru")'>Change Bonus 2</a></li>
+        </ul>
+
+    </div>
+</div>
+<!-- Breadcomb area End-->
+<br />
+
+
+<div class="container">
+    <center><h2>Edit Your Bonus</h2></center>
+    <h4>More Than Two People Introduce bonus value </h4>
+    <div class="row with-margin">
+        <div class="col-lg-12">
+            @using (Html.BeginForm())
+            {
+                <input type="hidden" name="positionid" value="1">
+                <div class="input-group input-group-lg">
+                    <input type="number" class="form-control input-lg" name="bonusvalue" id="myTextBox" readonly="readonly" placeholder="Your Bonus" value=@issubonus[0].bonusAmount>
+                    <span class="input-group-btn">
+                        <button class="btn btn-warning btn-lg" id="myButton" type="reset">Edit</button>
+                        <button class="btn btn-success btn-lg" type="submit">OK</button>
+                    </span>
+                </div><!-- /input-group 1 -->
+            }
+            <br />
+            <h4>More Than Four People Introduce bonus value </h4>
+            @using (Html.BeginForm())
+            {
+                <input type="hidden" name="positionid" value="2">
+                <div class="input-group input-group-lg">
+                    <input type="number" class="form-control input-lg" name="bonusvalue" id="myTextBox1" readonly="readonly" placeholder="Your Bonus" value=@issubonus[1].bonusAmount>
+                    <span class="input-group-btn">
+                        <button class="btn btn-warning btn-lg" id="myButton1" type="reset">Edit</button>
+                        <button class="btn btn-success btn-lg" type="submit">OK</button>
+                    </span>
+                </div><!-- /input-group 2 -->
+            }
+            <br />
+            <h4>More Than Six People Introduce bonus value</h4>
+            @using (Html.BeginForm())
+            {
+                <input type="hidden" name="positionid" value="3">
+                <div class="input-group input-group-lg">
+                    <input type="number" class="form-control input-lg" name="bonusvalue" id="myTextBox2" readonly="readonly" placeholder="Your Bonus" value=@issubonus[2].bonusAmount>
+                    <span class="input-group-btn">
+                        <button class="btn btn-warning btn-lg" id="myButton2" type="reset">Edit</button>
+                        <button class="btn btn-success btn-lg" type="submit">OK</button>
+                    </span>
+                </div><!-- /input-group 3 -->
+            }
+            <br />
+            <h4>Position Bonus Presentage</h4>
+            @using (Html.BeginForm())
+            {
+                <input type="hidden" name="positionid" value="4">
+                <div class="input-group input-group-lg">
+                    <input type="number" class="form-control input-lg" name="bonusvalue" id="myTextBox3" readonly="readonly" placeholder="Your Bonus" value=@issubonus[3].bonusAmount>
+                    <span class="input-group-btn">
+                        <button class="btn btn-warning btn-lg" id="myButton3" type="reset">Edit</button>
+                        <button class="btn btn-success btn-lg" type="submit">OK</button>
+                    </span>
+                </div><!-- /input-group 4 -->
+                <br />
+            }
+            <h4>Super And Middle Position Entrance Bonus Value</h4>
+            @using (Html.BeginForm())
+            {
+                <input type="hidden" name="positionid" value="5">
+                <div class="input-group input-group-lg">
+                    <input type="number" class="form-control input-lg" name="bonusvalue" id="myTextBox4" readonly="readonly" placeholder="Your Bonus" value=@issubonus[4].bonusAmount>
+                    <span class="input-group-btn">
+                        <button class="btn btn-warning btn-lg" id="myButton4" type="reset">Edit</button>
+                        <button class="btn btn-success btn-lg" type="submit">OK</button>
+                    </span>
+                </div><!-- /input-group 4 -->
+            }
+            <br />
+            <h4>Super And Middle Position First Row Bonus Value</h4>
+            @using (Html.BeginForm())
+            {
+                <input type="hidden" name="positionid" value="6">
+                <div class="input-group input-group-lg">
+                    <input type="number" class="form-control input-lg" name="bonusvalue" id="myTextBox5" readonly="readonly" placeholder="Your Bonus" value=@issubonus[5].bonusAmount>
+                    <span class="input-group-btn">
+                        <button class="btn btn-warning btn-lg" id="myButton5" type="reset">Edit</button>
+                        <button class="btn btn-success btn-lg" type="submit">OK</button>
+                    </span>
+                </div><!-- /input-group 4 -->
+            }
+            <br />
+            <h4>Super And Middle Position Second Row Bonus Value</h4>
+            @using (Html.BeginForm())
+            {
+                <input type="hidden" name="positionid" value="7">
+                <div class="input-group input-group-lg">
+                    <input type="number" class="form-control input-lg" name="bonusvalue" id="myTextBox6" readonly="readonly" placeholder="Your Bonus" value=@issubonus[6].bonusAmount>
+                    <span class="input-group-btn">
+                        <button class="btn btn-warning btn-lg" id="myButton6" type="reset">Edit</button>
+                        <button class="btn btn-success btn-lg" type="submit">OK</button>
+                    </span>
+                </div><!-- /input-group 4 -->
+            }
+            <br />
+            <h4>Super And Middle Position Final Row Bonus Value</h4>
+            @using (Html.BeginForm())
+            {
+                <input type="hidden" name="positionid" value="8">
+                <div class="input-group input-group-lg">
+                    <input type="number" class="form-control input-lg" name="bonusvalue" id="myTextBox7" readonly="readonly" placeholder="Your Bonus" value=@issubonus[7].bonusAmount>
+                    <span class="input-group-btn">
+                        <button class="btn btn-warning btn-lg" id="myButton7" type="reset">Edit</button>
+                        <button class="btn btn-success btn-lg" type="submit">OK</button>
+                    </span>
+                </div><!-- /input-group 4 -->
+            }
+            <br />
+            <h4>Super And Middle Position Entrance Bonus Value Fifth Stage</h4>
+            @using (Html.BeginForm())
+            {
+                <input type="hidden" name="positionid" value="9">
+                <div class="input-group input-group-lg">
+                    <input type="number" class="form-control input-lg" name="bonusvalue" id="myTextBox8" readonly="readonly" placeholder="Your Bonus" value=@issubonus[8].bonusAmount>
+                    <span class="input-group-btn">
+                        <button class="btn btn-warning btn-lg" id="myButton8" type="reset">Edit</button>
+                        <button class="btn btn-success btn-lg" type="submit">OK</button>
+                    </span>
+                </div><!-- /input-group 4 -->
+            }
+            <br />
+            <h4>Super And Middle Position first Row Bonus Value Fifth Stage</h4>
+            @using (Html.BeginForm())
+            {
+                <input type="hidden" name="positionid" value="10">
+                <div class="input-group input-group-lg">
+                    <input type="number" class="form-control input-lg" name="bonusvalue" id="myTextBox9" readonly="readonly" placeholder="Your Bonus" value=@issubonus[9].bonusAmount>
+                    <span class="input-group-btn">
+                        <button class="btn btn-warning btn-lg" id="myButton9" type="reset">Edit</button>
+                        <button class="btn btn-success btn-lg" type="submit">OK</button>
+                    </span>
+                </div><!-- /input-group 4 -->
+            }
+            <br />
+            <h4>Super And Middle Position Second Row Bonus Value Fifth Stage</h4>
+            @using (Html.BeginForm())
+            {
+                <input type="hidden" name="positionid" value="11">
+                <div class="input-group input-group-lg">
+                    <input type="number" class="form-control input-lg" name="bonusvalue" id="myTextBox10" readonly="readonly" placeholder="Your Bonus" value=@issubonus[10].bonusAmount>
+                    <span class="input-group-btn">
+                        <button class="btn btn-warning btn-lg" id="myButton10" type="reset">Edit</button>
+                        <button class="btn btn-success btn-lg" type="submit">OK</button>
+                    </span>
+                </div><!-- /input-group 4 -->
+            }
+            <br />
+            <h4>Super And Middle Position Final Row Bonus Value Fifth Stage</h4>
+            @using (Html.BeginForm())
+            {
+                <input type="hidden" name="positionid" value="12">
+                <div class="input-group input-group-lg">
+                    <input type="number" class="form-control input-lg" name="bonusvalue" id="myTextBox11" readonly="readonly" placeholder="Your Bonus" value=@issubonus[11].bonusAmount>
+                    <span class="input-group-btn">
+                        <button class="btn btn-warning btn-lg" id="myButton11" type="reset">Edit</button>
+                        <button class="btn btn-success btn-lg" type="submit">OK</button>
+                    </span>
+                </div><!-- /input-group 4 -->
+            }
+            <br />
+            <h4>TenTousend Package Entrance Bonus Value Third Stage</h4>
+            @using (Html.BeginForm())
+            {
+                <input type="hidden" name="positionid" value="13">
+                <div class="input-group input-group-lg">
+                    <input type="number" class="form-control input-lg" name="bonusvalue" id="myTextBox12" readonly="readonly" placeholder="Your Bonus" value=@issubonus[12].bonusAmount>
+                    <span class="input-group-btn">
+                        <button class="btn btn-warning btn-lg" id="myButton12" type="reset">Edit</button>
+                        <button class="btn btn-success btn-lg" type="submit">OK</button>
+                    </span>
+                </div><!-- /input-group 4 -->
+            }
+            <br />
+            <h4>TenTousend Package First Row Bonus Value Third Stage</h4>
+            @using (Html.BeginForm())
+            {
+                <input type="hidden" name="positionid" value="14">
+                <div class="input-group input-group-lg">
+                    <input type="number" class="form-control input-lg" name="bonusvalue" id="myTextBox13" readonly="readonly" placeholder="Your Bonus" value=@issubonus[13].bonusAmount>
+                    <span class="input-group-btn">
+                        <button class="btn btn-warning btn-lg" id="myButton13" type="reset">Edit</button>
+                        <button class="btn btn-success btn-lg" type="submit">OK</button>
+                    </span>
+                </div><!-- /input-group 4 -->
+            }
+            <br />
+            <h4>TenTousend Package Second Row Bonus Value Third Stage</h4>
+            @using (Html.BeginForm())
+            {
+                <input type="hidden" name="positionid" value="15">
+                <div class="input-group input-group-lg">
+                    <input type="number" class="form-control input-lg" name="bonusvalue" id="myTextBox14" readonly="readonly" placeholder="Your Bonus" value=@issubonus[14].bonusAmount>
+                    <span class="input-group-btn">
+                        <button class="btn btn-warning btn-lg" id="myButton14" type="reset">Edit</button>
+                        <button class="btn btn-success btn-lg" type="submit">OK</button>
+                    </span>
+                </div><!-- /input-group 4 -->
+            }
+            <br />
+            <h4>TenTousend Package Final Row Bonus Value Third Stage</h4>
+            @using (Html.BeginForm())
+            {
+                <input type="hidden" name="positionid" value="16">
+                <div class="input-group input-group-lg">
+                    <input type="number" class="form-control input-lg" name="bonusvalue" id="myTextBox15" readonly="readonly" placeholder="Your Bonus" value=@issubonus[15].bonusAmount>
+                    <span class="input-group-btn">
+                        <button class="btn btn-warning btn-lg" id="myButton15" type="reset">Edit</button>
+                        <button class="btn btn-success btn-lg" type="submit">OK</button>
+                    </span>
+                </div><!-- /input-group 4 -->
+            }
+            <br />
+            <h4>TenTousend Package Entrance Bonus Value Fifth Stage</h4>
+            @using (Html.BeginForm())
+            {
+                <input type="hidden" name="positionid" value="17">
+                <div class="input-group input-group-lg">
+                    <input type="number" class="form-control input-lg" name="bonusvalue" id="myTextBox16" readonly="readonly" placeholder="Your Bonus" value=@issubonus[16].bonusAmount>
+                    <span class="input-group-btn">
+                        <button class="btn btn-warning btn-lg" id="myButton16" type="reset">Edit</button>
+                        <button class="btn btn-success btn-lg" type="submit">OK</button>
+                    </span>
+                </div><!-- /input-group 4 -->
+            }
+            <br />
+            <h4>TenTousend Package First Row Bonus Value Fifth Stage</h4>
+            @using (Html.BeginForm())
+            {
+                <input type="hidden" name="positionid" value="18">
+                <div class="input-group input-group-lg">
+                    <input type="number" class="form-control input-lg" name="bonusvalue" id="myTextBox17" readonly="readonly" placeholder="Your Bonus" value=@issubonus[17].bonusAmount>
+                    <span class="input-group-btn">
+                        <button class="btn btn-warning btn-lg" id="myButton17" type="reset">Edit</button>
+                        <button class="btn btn-success btn-lg" type="submit">OK</button>
+                    </span>
+                </div><!-- /input-group 4 -->
+            }
+            <br />
+            <h4>TenTousend Package Second Row Bonus Value Fifth Stage</h4>
+            @using (Html.BeginForm())
+            {
+                <input type="hidden" name="positionid" value="19">
+                <div class="input-group input-group-lg">
+                    <input type="number" class="form-control input-lg" name="bonusvalue" id="myTextBox18" readonly="readonly" placeholder="Your Bonus" value=@issubonus[18].bonusAmount>
+                    <span class="input-group-btn">
+                        <button class="btn btn-warning btn-lg" id="myButton18" type="reset">Edit</button>
+                        <button class="btn btn-success btn-lg" type="submit">OK</button>
+                    </span>
+                </div><!-- /input-group 4 -->
+            }
+            <br />
+            <h4>TenTousend Package Final Row Bonus Value Fifth Stage</h4>
+            @using (Html.BeginForm())
+            {
+                <input type="hidden" name="positionid" value="20">
+                <div class="input-group input-group-lg">
+                    <input type="number" class="form-control input-lg" name="bonusvalue" id="myTextBox19" readonly="readonly" placeholder="Your Bonus" value=@issubonus[19].bonusAmount>
+                    <span class="input-group-btn">
+                        <button class="btn btn-warning btn-lg" id="myButton19" type="reset">Edit</button>
+                        <button class="btn btn-success btn-lg" type="submit">OK</button>
+                    </span>
+                </div><!-- /input-group 4 -->
+            }
+            <br />
+            <h4>Presentage Value More than Tree Introducer</h4>
+            @using (Html.BeginForm())
+            {
+                <input type="hidden" name="positionid" value="21">
+                <div class="input-group input-group-lg">
+                    <input type="number" class="form-control input-lg" name="bonusvalue" id="myTextBox20" readonly="readonly" placeholder="Your Bonus" value=@issubonus[20].bonusAmount>
+                    <span class="input-group-btn">
+                        <button class="btn btn-warning btn-lg" id="myButton20" type="reset">Edit</button>
+                        <button class="btn btn-success btn-lg" type="submit">OK</button>
+                    </span>
+                </div><!-- /input-group 4 -->
+            }
+            <br />
+            <h4>Presentage Value More than Five Introducer</h4>
+            @using (Html.BeginForm())
+            {
+                <input type="hidden" name="positionid" value="22">
+                <div class="input-group input-group-lg">
+                    <input type="number" class="form-control input-lg" name="bonusvalue" id="myTextBox21" readonly="readonly" placeholder="Your Bonus" value=@issubonus[21].bonusAmount>
+                    <span class="input-group-btn">
+                        <button class="btn btn-warning btn-lg" id="myButton21" type="reset">Edit</button>
+                        <button class="btn btn-success btn-lg" type="submit">OK</button>
+                    </span>
+                </div><!-- /input-group 4 -->
+            }
+            <br />
+            <h4>One Lakh Number of Coin</h4>
+            @using (Html.BeginForm())
+            {
+                <input type="hidden" name="positionid" value="23">
+                <div class="input-group input-group-lg">
+                    <input type="number" class="form-control input-lg" name="bonusvalue" id="myTextBox22" readonly="readonly" placeholder="Your Bonus" value=@issubonus[22].bonusAmount>
+                    <span class="input-group-btn">
+                        <button class="btn btn-warning btn-lg" id="myButton22" type="reset">Edit</button>
+                        <button class="btn btn-success btn-lg" type="submit">OK</button>
+                    </span>
+                </div><!-- /input-group 4 -->
+            }
+            <br />
+            <h4>Three Lakh and Fifteen Thousend Package Number of Coin</h4>
+            @using (Html.BeginForm())
+            {
+                <input type="hidden" name="positionid" value="24">
+                <div class="input-group input-group-lg">
+                    <input type="number" class="form-control input-lg" name="bonusvalue" id="myTextBox23" readonly="readonly" placeholder="Your Bonus" value=@issubonus[23].bonusAmount>
+                    <span class="input-group-btn">
+                        <button class="btn btn-warning btn-lg" id="myButton23" type="reset">Edit</button>
+                        <button class="btn btn-success btn-lg" type="submit">OK</button>
+                    </span>
+                </div><!-- /input-group 4 -->
+            }
+            <br />
+            <h4>Profit Presenage of Share Bonus</h4>
+            @using (Html.BeginForm())
+            {
+                <input type="hidden" name="positionid" value="25">
+                <div class="input-group input-group-lg">
+                    <input type="number" class="form-control input-lg" name="bonusvalue" id="myTextBox24" readonly="readonly" placeholder="Your Bonus" value=@issubonus[24].bonusAmount>
+                    <span class="input-group-btn">
+                        <button class="btn btn-warning btn-lg" id="myButton24" type="reset">Edit</button>
+                        <button class="btn btn-success btn-lg" type="submit">OK</button>
+                    </span>
+                </div><!-- /input-group 4 -->
+            }
+
+        </div><!-- /.col-lg-6 -->
+    </div><!-- /.row -->
+</div>
+
+<script>
+    document.getElementById('myButton').onclick = function () {
+        document.getElementById('myTextBox').readOnly = false;
+    };
+    document.getElementById('myButton1').onclick = function () {
+        document.getElementById('myTextBox1').readOnly = false;
+    };
+
+    document.getElementById('myButton2').onclick = function () {
+        document.getElementById('myTextBox2').readOnly = false;
+    };
+
+    document.getElementById('myButton3').onclick = function () {
+        document.getElementById('myTextBox3').readOnly = false;
+    };
+
+    document.getElementById('myButton4').onclick = function () {
+        document.getElementById('myTextBox4').readOnly = false;
+    };
+    document.getElementById('myButton5').onclick = function () {
+        document.getElementById('myTextBox5').readOnly = false;
+    };
+
+    document.getElementById('myButton6').onclick = function () {
+        document.getElementById('myTextBox6').readOnly = false;
+    };
+
+    document.getElementById('myButton7').onclick = function () {
+        document.getElementById('myTextBox7').readOnly = false;
+    };
+
+    document.getElementById('myButton8').onclick = function () {
+        document.getElementById('myTextBox8').readOnly = false;
+    };
+    document.getElementById('myButton').onclick = function () {
+        document.getElementById('myTextBox').readOnly = false;
+    };
+
+    document.getElementById('myButton9').onclick = function () {
+        document.getElementById('myTextBox9').readOnly = false;
+    };
+
+    document.getElementById('myButton10').onclick = function () {
+        document.getElementById('myTextBox10').readOnly = false;
+    };
+
+    document.getElementById('myButton11').onclick = function () {
+        document.getElementById('myTextBox11').readOnly = false;
+    };
+    document.getElementById('myButton12').onclick = function () {
+        document.getElementById('myTextBox12').readOnly = false;
+    };
+
+    document.getElementById('myButton13').onclick = function () {
+        document.getElementById('myTextBox13').readOnly = false;
+    };
+
+    document.getElementById('myButton14').onclick = function () {
+        document.getElementById('myTextBox14').readOnly = false;
+    };
+
+    document.getElementById('myButton15').onclick = function () {
+        document.getElementById('myTextBox15').readOnly = false;
+    };
+    document.getElementById('myButton16').onclick = function () {
+        document.getElementById('myTextBox16').readOnly = false;
+    };
+
+    document.getElementById('myButton17').onclick = function () {
+        document.getElementById('myTextBox17').readOnly = false;
+    };
+
+    document.getElementById('myButton18').onclick = function () {
+        document.getElementById('myTextBox18').readOnly = false;
+    };
+
+    document.getElementById('myButton19').onclick = function () {
+        document.getElementById('myTextBox19').readOnly = false;
+    };
+    document.getElementById('myButton20').onclick = function () {
+        document.getElementById('myTextBox20').readOnly = false;
+    };
+
+    document.getElementById('myButton21').onclick = function () {
+        document.getElementById('myTextBox21').readOnly = false;
+    };
+    document.getElementById('myButton22').onclick = function () {
+        document.getElementById('myTextBox22').readOnly = false;
+    };
+
+    document.getElementById('myButton23').onclick = function () {
+        document.getElementById('myTextBox23').readOnly = false;
+    };
+
+    document.getElementById('myButton24').onclick = function () {
+        document.getElementById('myTextBox24').readOnly = false;
+    };
+
+    document.getElementById('myButton25').onclick = function () {
+        document.getElementById('myTextBox25').readOnly = false;
+    };
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script>
+    function submitform(thiss) {
+        $('form').submit();
+    }
+</script>

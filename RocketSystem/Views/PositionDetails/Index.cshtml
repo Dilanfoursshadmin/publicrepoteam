@@ -1,0 +1,81 @@
+﻿@model IEnumerable<RocketSystem.Models.PositionDetail>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.membershipNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.introducePromoCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.registerDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.depositDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.package)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.packageStyle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.positionCount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.paymentStatus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.systemUpdate)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.membershipNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.introducePromoCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.registerDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.depositDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.package)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.packageStyle)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.positionCount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.paymentStatus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.systemUpdate)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.positionId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.positionId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.positionId })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,106 @@
+﻿@{
+    Layout = "~/Views/Shared/AdminPanel.cshtml";
+    var positiondetail = ViewBag.list1;
+}
+
+<style type="text/css">
+
+    .nav-pills > li.active > a, .nav-pills > li.active > a:focus, .nav-pills > li.active > a:hover {
+        color: #fff;
+        background-color: #00c292;
+    }
+
+    a {
+        color: #686869;
+    }
+
+        a:hover {
+            color: #067538;
+        }
+</style>
+
+<!-- Breadcomb area Start-->
+<div class="breadcomb-area">
+    <div class="container-fluid">
+
+        <ul class="nav nav-pills nav-justified">
+            <li><a href='@Url.Action("temporaryposition", "Kalamanakaru")'>All transaction</a></li>
+            <li> <a href='@Url.Action("allpaid", "Kalamanakaru")'>All Paid</a></li>
+            <li><a href='@Url.Action("systemupdate1", "Kalamanakaru")'>System Update All</a></li>
+            <li><a href='@Url.Action("systemupdate2", "Kalamanakaru")'>No Payment</a></li>
+            <li><a href='@Url.Action("remainingSystemUpdate", "Kalamanakaru")'>Remaining System Update</a></li>
+            <li><a href='@Url.Action("remainingPayment", "Kalamanakaru")'>remaining Payment</a></li>
+            <li><a href='@Url.Action("systemupdate3", "Kalamanakaru")'>No System Update</a></li>
+            <li><a href="@Url.Action("nopayment", "Kalamanakaru" )">No Payment and System Update</a></li>
+            <li class="active"><a href="@Url.Action("rejected", "Kalamanakaru" )">Rejected Position</a></li>
+            <li><a href="@Url.Action("rejectedCsv", "Kalamanakaru" )">Rejected Csv</a></li>
+
+    </div>
+</div>
+<!-- Breadcomb area End-->
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "submitform" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="data-table-area">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="data-table-list">
+                        <div class="basic-tb-hd">
+                            <h1>Rejected</h1>
+
+                        </div>
+                        <div class="table-responsive">
+                            <table id="myTable" class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Rejected Position id</th>
+                                        <th>Membership No</th>
+                                        <th>Introduce Member Number</th>
+                                        <th>Deposit Date</th>
+                                        <th>User Name</th>
+                                        <th>Balance Amount</th>
+                                        <th>Add Position</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    @{
+                                        int i = 0;
+                                        double x = 0;
+                                        foreach (var a in positiondetail)
+                                        {
+
+                                            <tr>
+                                                <td>@a.jump</td>
+                                                <td>@a.membershipNo </td>
+                                                <td>@a.introducePromoCode</td>
+                                                <td>@a.entryDate.ToString("yyyy/MM/dd")</td>
+                                                <td>@a.jumpHistory</td>
+                                                <td>@a.treeColumn</td>
+                                                <td>
+                                                    <button type="button" class="btn btn-success" id="btns" onclick="myfun(@a.bcNo);">Add Position</button>
+                                                </td>
+                                            </tr>
+
+
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <input type="hidden" id="positionId" name="positionId">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<script>
+    function myfun(id) {
+        document.getElementById("positionId").value = id;
+        alert("id: " + id);
+        document.getElementById("submitform").submit();
+    }
+</script>
+<!-- Data Table area End-->

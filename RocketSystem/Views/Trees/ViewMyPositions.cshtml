@@ -1,0 +1,407 @@
+﻿@model IEnumerable<RocketSystem.Models.PositionDetail>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Main Page</title>
+    <!-- Custom fonts for this template-->
+    <link href="~/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <!-- tipp.js library -->
+    <script src="https://unpkg.com/popper.js@1"></script>
+    <script src="https://unpkg.com/tippy.js@4"></script>
+    <!-- tipp.js library -->
+    <!-- Custom styles for this template-->
+    <link rel="stylesheet" type="text/css" href="~/css/style.css">
+    <link href="~/css/sb-admin-2.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/fixedheader/3.1.5/css/fixedHeader.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <style type="text/css">
+
+
+        #side-nav {
+            position: fixed;
+            /*width: 1500px;
+        height:200px;*/
+            width: 100%;
+            height: 600px;
+            overflow-y: scroll;
+            overflow-x: scroll;
+        }
+        .btn-success {
+            background-color: #89878c !important;
+            border-color: #89878c !important;
+        }
+    </style>
+</head>
+<body id="page-top">
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+        <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href='@Url.Action("Index", "Trees")'>
+                <div class="sidebar-brand-icon">
+                    <img src="~/img/logo/logo.png" />
+                </div>
+                <div class="sidebar-brand-text mx-3"> <!-- <sup>2</sup> --></div>
+            </a>
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+            <!-- Nav Item - Dashboard -->
+            @*<li class="nav-item active">
+            <a class="nav-link" href='@Url.Action("StageOne", "Trees")'>
+                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <span>Tree view</span>
+            </a>
+        </li>*@
+            <li class="nav-item active">
+                <a class="nav-link" href='@Url.Action("index", "Trees")'>
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>ホーム</span>
+                </a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href='@Url.Action("TreeTable", "Trees")'>
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>テーブル　ビュー</span>
+                </a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href='@Url.Action("ViewMyPositions", "Trees")'>
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Cooling Off</span>
+                </a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href='@Url.Action("Bonusview", "Trees", new { bcvalue1 = 0, jumphistory=0 })'>
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>ボーナス　ビュー</span>
+                </a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href='@Url.Action("UserProfile", "Trees")'>
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>ユーザー　プロファイル</span>
+                </a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href='@Url.Action("Rules", "Trees")'>
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>ルール</span>
+                </a>
+            </li>
+            <hr class="sidebar-divider my-0">
+            <br>
+            <li class="nav-item active">
+                <a class="nav-link" href='@Url.Action("StageOne", "Trees", new { @bcnumval = 0 })'>
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>ステージ　1</span>
+                </a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href='@Url.Action("StageTwo", "Trees", new { @bcnumval = 0 })'>
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>ステージ　2</span>
+                </a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href='@Url.Action("StageThree", "Trees", new { @bcnumval = 0 })'>
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>ステージ　3</span>
+                </a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href='@Url.Action("StageFour", "Trees", new { @bcnumval = 0 })'>
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>ステージ　4</span>
+                </a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href='@Url.Action("StageFive", "Trees", new { @bcnumval = 0 })'>
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>ステージ　5</span>
+                </a>
+            </li>
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
+            <!-- Sidebar Toggler (Sidebar) -->
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            </div>
+        </ul>
+        <!-- End of Sidebar -->
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+            <!-- Main Content -->
+            <div id="content">
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+                    <!-- Sidebar Toggle (Topbar) -->
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                        <i class="fa fa-bars"></i>
+                    </button>
+                    <!-- Topbar Search -->
+                    <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                        <div class="input-group">
+
+                            <div class="input-group-append">
+
+                            </div>
+                        </div>
+                    </form>
+                    <!-- Topbar Navbar -->
+                    <ul class="navbar-nav ml-auto">
+                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+                        <li class="nav-item dropdown no-arrow d-sm-none">
+
+                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
+                                <form class="form-inline mr-auto w-100 navbar-search">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary" type="button">
+                                                <i class="fas fa-search fa-sm"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </li>
+
+
+                        <div class="topbar-divider d-none d-sm-block"></div>
+                        <!-- Nav Item - User Information -->
+                        <li class="nav-item dropdown no-arrow">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">@Session["memberName"].ToString()</span>
+                                <img class="img-profile rounded-circle" src="~/img/user.jpg">
+                            </a>
+                            <!-- Dropdown - User Information -->
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                                @*<a class="dropdown-item" href="#">
+                                <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                Profile
+                            </a>
+                            <a class="dropdown-item" href="#">
+                                <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                                Settings
+                            </a>
+                            <a class="dropdown-item" href="#">
+                                <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                                Activity Log
+                            </a>*@
+                                @*<div class="dropdown-divider"></div>*@
+                                <a class="dropdown-item" href='@Url.Action("Index", "Home")'>
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Logout
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </nav>
+                <!-- End of Topbar -->
+                <!-- Begin Data table -->
+                <div class="col-md-12">
+                    <!-- <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search..." title="Type in a name"> -->
+
+                    <table class="table table-striped" id="myTable">
+                        <thead>
+                            <tr>
+
+
+                                <th>
+                                    bc no
+                                </th>
+                                <th> @Html.DisplayNameFor(model => model.package)</th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.registerDate)
+                                </th>
+                                <th></th>
+
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{int max = ViewBag.maxbc; }
+                            @foreach (var item in Model)
+                            {
+
+                                for (int x = 1; x <= item.positionCount; x++)
+                                {
+                                    <tr>
+
+
+                                        <td>
+
+                                            @{ max = max + 1;}
+                                            @max
+                                        </td>
+
+                                        @if (item.package == "1")
+                                        {
+                                            <td>100,000</td>
+                                        }
+                                        else
+                                        {
+                                            <td>350,000</td>
+                                        }
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.registerDate)
+                                        </td>
+                                        <td><input type="checkbox" id="coolingoff-@item.positionId-@x" onclick="getcool('@item.positionId-@x');" /> cooling off</td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                    @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "createpack" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" id="setupdate" name="positionVal" />
+
+
+
+
+
+
+                    }
+
+                </div>
+            </div>
+            <div class="container-fluid">
+               
+                   
+                    <div class="col-md-6" style="float:right;">
+                        <div class="btn btn-lg">
+                            <button type="button" value="Submit" class="btn btn-success btn-lg" id="submit2" onclick="asignval()">Submit</button>
+                        </div>
+                    </div>
+
+            </div>
+            <!-- End Data table -->
+            <!-- Scroll to Top Button-->
+            <a class="scroll-to-top rounded" href="#page-top">
+                <i class="fas fa-angle-up"></i>
+            </a>
+            <!-- Logout Modal-->
+            <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                        <div class="modal-footer">
+                            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                            <a class="btn btn-primary" href="login.html">Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+            <!-- Bootstrap core JavaScript-->
+            <script src="~/vendor/jquery/jquery.min.js"></script>
+            <script src="~/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+            <!-- Core plugin JavaScript-->
+            <script src="~/vendor/jquery-easing/jquery.easing.min.js"></script>
+            <!-- Custom scripts for all pages-->
+            <script src="~/js/sb-admin-2.min.js"></script>
+            <!-- Page level plugins -->
+            <script src="~/vendor/chart.js/Chart.min.js"></script>
+            <!-- Page level custom scripts -->
+            <script src="~/js/demo/chart-area-demo.js"></script>
+            <script src="~/js/demo/chart-pie-demo.js"></script>
+
+            <link href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css" rel="stylesheet" />
+            <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+            <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+            <script src="~/js/bootstrap.min.js"></script>
+            <script>
+
+                $(document).ready(function () {
+                    $('#myTable').DataTable();
+                });
+            </script>
+
+
+            <script>
+                var getdataarr = [];
+                var allvalue="";
+                function getcool(getvalue) {
+                    var val = parseInt(getvalue.split("-", 1));
+                    if (document.getElementById('coolingoff-' + getvalue).checked) {
+                        getdataarr.push(val);
+
+                    }
+                    else if (!(document.getElementById('coolingoff-' + getvalue).checked)) {
+
+                        for (var i = 0; i < getdataarr.length; i++) {
+                            if (getdataarr[i] == val) {
+                                getdataarr.splice(i, 1);
+                                break;
+                            }
+                        }
+
+                    }
+                    getdataarr.sort();
+                    var xp = 0;
+                    var alldata = "";
+
+                    for (var ab = 0; ab < getdataarr.length; ab++) {
+                        var co = 0;
+                        for (var xy = ab; xy < getdataarr.length; xy++) {
+
+                            if (getdataarr[ab] == getdataarr[xy]) {
+
+                                xp++; co++;
+                            }
+
+
+                        }
+                        //alert(getdataarr[ab] + "-" + co);
+
+                        if (alldata == "") {
+                            alldata = getdataarr[ab] + "-" + co;
+                        }
+                        else {
+                            alldata = alldata + "," + getdataarr[ab] + "-" + co;
+                        }
+                        ab = xp - 1;
+                    }
+                    allvalue = alldata;
+                }
+                function asignval() {
+
+                    document.getElementById("setupdate").value = allvalue;
+                    if (document.getElementById("setupdate").value != "") {
+                        document.getElementById("createpack").submit();
+                    }
+                    else {
+                        alert("please select cooling of data");
+                    }
+
+                }
+            </script>
+</body>
+</html>

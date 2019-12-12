@@ -1,0 +1,88 @@
+﻿
+@{
+    // ViewBag.Title = "ViewMembershipNo";
+    Layout = null;
+}
+<br /><br /><br />
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title> View Membership Number</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <style>
+        .bs-example {
+            margin: 20px;
+        }
+
+        .alert-primary {
+            color: #004085;
+            background-color: #f0f0f0;
+            border-color: #d3d2d3;
+        }
+
+        .btn-primary {
+            color: #fff;
+            background-color: #224abe;
+            border-color: #224abe;
+        }
+
+        .imgcontainer {
+            text-align: center;
+            margin: 24px 0 12px 0;
+            position: relative;
+        }
+
+        .zoom {
+            transition: transform .2s;
+        }
+
+            .zoom:hover {
+                -ms-transform: scale(1.5);
+                color: rgb(163, 93, 196);
+                /* IE 9 */
+                -webkit-transform: scale(1.5);
+                /* Safari 3-8 */
+                transform: scale(1.5);
+            }
+    </style>
+</head>
+
+<body>
+
+    <div class="bs-example">
+        <div class="d-flex justify-content-center">
+            <div class="col-md-6">
+                <div class="alert alert-primary alert-dismissible fade show">
+                    <div class="imgcontainer">
+                        <img src="~/img/membership.png" alt="Avatar" width="150" height="115" style="opacity: 0.9;">
+                    </div>
+                    <center>
+                        <h4 class="alert-heading"> Your Membership Number is:</h4>
+                        <h1 class="alert-heading zoom"><b>@Session["membershipNo"].ToString()</b></h1>
+                        <p>Please Remember your membership is number as you will need this when you login again!</p>
+                    </center>
+                    <hr style="border-color: rgb(219, 219, 219);">
+
+                    @if (@Session["tempnum"].ToString() == "0")
+                    {
+                        <a href='@Url.Action("login", "Users")'> <center><button class="btn btn-lg btn-primary">Continue To Login</button></center></a>
+                    }
+                    else
+                    {
+                        <a href='@Url.Action("Index", "Trees")'> <center><button class="btn btn-lg btn-primary">Continue</button></center></a>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

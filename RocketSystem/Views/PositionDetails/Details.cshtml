@@ -1,0 +1,90 @@
+﻿@model RocketSystem.Models.PositionDetail
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>PositionDetail</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.membershipNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.membershipNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.introducePromoCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.introducePromoCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.registerDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.registerDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.depositDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.depositDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.package)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.package)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.packageStyle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.packageStyle)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.positionCount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.positionCount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.paymentStatus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.paymentStatus)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.systemUpdate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.systemUpdate)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.positionId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

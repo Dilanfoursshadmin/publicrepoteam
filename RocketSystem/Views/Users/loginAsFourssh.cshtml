@@ -1,0 +1,158 @@
+﻿@model RocketSystem.Models.LoginAsFourssh
+
+@{
+    //ViewBag.Title = "loginAsFourssh";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Login</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/vendor/bootstrap/css/bootstrap.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/fonts/iconic/css/material-design-iconic-font.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/vendor/animate/animate.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/vendor/css-hamburgers/hamburgers.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/vendor/animsition/css/animsition.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/vendor/select2/select2.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/vendor/daterangepicker/daterangepicker.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/css/util.css">
+    <link rel="icon" href="~/img/favicon.png" />
+
+    <!--===============================================================================================-->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.min.css" rel="stylesheet" />
+
+    <link href="~/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <!--   <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+      <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'> -->
+    <link href='https://fonts.googleapis.com/css?family=Actor' rel='stylesheet'>
+    <!-- Plugin CSS -->
+    <link href="~/vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
+    <link href="~/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" media="screen" href="~/css/animate.css">
+    <link href="~/css/main.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="~/css/creative.min.css" rel="stylesheet">
+    <link href="~/css/footer.css" type="text/css" rel="stylesheet">
+    <link href="~/css/jquery-social-share-bar.css" rel="stylesheet" type="text/css">
+
+    <style type="text/css">
+        body {
+            font-family: 'Actor';
+            font-size: 22px;
+        }
+
+        .wrap-login100 {
+            margin-top: 0px !important;
+            padding: 50px;
+        }
+
+        .login100-form-bgbtn {
+            background-image: linear-gradient(20deg,#ac4edf 5%,#224abe 100%) !important;
+        }
+    </style>
+
+</head>
+
+
+
+<body>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div class="limiter">
+            <div class="container-login100">
+                <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
+                    <form name="frm" class="login100-form">
+                        <span class="login100-form-title p-b-49">
+                            <b>login As Fourssh- ログイン</b>
+                        </span>
+
+                        <h5 class="text-danger">@ViewBag.Existing</h5>
+
+                        <div class="wrap-input100 validate-input m-b-23" data-validate="Username is reauired">
+                            <span class="label-input100"><i class="fas fa-user"></i> Username</span>
+                            @*<input class="input100" type="text" name="membershipNo" id="membershipNo" placeholder="Type your Username">*@
+                            @Html.EditorFor(model => model.membershipNo, new { htmlAttributes = new { @class = "input100", @id = "membershipNo", @placeholder = "Type your Username" } })
+
+                            @Html.ValidationMessageFor(model => model.membershipNo, "", new { @class = "text-danger" })
+                        </div>
+                        <br>
+                        <div class="wrap-input100 validate-input" data-validate="Password is required">
+                            <span class="label-input100"><i class="fas fa-unlock-alt"></i> Password</span>
+                            @* <input class="input100" type="password" name="password" id="password" placeholder="type your Password">*@
+                            @Html.EditorFor(model => model.password, new { htmlAttributes = new { @class = "input100", @id = "password", @placeholder = "Type your Password", @type = "password" } })
+
+                            @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
+                        </div>
+                        <input type="checkbox" onclick="myFunction()"> <a class="fgtpass">パスワードを表示</a>
+                        <br />
+                        <div class="container-login100-form-btn">
+                            <div class="wrap-login100-form-btn">
+                                <div class="login100-form-bgbtn"></div>
+                                <button class="login100-form-btn" type="submit" value="submit">
+                                    <b>Sign in</b>
+                                </button>
+                            </div>
+                        </div>
+
+
+                        <br>
+                    </form>
+                </div>
+            </div>
+        </div>
+    }
+
+
+
+    <!--===============================================================================================-->
+    <!-- <script src="vendor/jquery/jquery-3.2.1.min.js"></script> -->
+    <!--===============================================================================================-->
+    <script src="~/vendor/animsition/js/animsition.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="~/vendor/bootstrap/js/popper.js"></script>
+    <script src="~/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="~/vendor/select2/select2.min.js"></script>
+    <!--===============================================================================================-->
+    <!--===============================================================================================-->
+    <!--===============================================================================================-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <script src="~/js/main.js"></script>
+
+
+
+    <script type="text/javascript">
+
+        function myFunction() {
+            var x = document.getElementById("password");
+            if (x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
+            }
+        }
+    </script>
+</body>
+</html>

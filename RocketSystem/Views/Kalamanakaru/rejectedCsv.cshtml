@@ -1,0 +1,151 @@
+﻿@{
+    Layout = "~/Views/Shared/AdminPanel.cshtml";
+    var csvdate = ViewBag.csvAmount;
+    var positionid = ViewBag.getdatalist;
+}
+<head>
+
+    <!--formden.js communicates with FormDen server to validate fields and submit via AJAX -->
+    <script type="text/javascript" src="https://formden.com/static/cdn/formden.js"></script>
+    <!-- Special version of Bootstrap that is isolated to content wrapped in .bootstrap-iso -->
+    <link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
+    <!--Font Awesome (added because you use icons in your prepend/append)-->
+    <link rel="stylesheet" href="https://formden.com/static/cdn/font-awesome/4.4.0/css/font-awesome.min.css" />
+</head>
+<style type="text/css">
+
+    .nav-pills > li.active > a, .nav-pills > li.active > a:focus, .nav-pills > li.active > a:hover {
+        color: #fff;
+        background-color: #00c292;
+    }
+
+    a {
+        color: #686869;
+    }
+
+        a:hover {
+            color: #067538;
+        }
+</style>
+
+<!-- Breadcomb area Start-->
+<div class="breadcomb-area">
+    <div class="container-fluid">
+
+        <ul class="nav nav-pills nav-justified">
+            <li><a href='@Url.Action("temporaryposition", "Kalamanakaru")'>All transaction</a></li>
+            <li> <a href='@Url.Action("allpaid", "Kalamanakaru")'>All Paid</a></li>
+            <li><a href='@Url.Action("systemupdate1", "Kalamanakaru")'>System Update All</a></li>
+            <li><a href='@Url.Action("systemupdate2", "Kalamanakaru")'>No Payment</a></li>
+            <li><a href='@Url.Action("remainingSystemUpdate", "Kalamanakaru")'>Remaining System Update</a></li>
+            <li><a href='@Url.Action("remainingPayment", "Kalamanakaru")'>remaining Payment</a></li>
+            <li><a href='@Url.Action("systemupdate3", "Kalamanakaru")'>No System Update</a></li>
+            <li><a href="@Url.Action("nopayment", "Kalamanakaru")">No Payment and System Update</a></li>
+            <li><a href="@Url.Action("rejected", "Kalamanakaru")">Rejected Position</a></li>
+            <li class="active"><a href="@Url.Action("rejectedCsv", "Kalamanakaru" )">Rejected Csv</a></li>
+
+    </div>
+</div>
+<!-- Breadcomb area End-->
+
+<script>
+    $('.datepicker').pickadate();
+</script>
+
+<div class="data-table-area">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="data-table-list">
+                    <div class="basic-tb-hd">
+                        <h1>Rejected</h1>
+
+                    </div>
+                    <div class="basic-tb-hd">
+
+                    </div>
+                    <div class="table-responsive">
+                        <table id="myTable" class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Csv Date</th>
+                                    <th>Accepted Amount</th>
+                                    <th>Detail One</th>
+                                    <th>Name</th>
+                                    <th>Birth Day</th>
+                                    <th>Status</th>
+                                    <th>Apply Or No Position</th>
+                                    <th>Add Position</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+
+                                @{
+                                    foreach (var a in csvdate)
+                                    {
+                                        string t = "Processing";
+                                        string y = "no position Apply";
+                                        var b = 0;
+                                        string x = a.detailTwo;
+                                        string[] arr = x.Split(' ');
+                                        var name = arr[0];
+                                        <tr>
+                                            <td>@a.csvDate</td>
+                                            <td>@a.acceptedamount</td>
+                                            <td>@a.detailOne</td>
+                                            <td>@arr[0]</td>
+                                            <td>
+                                                @try
+                                                {
+                                                    @arr[1]
+                                                }
+                                                catch (Exception ex)
+                                                {
+                                                    @b;
+                                                }
+
+                                            </td>
+                                            <td>@a.status</td>
+                                            <td>
+                                                @if (name == positionid.membershipNo)
+                                                {
+                                                    @y;
+                                                }
+                                                else
+                                                {
+                                                    @t;
+                                                }
+
+                                            </td>
+                                            <td>
+                                                @using (Html.BeginForm())
+                                                {
+                                                    if (a.status == "Rejected - No_Positions_Applied")
+                                                    {
+                                                        <button class="btn btn-success" value="@a.detailTwo" onchange="submitform(this);" id="Namebirthday" name="namebirthday">Add Position</button>
+                                                    }
+                                                    else
+                                                    {
+                                                        <button disabled class="btn btn-success" onchange="submitform(this);" id="Namebirthday" name="namebirthday">Add Position</button>
+                                                    }
+                                                }
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script>
+    function submitform(thiss) {
+        $('form').submit();
+    }
+</script>
+<!-- Data Table area End-->

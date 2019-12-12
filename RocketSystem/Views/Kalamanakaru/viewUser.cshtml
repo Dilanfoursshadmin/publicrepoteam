@@ -1,0 +1,372 @@
+﻿@model IEnumerable<RocketSystem.Models.UserLogin>
+
+@{
+    Layout = "~/Views/Shared/AdminPanel.cshtml";
+    ViewBag.Title = "Index";
+}
+<title>Expired Users</title>
+
+<link rel="stylesheet" type="text/css" href="~/css/nodepopup.css">
+
+<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700,900" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
+<div class="container-fluid">
+    @*<h2>Index</h2>
+
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>*@
+    <table id="myTable" class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.membershipNo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.userName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.questionOne)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.answerOne)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.questionTwo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.answerTwo)
+                </th>
+
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.membershipNo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.userName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.questionOne)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.answerOne)
+                    </td>
+
+                    @*<td>
+                        @Html.DisplayFor(modelItem => item.questionOne)
+                    </td>*@
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.questionTwo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.answerTwo)
+                    </td>
+
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.userLogID }) |
+                        <input type="button" value="View more" data-toggle="modal" data-target="#modal" onclick="mycall(@item.userLogID);" /> |
+                        @Html.ActionLink("Login As Customer", "loginAs", new { id = item.uID }, new { target = "_blank" })|
+
+                        @if (item.status == 0)
+                        {
+                            <input type="button" name="Suspend" value="Suspend" onclick="suspend(@item.userLogID);" />
+
+                        }
+                        else
+                        {
+                            <input type="button" name="Unsuspend" value="Unsuspend" onclick="unSuspend(@item.userLogID);" />
+
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+
+</div>
+<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <!--Content-->
+        <div class="modal-content form-elegant">
+            <!--Header-->
+            <div class="container-contact100">
+                <div class="wrap-contact100">
+                    <span class="contact100-form-title">
+                        メンバー詳細
+                    </span>
+
+
+                    <div class="wrap-input100 validate-input">
+                        <span class="label-input100">Name</span>
+                        <input class="input100" type="text" name="name" id="name" disabled>
+                        <span class="focus-input100"></span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input">
+                        <span class="label-input100">Membership No</span>
+                        <input class="input100" type="text" name="membershipNo" id="membershipNo" disabled>
+                        <span class="focus-input100"></span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input">
+                        <span class="label-input100">Date Of Birth</span>
+                        <input class="input100" type="text" name="dateOfBirth" id="dateOfBirth" disabled>
+                        <span class="focus-input100"></span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input">
+                        <span class="label-input100">Telephone No</span>
+                        <input class="input100" type="text" name="telephoneNo" id="telephoneNo" disabled>
+                        <span class="focus-input100"></span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input">
+                        <span class="label-input100">Mobile No</span>
+                        <input class="input100" type="text" name="mobileNo" id="mobileNo" disabled>
+                        <span class="focus-input100"></span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input">
+                        <span class="label-input100">Postal Code</span>
+                        <input class="input100" type="text" name="postalCode" id="postalCode" disabled>
+                        <span class="focus-input100"></span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input">
+                        <span class="label-input100">Nick Name</span>
+                        <input class="input100" type="text" name="nickName" id="nickName" disabled>
+                        <span class="focus-input100"></span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input">
+                        <span class="label-input100">Gender</span>
+                        <input class="input100" type="text" name="gender" id="gender" disabled>
+                        <span class="focus-input100"></span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input">
+                        <span class="label-input100">Mobile No</span>
+                        <input class="input100" type="text" name="mobileNo" id="mobileNo" disabled>
+                        <span class="focus-input100"></span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input">
+                        <span class="label-input100">Postal Code</span>
+                        <input class="input100" type="text" name="postalCode" id="postalCode" disabled>
+                        <span class="focus-input100"></span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input">
+                        <span class="label-input100">Katakana Name</span>
+                        <input class="input100" type="text" name="katakanaName" id="katakanaName" disabled>
+                        <span class="focus-input100"></span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input">
+                        <span class="label-input100">Nick Name</span>
+                        <input class="input100" type="text" name="nickName" id="nickName" disabled>
+                        <span class="focus-input100"></span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input">
+                        <span class="label-input100">Gender</span>
+                        <input class="input100" type="text" name="gender" id="gender" disabled>
+                        <span class="focus-input100"></span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input">
+                        <span class="label-input100">Address 1</span>
+                        <input class="input100" type="text" name="addressOne" id="addressOne" disabled>
+                        <span class="focus-input100"></span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input">
+                        <span class="label-input100">Address 2</span>
+                        <input class="input100" type="text" name="addressTwo" id="addressTwo" disabled>
+                        <span class="focus-input100"></span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input">
+                        <span class="label-input100">address 3</span>
+                        <input class="input100" type="text" name="addressThree" id="addressThree" disabled>
+                        <span class="focus-input100"></span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input">
+                        <span class="label-input100">Fax No</span>
+                        <input class="input100" type="text" name="faxNo" id="faxNo" disabled>
+                        <span class="focus-input100"></span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input">
+                        <span class="label-input100">Web Email</span>
+                        <input class="input100" type="text" name="webEmail" id="webEmail" disabled>
+                        <span class="focus-input100"></span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input">
+                        <span class="label-input100">Mobile Email</span>
+                        <input class="input100" type="text" name="mobileEmail" id="mobileEmail" disabled>
+                        <span class="focus-input100"></span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input">
+                        <span class="label-input100">Account Name</span>
+                        <input class="input100" type="text" name="accountName" id="accountName" disabled>
+                        <span class="focus-input100"></span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input">
+                        <span class="label-input100">Account Name Katakana</span>
+                        <input class="input100" type="text" name="accountNameKatakana" id="accountNameKatakana" disabled>
+                        <span class="focus-input100"></span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input">
+                        <span class="label-input100">Bank Name Katakana</span>
+                        <input class="input100" type="text" name="bankNameKatakana" id="bankNameKatakana" disabled>
+                        <span class="focus-input100"></span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input">
+                        <span class="label-input100">Transfer Destination Bank</span>
+                        <input class="input100" type="text" name="transferDestinationBank" id="transferDestinationBank" disabled>
+                        <span class="focus-input100"></span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input">
+                        <span class="label-input100">Branch Name Katakana</span>
+                        <input class="input100" type="text" name="branchNameKatakana" id="branchNameKatakana" disabled>
+                        <span class="focus-input100"></span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input">
+                        <span class="label-input100">Transfer Destination Branch Code</span>
+                        <input class="input100" type="text" name="transferDestinationBranchCode" id="transferDestinationBranchCode" disabled>
+                        <span class="focus-input100"></span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input">
+                        <span class="label-input100">Account Classification</span>
+                        <input class="input100" type="text" name="accountClassification" id="accountClassification" disabled>
+                        <span class="focus-input100"></span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input">
+                        <span class="label-input100">Transfer Account Number</span>
+                        <input class="input100" type="text" name="transferAccountNumber" id="transferAccountNumber" disabled>
+                        <span class="focus-input100"></span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input">
+                        <span class="label-input100">User Name</span>
+                        <input class="input100" type="text" name="userName" id="userName" disabled>
+                        <span class="focus-input100"></span>
+                    </div>
+
+                    <div class="container-contact100-form-btn">
+                        <div class="wrap-contact100-form-btn">
+                            <div class="contact100-form-bgbtn"></div>
+                            <button class="contact100-form-btn" data-dismiss="modal">
+                                <span>
+                                    閉じる
+                                    <i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="dropDownSelect1"></div>
+            <!--Footer-->
+        </div>
+        <!--/.Content-->
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script>
+    $.noConflict();
+    jQuery(document).ready(function ($) {
+        $('#myTable').DataTable();
+    });
+    // Code that uses other library's $ can follow here.
+
+    function mycall(uid) {
+
+        $(document).ready(function () {
+            //var serviceURL = '/AllStages/popupAjax/';
+            $.ajax({
+                type: "POST",
+                url: "/kalamanakaru/userDetails/" + uid,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: successFunc,
+                error: errorFunc
+            });
+            function successFunc(data, status) {
+
+
+                document.getElementById("name").value = data[0].name;
+                document.getElementById("membershipNo").value = data[0].membershipNo;
+                var date = new Date(parseInt(data[0].dateOfBirth.substr(6)));
+
+                document.getElementById("dateOfBirth").value = date.toISOString().split('T')[0];
+                document.getElementById("telephoneNo").value = data[0].telephoneNo;
+                document.getElementById("mobileNo").value = data[0].mobileNo;
+                document.getElementById("postalCode").value = data[0].postalCode;
+                document.getElementById("katakanaName").value = data[0].katakanaName;
+                document.getElementById("nickName").value = data[0].nickName;
+                document.getElementById("gender").value = data[0].gender;
+                document.getElementById("addressOne").value = data[0].addressOne;
+                document.getElementById("addressTwo").value = data[0].addressTwo;
+                document.getElementById("addressThree").value = data[0].addressThree;
+                document.getElementById("faxNo").value = data[0].faxNo;
+                document.getElementById("webEmail").value = data[0].webEmail;
+                document.getElementById("mobileEmail").value = data[0].mobileEmail;
+                document.getElementById("accountName").value = data[0].accountName;
+                document.getElementById("accountNameKatakana").value = data[0].accountNameKatakana;
+                document.getElementById("bankNameKatakana").value = data[0].bankNameKatakana;
+                document.getElementById("transferDestinationBank").value = data[0].transferDestinationBank;
+                document.getElementById("branchNameKatakana").value = data[0].branchNameKatakana;
+                document.getElementById("transferDestinationBranchCode").value = data[0].transferDestinationBranchCode;
+                document.getElementById("accountClassification").value = data[0].accountClassification;
+                document.getElementById("transferAccountNumber").value = data[0].transferAccountNumber;
+                document.getElementById("userName").value = data[0].userName;
+
+
+            }
+            function errorFunc() {
+                alert('error');
+            }
+        });
+    }
+    function suspend(result) {
+
+        var x = confirm("Do Want to suspend This user?");
+        if (x) {
+            window.location.replace("../kalamanakaru/userSuspend/" + result);
+        }
+    }
+
+    function unSuspend(result) {
+
+        var x = confirm("Do Want to Unsuspend This user?");
+        if (x) {
+            window.location.replace("../kalamanakaru/userUnSuspend/" + result);
+        }
+    }
+</script>
+

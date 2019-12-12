@@ -1,0 +1,166 @@
+.card{
+        position: absolute;
+        width: 100%;
+        margin-left: -50px;
+        justify-content: center;
+
+    }
+
+
+    .Center-Container {
+        position: relative;
+        margin: 0 auto;
+        justify-content: center;
+        align-items: center;
+        padding-right: 20%;
+    }
+
+    .Absolute-Center {
+        margin: 0 auto;
+        flex-wrap: wrap;
+        margin-left: 40%;
+        justify-content: center;
+
+    }
+
+ /*Media Queary*/
+  @media screen and (max-width: 600px) {
+
+    .card{
+        position: absolute;
+        margin-left: -120px;
+        justify-content: center;
+        width: 150%;
+    }
+
+
+    .Center-Container {
+        position: relative;
+        margin: 0 auto;
+        justify-content: center;
+        align-items: center;
+        padding-right: 20%;
+
+    }
+
+    .Absolute-Center {
+        margin: 0 auto;
+        flex-wrap: wrap;
+        margin-left: 40%;
+        justify-content: center;
+
+    }
+}
+@media only screen  and (min-width : 1224px) {
+
+    .card{
+        position: absolute;
+        margin-left: -120px;
+        justify-content: center;
+        width: 150%;
+    }
+
+
+    .Center-Container {
+        position: relative;
+        margin: 0 auto;
+        justify-content: center;
+        align-items: center;
+        padding-right: 20%;
+
+    }
+
+    .Absolute-Center {
+        margin: 0 auto;
+        flex-wrap: wrap;
+        margin-left: 40%;
+        justify-content: center;
+
+    }
+
+}
+@media only screen and (min-device-width: 320px) and (max-device-height: 568px) and (orientation : portrait) and (-webkit-device-pixel-ratio: 2){
+
+    .card{
+        position: absolute;
+        margin-right:-150px;
+        justify-content: center;
+        width: 150%;
+    }
+
+
+    .Center-Container {
+        position: relative;
+        margin: 0 auto;
+        justify-content: center;
+        align-items: center;
+        padding-right: 20%;
+
+    }
+
+    .Absolute-Center {
+        margin: 0 auto;
+        flex-wrap: wrap;
+        margin-left: 40%;
+        justify-content: center;
+
+    }
+
+}
+
+@media only screen and (min-device-width: 375px) and (max-device-height: 667px) and (orientation : landscape) and (-webkit-device-pixel-ratio: 2){
+
+    .card{
+        position: absolute;
+        margin-left: -120px;
+        justify-content: center;
+        width: 150%;
+    }
+
+
+    .Center-Container {
+        position: relative;
+        margin: 0 auto;
+        justify-content: center;
+        align-items: center;
+        padding-right: 20%;
+
+    }
+
+    .Absolute-Center {
+        margin: 0 auto;
+        flex-wrap: wrap;
+        margin-left: 40%;
+        justify-content: center;
+
+    }
+
+}
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
+
+    .card{
+        position: absolute;
+        margin-left: -180px;
+        justify-content: center;
+        width: 250%;
+    }
+
+
+    .Center-Container {
+        position: relative;
+        margin: 0 auto;
+        justify-content: center;
+        align-items: center;
+        padding-right: 20%;
+
+    }
+
+    .Absolute-Center {
+        margin: 0 auto;
+        flex-wrap: wrap;
+        margin-left: 40%;
+        justify-content: center;
+
+    }
+
+}

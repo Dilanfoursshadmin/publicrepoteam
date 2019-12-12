@@ -1,0 +1,176 @@
+﻿@{
+    Layout = "~/Views/Shared/AdminPanel.cshtml";
+    var positiondetail = ViewBag.list1;
+}
+<style type="text/css">
+
+    .files input {
+        outline: 2px dashed #92b0b3;
+        outline-offset: -10px;
+        -webkit-transition: outline-offset .15s ease-in-out, background-color .15s linear;
+        transition: outline-offset .15s ease-in-out, background-color .15s linear;
+        padding: 120px 0px 85px 35%;
+        text-align: center !important;
+        margin: 0;
+        width: 100% !important;
+    }
+
+        .files input:focus {
+            outline: 2px dashed #92b0b3;
+            outline-offset: -10px;
+            -webkit-transition: outline-offset .15s ease-in-out, background-color .15s linear;
+            transition: outline-offset .15s ease-in-out, background-color .15s linear;
+            border: 1px solid #92b0b3;
+        }
+
+    .files {
+        position: relative
+    }
+
+        .files:after {
+            pointer-events: none;
+            position: absolute;
+            top: 60px;
+            left: 0;
+            width: 50px;
+            right: 0;
+            height: 56px;
+            content: "";
+            background-image: url(https://image.flaticon.com/icons/png/128/109/109612.png);
+            display: block;
+            margin: 0 auto;
+            background-size: 100%;
+            background-repeat: no-repeat;
+        }
+
+    .color input {
+        background-color: #f1f1f1;
+    }
+
+    .files:before {
+        position: absolute;
+        bottom: 10px;
+        left: 0;
+        pointer-events: none;
+        width: 100%;
+        right: 0;
+        height: 57px;
+        display: block;
+        margin: 0 auto;
+        color: #2ea591;
+        font-weight: 600;
+        text-transform: capitalize;
+        text-align: center;
+    }
+
+    .nav-pills > li.active > a, .nav-pills > li.active > a:focus, .nav-pills > li.active > a:hover {
+        color: #fff;
+        background-color: #00c292;
+    }
+
+    a {
+        color: #686869;
+    }
+
+        a:hover {
+            color: #067538;
+        }
+</style>
+
+<!-- Breadcomb area Start-->
+<div class="breadcomb-area">
+    <div class="container-fluid">
+
+        <ul class="nav nav-pills nav-justified">
+            <li class="active"><a href='@Url.Action("temporaryposition", "Kalamanakaru")'>All transaction</a></li>
+            <li> <a href='@Url.Action("allpaid", "Kalamanakaru")'>All Paid</a></li>
+            <li><a href='@Url.Action("systemupdate1", "Kalamanakaru")'>System Update All</a></li>
+            <li><a href='@Url.Action("systemupdate2", "Kalamanakaru")'>No Payment</a></li>
+            <li><a href='@Url.Action("remainingSystemUpdate", "Kalamanakaru")'>Remaining System Update</a></li>
+            <li><a href='@Url.Action("remainingPayment", "Kalamanakaru")'>remaining Payment</a></li>
+            <li><a href='@Url.Action("systemupdate3", "Kalamanakaru")'>No System Update</a></li>
+            <li><a href="@Url.Action("nopayment", "Kalamanakaru" )">No Payment and System Update</a></li>
+            <li><a href="@Url.Action("rejected", "Kalamanakaru" )">Rejected position</a></li>
+            <li><a href="@Url.Action("rejectedCsv", "Kalamanakaru" )">Rejected Csv</a></li>
+        </ul>
+
+    </div>
+</div>
+<!-- Breadcomb area End-->
+
+<div class="data-table-area">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="data-table-list">
+                    <div class="basic-tb-hd">
+                        <h1>All Transaction</h1>
+                    </div>
+                    <div class="table-responsive">
+                        <table id="myTable" class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Membership No</th>
+                                    <th>Register date</th>
+                                    <th>Deposit Date</th>
+                                    <th>Package</th>
+                                    <th>position Count</th>
+                                    <th>Payment Status </th>
+                                    <th>system Update</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                    foreach (var a in positiondetail)
+                                    {
+                                        var az = "Pay Full Payment";
+                                        var az1 = "Pay half Payment";
+                                        var az3 = "No Pay Payment";
+                                        var az4 = "Payment Position All No update";
+                                        var az5 = "Payment Position All Update";
+                                        var az6 = "Position No System Update";
+                                        <tr>
+
+                                            <td>@a.membershipNo</td>
+                                            <td>@a.registerDate</td>
+                                            <td>@a.depositDate</td>
+                                            <td>@a.package</td>
+                                            <td>@a.positionCount</td>
+                                            <td align="center">
+                                                <button type="button" class="btn btn-success btn-sm">
+                                                    @if (@a.paymentStatus == a.positionCount && @a.paymentStatus > 0)
+                                                    {@az }
+                                                else if (@a.paymentStatus < a.positionCount && @a.paymentStatus > 0)
+                                                {@az1}
+                                            else
+                                            {
+                                                @az3
+                                            }
+                                                </button>
+                                            </td>
+                                            <td align="center">
+                                                <button type="button" class="btn btn-success btn-sm">
+                                                    @if (@a.systemUpdate == a.paymentStatus && a.systemUpdate > 0)
+                                                    {@az5 }
+                                                else if (@a.systemUpdate < a.paymentStatus && a.systemUpdate > 0)
+                                                {@az4}
+                                            else
+                                            {
+                                                @az6;
+                                            }
+                                                </button>
+                                            </td>
+
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Data Table area End-->

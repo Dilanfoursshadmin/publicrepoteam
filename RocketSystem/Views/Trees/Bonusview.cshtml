@@ -1,0 +1,658 @@
+﻿@using RocketSystem.Models
+@{
+    //Layout = null;
+    Layout = "~/Views/Shared/StageSideBar.cshtml";
+    ViewBag.Title = "Bonusview";
+    var selectingbcs = ViewBag.bcnumberselect;
+    var selectingbcs1 = ViewBag.bcnumberselect12;
+    //new bonus detail start
+    double paidtotoalbonus = ViewBag.totoalbonuspastmonth;
+    double paidtotalbonus1 = ViewBag.totoalbonuspastmonth1;
+    double paidtotalbonus2 = ViewBag.totoalbonuspastmonth2;
+    int month = ViewBag.month;
+    int profitpresetage = ViewBag.profitpresentage1;
+    int positionbonusall = ViewBag.positionbonusall;
+    int sharebonus = ViewBag.sharebonus;
+    int introducebonusall = ViewBag.introducebonusall;
+    int fifthstagebonus = ViewBag.fifthstagebonuses;
+    int thirdstagebonus = ViewBag.thirdstagebonus;
+    int anytotal = ViewBag.anytotal;
+    var coining = ViewBag.coining;
+
+
+}
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <!--hi chart start-->
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!--hi chart end-->
+    <!-- style start new-->
+    <style>
+        .card-header {
+            padding: .75rem 1.25rem;
+            margin-bottom: 0;
+            background-color: #ebfcfc;
+            border-bottom: 1px solid #e3e6f0;
+        }
+
+        h4 {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .card:hover {
+            background-color: #fcfafa;
+        }
+
+        .alert-success {
+            color: #f3fffb;
+            /*background-color: #b780f7;*/
+            background-image: linear-gradient(60deg,#ac4edf 10%,#224abe 100%);
+            border-color: #bff0de;
+        }
+
+        rect.highcharts-background {
+            fill: transparent;
+        }
+
+        /*Table View style*/
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 20px;
+        }
+
+        #searchInput {
+            width: 50%;
+            font-size: 20px;
+            padding: 1px 2px;
+            border: 1px solid #ccc;
+            margin-bottom: 12px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        /* zebra striping */
+        tr:nth-of-type(odd) {
+            /*background: #D6EAF8;*/
+            background: white;
+        }
+
+        tr:nth-of-type(even) {
+            /*background: #EAF2F8;*/
+            background: white;
+        }
+
+        th {
+            background: #ebfcfc;
+            color: black;
+            font-weight: bold;
+        }
+
+        td, th {
+            padding: 6px;
+            border: 1px solid #A1BCD5;
+            text-align: left;
+        }
+
+        /* Table Row Hover */
+
+        #myTable tr:hover {
+            background-color: skyblue;
+        }
+
+        #456 {
+            background: white !important;
+        }
+
+        @@media all and (max-width: 400px) and (min-width: 300px) {
+            g.highcharts-series.highcharts-series-4.highcharts-pie-series.highcharts-tracker {
+                display: none;
+            }
+        }
+
+        text.highcharts-credits {
+            display: none;
+        }
+    </style>
+    <!--style end new-->
+</head>
+<body>
+    <!--  Total Bonus Area -->
+    <div class="container">
+        <div class="alert alert-success"><center><h4>ボーナスを受け取る (先月)</h4></center></div>
+        <div class="row">
+
+            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                <div class="card">
+                    <div class="card-header">
+                        <center>
+                            <b><h4>紹介のボーナス</h4></b>
+                            ボーナスの支払日は - @month 月/05日
+                        </center>
+                    </div>
+                    <div class="card-body">
+                        <i class="fa fa-lightbulb-o fa-3x"></i>
+                        <h2 class="timer count-title count-number" data-to="@paidtotalbonus1" data-speed="1500"></h2>
+                        <p class="count-text ">貴方の先月1日から10日までの紹介のボーナス</p>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                <div class="card">
+                    <div class="card-header">
+                        <center>
+                            <b><h4>紹介のボーナス</h4></b>
+                            ボーナスの支払日は - @month 月/15 日
+                        </center>
+                    </div>
+
+                    <div class="card-body">
+                        <i class="fa fa-lightbulb-o fa-3x"></i>
+                        <h2 class="timer count-title count-number" data-to="@paidtotalbonus2" data-speed="1500"></h2>
+                        <p class="count-text ">貴方の先月11日から10日までの紹介のボーナス</p>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                <div class="card">
+                    <div class="card-header">
+                        <center>
+                            <b><h4>フルボーナス</h4></b>
+                            フルボーナスの支払い日 - @month 月/25 日
+                        </center>
+                    </div>
+
+                    <div class="card-body">
+                        <i class="fa fa-lightbulb-o fa-3x"></i>
+                        <h2 class="timer count-title count-number" data-to="@paidtotoalbonus" data-speed="1500"></h2>
+                        <p class="count-text ">あなたの先月1日から20日までのフルボーナス（1日から10までの紹介ボーナスを省いております）</p>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <br />
+    <!--  Total bonus Area -->
+    <!--  User area -->
+    <div class="container">
+        <div class="alert alert-success"><center><h4>メンバーによりボーナス</h4></center></div>
+        <div class="row">
+
+            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                <div class="card">
+                    <div class="card-header">
+                        <center>
+                            <b><h4>利益の割合によりのボーナス</h4></b>
+
+                        </center>
+                    </div>
+                    <div class="card-body">
+                        <i class="fa fa-lightbulb-o fa-3x"></i>
+                        <h2 class="timer count-title count-number" data-to="@profitpresetage" data-speed="1500"></h2>
+                        <p class="count-text ">貴方の先月1日から月末までの利益に割合からのボーナス</p>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                <div class="card">
+                    <div class="card-header">
+                        <center>
+                            <b><h4>紹介のボーナス</h4></b>
+
+                        </center>
+                    </div>
+
+                    <div class="card-body">
+                        <i class="fa fa-lightbulb-o fa-3x"></i>
+                        <h2 class="timer count-title count-number" data-to="@positionbonusall" data-speed="1500"></h2>
+                        <p class="count-text ">先月1日から月末までに紹介ボーナス、貴方のボーナスは合計紹介によって変更されます。</p>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                <div class="card">
+                    <div class="card-header">
+                        <center>
+                            <b><h4>シェアボーナス</h4></b>
+
+                        </center>
+                    </div>
+
+                    <div class="card-body">
+                        <i class="fa fa-lightbulb-o fa-3x"></i>
+                        <h2 class="timer count-title count-number" data-to="@sharebonus" data-speed="1500"></h2>
+                        <p class="count-text ">貴方のシェアボーナスは貴方のコインと今月のコインの評価に応じて変更されます。（先月）</p>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <br />
+    <!--  Coin Table -->
+    <div class="container">
+        <div class="alert alert-success"><center><h4>コイン　テーブル</h4></center></div>
+        <div style="overflow-x:auto; height:250px">
+            <table class="table" id="myTable">
+                <tbody>
+                    <tr>
+                        <th onclick="sortTable(0)">BC番号</th>
+                        <th onclick="sortTable(1)">パッケージのタイプ </th>
+                        <th onclick="sortTable(2)">ポジションに御登録した日</th>
+                        <th onclick="sortTable(3)">ポジションの状態</th>
+                        <th onclick="sortTable(4)">コインの評価</th>
+                        <th onclick="sortTable(5)">現在の合計コイン</th>
+                    </tr>
+                </tbody>
+                <tbody>
+                    @{
+                    var previouscoin = 0;
+                    foreach (var a in coining)
+                    {
+                        var k = "100000";
+                        var c = "350000";
+                        var L = "100000";
+                        var coin = 2500;
+                        if (a.package == 2)
+                        {
+                        L = c;
+                        coin = 7500;
+                        }
+                        var s = "freeposition";
+                        var T = "Freeposition";
+                        if (a.freeStatus == 0)
+                        {
+                        T = "NotFreePosition";
+                        }
+                        previouscoin = previouscoin + coin;
+                        <tr>
+                            <td onclick="sortTable(0)">@a.bcNo</td>
+                            <td onclick="sortTable(1)">@L</td>
+                            <td onclick="sortTable(2)">@a.entryDate.ToString("yyyy/MM/dd")</td>
+                            <td onclick="sortTable(3)">@T</td>
+                            <td onclick="sortTable(4)">@coin</td>
+                            <td onclick="sortTable(5)">@previouscoin</td>
+                        </tr>
+                    }
+
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <br />
+    <!-- End of coin table  -->
+    <!--  User area -->
+    <div class="container">
+        <br />
+        <div class="alert alert-success"><center><h4>BC番号のボーナスの評価</h4></center></div>
+        <div id="content-wrapper" class="d-flex flex-column">
+            <!-- Begin Page Content -->
+
+            <div class="col-md-12">
+                @using (Html.BeginForm())
+                {
+                <div class="col-md-3">
+                    <select class="form-control" onchange="submitform(this);" id="bcvalue1" name="bcvalue1">
+                        @{
+                        var number = 1;
+
+                        var k = "notselect";
+                        var l = "notselect";
+                        var m = "notselect";
+                        var r = "notselected";
+
+
+                        var grid2 = ViewBag.list2;
+
+                        foreach (var a in grid2)
+                        {
+                        if (number == 1)
+                        {
+                        <option value="one @a.bcNo">BC番号を選んでください。</option>
+                        }
+
+                        if (a.jumpHistory == "1")
+                        {
+                        if (a.jumpHistory == selectingbcs1[0] && a.bcNo == selectingbcs[0])
+                        {
+                        k = "selected";
+                        }
+                        <option value="one @a.bcNo" @k>1st stage - @a.bcNo</option>
+                        }
+                        if (a.jumpHistory == "2")
+                        {
+                        if (a.jumpHistory == selectingbcs1[0] && a.bcNo == selectingbcs[0])
+                        {
+                        l = "selected";
+                        }
+
+                        <option value="two @a.bcNo" @l>2nd stage - @a.bcNo</option>
+                        }
+                        if (a.jumpHistory == "3")
+                        {
+                        if (a.jumpHistory == selectingbcs1[0] && a.bcNo == selectingbcs[0])
+                        {
+                        m = "selected";
+                        }
+                        <option value="three @a.bcNo" @m>3rd stage - @a.bcNo</option>
+                        }
+                        k = "notselected";
+                        l = "notselected";
+                        m = "notselected";
+
+
+
+                        number = number + 1;
+                        }
+                        if (selectingbcs[0] == -1)
+                        {
+                        r = "selected";
+                        }
+                        <option value="all -1" @r>Allbcs Bonus</option>
+                        }
+                    </select>
+
+                </div>
+                }
+                <br>
+            </div>
+
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+            <script>
+                function submitform(thiss) {
+                    $('form').submit();
+                }
+            </script>
+
+
+            <div class="container">
+                <div class="grid">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                            <div class="counter col_fourth">
+                                <i class="fa fa-area-chart fa-3x"></i>
+                                <h2 class="timer count-title count-number" data-to="@fifthstagebonus" data-speed="1500"></h2>
+                                <p class="count-text ">5回目のロケット　ボーナス</p>
+                            </div>
+
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                            <div class="counter col_fourth">
+                                <i class="fa fa-bar-chart fa-3x" aria-hidden="true"></i>
+                                <h2 class="timer count-title count-number" data-to="@thirdstagebonus" data-speed="1500">+</h2>
+                                <p class="count-text ">3回目のロケット　ボーナス</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                            <div class="counter col_fourth">
+                                <i class="fa fa-user fa-3x"></i>
+                                <h2 class="timer count-title count-number" data-to="@introducebonusall" data-speed="1500"></h2>
+                                <p class="count-text ">レベルアップボーナス </p>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                            <div class="counter col_fourth">
+                                <i class="fa fa-calculator fa-3x"></i>
+                                <h2 class="timer count-title count-number" data-to="@anytotal" data-speed="1500"></h2>
+                                <p class="count-text ">合計ボーナス（BC番号により）</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="counter col_fourth">
+                                <h2 style="text-align: center;">BC　番号のボーナス(%)</h2>
+                                <div class="google-map-single">
+                                    <div id="container" style="min-width: 300px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="counter col_fourth">
+                                <h2 style="text-align: center;">BC　番号のボーナス(¥)</h2>
+                                <div class="google-map-single sm-res-mg-t-30">
+                                    <div id="container2" style="min-width: 300px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <!--  User area -->
+            <!--  User area -->
+        </div>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <!-- countdown function -->
+
+    <script>
+        $(document).ready(function () {
+            var workselected = $('.rowss').val();
+            //alert(workselected)
+            $.ajax({
+                method: "POST",
+                url: "http://localhost:65254/trees/bonusview",
+                data: { bcvalue1: workselected },
+                success: function (data) {
+                    console.log(data);
+                }
+            });
+        });
+    </script>
+
+    <script type="text/javascript">
+        (function ($) {
+            $.fn.countTo = function (options) {
+                options = options || {};
+
+                return $(this).each(function () {
+                    // set options for current element
+                    var settings = $.extend({}, $.fn.countTo.defaults, {
+                        from: $(this).data('from'),
+                        to: $(this).data('to'),
+                        speed: $(this).data('speed'),
+                        refreshInterval: $(this).data('refresh-interval'),
+                        decimals: $(this).data('decimals')
+                    }, options);
+
+                    // how many times to update the value, and how much to increment the value on each update
+                    var loops = Math.ceil(settings.speed / settings.refreshInterval),
+                        increment = (settings.to - settings.from) / loops;
+
+                    // references & variables that will change with each update
+                    var self = this,
+                        $self = $(this),
+                        loopCount = 0,
+                        value = settings.from,
+                        data = $self.data('countTo') || {};
+
+                    $self.data('countTo', data);
+
+                    // if an existing interval can be found, clear it first
+                    if (data.interval) {
+                        clearInterval(data.interval);
+                    }
+                    data.interval = setInterval(updateTimer, settings.refreshInterval);
+
+                    // initialize the element with the starting value
+                    render(value);
+
+                    function updateTimer() {
+                        value += increment;
+                        loopCount++;
+
+                        render(value);
+
+                        if (typeof (settings.onUpdate) == 'function') {
+                            settings.onUpdate.call(self, value);
+                        }
+
+                        if (loopCount >= loops) {
+                            // remove the interval
+                            $self.removeData('countTo');
+                            clearInterval(data.interval);
+                            value = settings.to;
+
+                            if (typeof (settings.onComplete) == 'function') {
+                                settings.onComplete.call(self, value);
+                            }
+                        }
+                    }
+
+                    function render(value) {
+                        var formattedValue = settings.formatter.call(self, value, settings);
+                        $self.html(formattedValue);
+                    }
+                });
+            };
+
+            $.fn.countTo.defaults = {
+                from: 0,               // the number the element should start at
+                to: 0,                 // the number the element should end at
+                speed: 1000,           // how long it should take to count between the target numbers
+                refreshInterval: 100,  // how often the element should be updated
+                decimals: 0,           // the number of decimal places to show
+                formatter: formatter,  // handler for formatting the value before rendering
+                onUpdate: null,        // callback method for every time the element is updated
+                onComplete: null       // callback method for when the element finishes updating
+            };
+
+            function formatter(value, settings) {
+                return value.toFixed(settings.decimals);
+            }
+        }(jQuery));
+
+        jQuery(function ($) {
+            // custom formatting example
+            $('.count-number').data('countToOptions', {
+                formatter: function (value, options) {
+                    return value.toFixed(options.decimals).replace(/\B(?=(?:\d{3})+(?!\d))/g, ',');
+                }
+            });
+
+            // start all the timers
+            $('.timer').each(count);
+
+            function count(options) {
+                var $this = $(this);
+                options = $.extend({}, options || {}, $this.data('countToOptions') || {});
+                $this.countTo(options);
+            }
+        });
+    </script>
+    <script>
+        // First Chart
+        Highcharts.chart('container', {
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                type: 'pie'
+            },
+            title: {
+                text: ' '
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: true,
+                        format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                        connectorColor: 'silver'
+                    }
+                }
+            },
+            series: [{
+                name: 'Share',
+                data: [
+                    { name: '紹介のボーナス', y: @introducebonusall },
+                    { name: '3回目のロケット　ボーナス', y: @thirdstagebonus },
+                    { name: '5回目のロケット　ボーナス', y: @fifthstagebonus },
+
+                    ]
+                }]
+            });
+
+        //Second Chart
+        Highcharts.chart('container2', {
+
+            chart: {
+                type: 'column'
+            },
+
+            title: {
+                text: ' '
+            },
+
+            xAxis: {
+                categories: ['紹介のボーナス', '3回目のロケット　ボーナス', '5回目のロケット　ボーナス']
+            },
+
+            yAxis: {
+                allowDecimals: false,
+                min: 0,
+                title: {
+                    text: 'ボーナス金額'
+                }
+            },
+
+            tooltip: {
+                formatter: function () {
+                    return '<b>' + this.x + '</b><br/>' +
+                        this.series.name + ': ' + this.y + '<br/>' +
+                        'Total: ' + this.point.stackTotal;
+                }
+            },
+
+            plotOptions: {
+                column: {
+                    stacking: 'normal'
+                }
+            },
+
+            series: [{
+                name: '支払済みボーナス',
+                /**/
+                data: [@introducebonusall, @thirdstagebonus, @fifthstagebonus],
+        /**/
+        stack: 'male'
+        }]
+});
+    </script>
+
+
+</body>

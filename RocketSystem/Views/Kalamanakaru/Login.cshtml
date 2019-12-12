@@ -1,0 +1,53 @@
+﻿@model RocketSystem.Models.Kalamanakaru
+@{
+    ViewBag.Title = "Login";
+    Layout = null;
+}
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Admin login</title>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="~/css/css/loginadmin.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-9 col-md-7 col-lg-5 mx-auto" style="margin-top:150px;">
+                <div class="card card-signin my-5">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Administrator Login</h5>
+                        @using (Html.BeginForm(null, null, FormMethod.Post, new { @class = "form-signin" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            <div class="form-label-group">
+                                <input type="text" id="inputEmail" class="form-control" name="userName" placeholder="User Name" required autofocus>
+                                <label for="inputEmail">User Name</label>
+                            </div>
+
+                            <div class="form-label-group">
+                                <input type="password" id="inputPassword" class="form-control" placeholder="Password" name="password" required>
+                                <label for="inputPassword">Password</label>
+                            </div>
+                            <br>
+
+                            <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign in</button>
+
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
