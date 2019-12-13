@@ -15,6 +15,7 @@ namespace RocketSystem.Controllers
 
         public ActionResult About()
         {
+            int a = 0;
             ViewBag.Message = "Your application description page.";
 
             return View();
