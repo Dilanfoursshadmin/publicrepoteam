@@ -410,6 +410,7 @@ namespace RocketSystem.Controllers
             ViewBag.bcnumberselect12 = selectbcnew;
 
             ViewBag.list2 = list2second;
+            //news
             //new query end
            
 
