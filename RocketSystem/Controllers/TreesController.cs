@@ -411,7 +411,7 @@ namespace RocketSystem.Controllers
 
             ViewBag.list2 = list2second;
             //new query end
-            int dff = 0;
+           
 
             //new User wise Bonus
 
