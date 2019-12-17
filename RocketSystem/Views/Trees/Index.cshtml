@@ -96,7 +96,7 @@
                 </a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href='@Url.Action("Bonusview", "Trees", new { bcvalue1 = 0, jumphistory=0 })'>
+                <a class="nav-link" href='@Url.Action("Bonusview", "Trees", new { bcvalue1 = 0, jumphistory=0})'>
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>ボーナス　ビュー</span>
                 </a>
@@ -163,8 +163,8 @@
                 <!-- Topbar -->
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
                     <h2>Membership No: @Session["membershipNo"].ToString()&nbsp;&nbsp;</h2>
-                    <h2>&nbsp;&nbsp;Your api member Coin: @Session["coin"].ToString()</h2>
-                    <h2>&nbsp;&nbsp;Your api total Coin: @Session["apitotalcoin"].ToString()</h2>
+                    @*<h2>&nbsp;&nbsp;Your api member Coin: @Session["coin"].ToString()</h2>
+                    <h2>&nbsp;&nbsp;Your api total Coin: @Session["apitotalcoin"].ToString()</h2>*@
                     <!-- Sidebar Toggle (Topbar) -->
                     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                         <i class="fa fa-bars"></i>

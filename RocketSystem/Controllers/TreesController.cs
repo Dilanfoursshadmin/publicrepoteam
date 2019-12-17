@@ -361,7 +361,7 @@ namespace RocketSystem.Controllers
         }
 
         [HttpGet]
-        public ActionResult Bonusview(int bcvalue1, int jumphistory)
+        public ActionResult Bonusview(int bcvalue1, int jumphistory, string passmonth)
         {
             if (Session["membershipNo"] == null)
             {
@@ -396,7 +396,7 @@ namespace RocketSystem.Controllers
                 nexttempory1 = nexttempory;
                 list2second.Add(nexttempory1);
             }
-            
+
             list2second.AddRange(list2seconds);
             list2second.OrderBy(b => b.bcNo);
 
@@ -411,10 +411,62 @@ namespace RocketSystem.Controllers
 
             ViewBag.list2 = list2second;
             //new query end
+            int dff = 0;
 
             //new User wise Bonus
+
             ViewBag.month = DateTime.Now.Month;
             DateTime corecttime = DateTime.Now.AddMonths(0); //should be corect -1 month add
+            int selectyear = corecttime.Year;
+            int selectmont = corecttime.Month;
+
+            switch (passmonth)
+            {
+                case "january":
+                    selectmont = 2;
+                    break;
+                case "february":
+                    selectmont = 3;
+                    break;
+                case "march":
+                    selectmont = 4;
+                    break;
+                case "april":
+                    selectmont = 5;
+                    break;
+                case "may":
+                    selectmont = 6;
+                    break;
+                case "June":
+                    selectmont = 7;
+                    break;
+                case "july":
+                    selectmont = 8;
+                    break;
+                case "agust":
+                    selectmont = 9;
+                    break;
+                case "september":
+                    selectmont = 10;
+                    break;
+                case "octomber":
+                    selectmont = 11;
+                    break;
+                case "november":
+                    selectmont = 12;
+                    break;
+                case "december":
+                    selectmont = 1;
+                    selectyear = selectyear + 1;
+                    break;
+                case "default":
+
+                    break;
+
+
+            }
+
+            corecttime = new DateTime(selectyear, selectmont, 5);
             int month = corecttime.Month;
             int year = corecttime.Year;
             int year1 = corecttime.Year;
@@ -555,19 +607,22 @@ namespace RocketSystem.Controllers
             //any totalbonus end
 
             //new User wise Bonus End
-
+            ViewBag.selectedmonth = passmonth;
 
             string membersNo = Session["membershipNo"].ToString();
             //var coin = new StageOne();
-            var coining = db.StageOnes.Where(d => d.membershipNo == membersNo).ToList();
+            var coining = db.StageOnes.Where(d => d.membershipNo == membersNo && d.entryDate < lastday).ToList();
             ViewBag.coining = coining;
 
+            long oldcoin = Task.Run(() => BonusCalculation.numberofcoin(membersNo)).Result;
+            ViewBag.totaloldcoin = oldcoin;
             return View();
         }
 
         [HttpPost]
-        public ActionResult Bonusview(string bcvalue1)
+        public ActionResult Bonusview(string bcvalue1, string month)
         {
+
             string phrase = bcvalue1;
             string[] words = phrase.Split(' ');
             string stage = words[0];
@@ -584,7 +639,7 @@ namespace RocketSystem.Controllers
                         int bcs = stageones.bcNo;
                         int jumphistry = Convert.ToInt32(stageones.jumpHistory);
 
-                        return RedirectToAction("Bonusview", "Trees", new { bcvalue1 = bcs, jumphistory = jumphistry });
+                        return RedirectToAction("Bonusview", "Trees", new { bcvalue1 = bcs, jumphistory = jumphistry, passmonth = month });
                     }
                     break;
                 case "two":
@@ -594,7 +649,7 @@ namespace RocketSystem.Controllers
                         var stagetwo = db.StageTwoes.Where(d => d.membershipNo == members && d.bcNo == bcnumber && d.jumpHistory == "2").FirstOrDefault();
                         int bcs = stagetwo.bcNo;
                         int jumphistry = Convert.ToInt32(stagetwo.jumpHistory);
-                        return RedirectToAction("Bonusview", "Trees", new { bcvalue1 = bcs, jumphistory = jumphistry });
+                        return RedirectToAction("Bonusview", "Trees", new { bcvalue1 = bcs, jumphistory = jumphistry, passmonth = month });
                     }
                     break;
                 case "three":
@@ -604,16 +659,18 @@ namespace RocketSystem.Controllers
                         var stagethree = db.StageThrees.Where(d => d.membershipNo == members && d.bcNo == bcnumber && d.jumpHistory == "3").FirstOrDefault();
                         int bcs = stagethree.bcNo;
                         int jumphistry = Convert.ToInt32(stagethree.jumpHistory);
-                        return RedirectToAction("Bonusview", "Trees", new { bcvalue1 = bcs, jumphistory = jumphistry });
+                        return RedirectToAction("Bonusview", "Trees", new { bcvalue1 = bcs, jumphistory = jumphistry, passmonth = month });
                     }
                     break;
 
                 case "all":
-                    return RedirectToAction("Bonusview", "Trees", new { bcvalue1 = -1, jumphistory = 0 });
+                    return RedirectToAction("Bonusview", "Trees", new { bcvalue1 = -1, jumphistory = 0, passmonth = month });
 
                 case "fifth":
-                    return RedirectToAction("Bonusview", "Trees", new { bcvalue1 = 0, jumphistory = 5 });
+                    return RedirectToAction("Bonusview", "Trees", new { bcvalue1 = 0, jumphistory = 5, passmonth = month });
             }
+
+
             return View();
         }
 
