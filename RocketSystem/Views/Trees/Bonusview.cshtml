@@ -18,6 +18,9 @@
     int thirdstagebonus = ViewBag.thirdstagebonus;
     int anytotal = ViewBag.anytotal;
     var coining = ViewBag.coining;
+    long totalallcoin = ViewBag.totaloldcoin;
+    string monthis = "january";
+    string selectedmonth = ViewBag.selectedmonth;
 
 
 }
@@ -125,6 +128,251 @@
     <!--style end new-->
 </head>
 <body>
+    @{
+        string mo1 = "notselected";
+        string mo2 = "notselected";
+        string mo3 = "notselected";
+        string mo4 = "notselected";
+        string mo5 = "notselected";
+        string mo6 = "notselected";
+        string mo7 = "notselected";
+        string mo8 = "notselected";
+        string mo9 = "notselected";
+        string mo10 = "notselected";
+        string mo11 = "notselected";
+        string mo12 = "notselected";
+
+        if (selectedmonth == "january")
+        {
+            mo1 = "selected";
+        }
+        else if (selectedmonth == "february")
+        {
+            mo2 = "selected";
+        }
+        else if (selectedmonth == "march")
+        {
+            mo3 = "selected";
+        }
+        else if (selectedmonth == "april")
+        {
+            mo4 = "selected";
+        }
+        else if (selectedmonth == "may")
+        {
+            mo5 = "selected";
+        }
+        else if (selectedmonth == "June")
+        {
+            mo6 = "selected";
+        }
+        else if (selectedmonth == "july")
+        {
+            mo7 = "selected";
+        }
+        else if (selectedmonth == "agust")
+        {
+            mo8 = "selected";
+        }
+        else if (selectedmonth == "september")
+        {
+            mo9 = "selected";
+        }
+        else if (selectedmonth == "octomber")
+        {
+            mo10 = "selected";
+        }
+        else if (selectedmonth == "november")
+        {
+            mo11 = "selected";
+        }
+        else if (selectedmonth == "december")
+        {
+            mo12 = "selected";
+        }
+
+        <div class="container">
+            <div class="col-md-12">
+
+                <div class="col-md-3">
+
+                    <select onchange="getmonth(thiss)" class="form-control" id="getmonth" name="getmonth">
+                        <option value="january" @mo1>january</option>
+                        <option value="february" @mo2>february</option>
+                        <option value="march" @mo3>march</option>
+                        <option value="april" @mo4>april</option>
+                        <option value="may" @mo5>may</option>
+                        <option value="June" @mo6>June</option>
+                        <option value="july" @mo7>July</option>
+                        <option value="agust" @mo8>agust</option>
+                        <option value="september" @mo9>september</option>
+                        <option value="octomber" @mo10>octomber</option>
+                        <option value="november" @mo11>november</option>
+                        <option value="december" @mo12>December</option>
+
+                    </select>
+
+                </div>
+                <div class="col-md-6">
+
+
+                </div>
+
+                <br>
+            </div>
+
+        </div>
+    }
+    <br />
+    <div class="container">
+        <div class="col-md-12">
+            @using (Html.BeginForm())
+            {
+                <div class="col-md-3">
+                    <input id="month" type="hidden" name="month" onchange="submitform(this);">
+                    <select class="form-control" onchange="submitform(this);" id="bcvalue1" name="bcvalue1">
+                        @{
+                            var number = 1;
+
+                            var k = "notselect";
+                            var l = "notselect";
+                            var m = "notselect";
+                            var r = "notselected";
+
+
+                            var grid2 = ViewBag.list2;
+
+                            foreach (var a in grid2)
+                            {
+                                if (number == 1)
+                                {
+                                    <option value="one @a.bcNo">BC番号を選んでください。</option>
+                                }
+
+                                if (a.jumpHistory == "1")
+                                {
+                                    if (a.jumpHistory == selectingbcs1[0] && a.bcNo == selectingbcs[0])
+                                    {
+                                        k = "selected";
+                                    }
+                                    <option value="one @a.bcNo" @k>1st stage - @a.bcNo</option>
+                                }
+                                if (a.jumpHistory == "2")
+                                {
+                                    if (a.jumpHistory == selectingbcs1[0] && a.bcNo == selectingbcs[0])
+                                    {
+                                        l = "selected";
+                                    }
+
+                                    <option value="two @a.bcNo" @l>2nd stage - @a.bcNo</option>
+                                }
+                                if (a.jumpHistory == "3")
+                                {
+                                    if (a.jumpHistory == selectingbcs1[0] && a.bcNo == selectingbcs[0])
+                                    {
+                                        m = "selected";
+                                    }
+                                    <option value="three @a.bcNo" @m>3rd stage - @a.bcNo</option>
+                                }
+                                k = "notselected";
+                                l = "notselected";
+                                m = "notselected";
+
+
+
+                                number = number + 1;
+                            }
+                            if (selectingbcs[0] == -1)
+                            {
+                                r = "selected";
+                            }
+                            <option value="all -1" @r>Allbcs Bonus</option>
+                        }
+                    </select>
+
+                </div>
+            }
+
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script>
+        function submitform(thiss) {
+            $('form').submit();
+        }
+    </script>
+    <!--bcwise bonus-->
+    <div class="container">
+        <br />
+        <div class="alert alert-success"><center><h4>BC番号のボーナスの評価</h4></center></div>
+        <div id="content-wrapper" class="d-flex flex-column">
+            <!-- Begin Page Content -->
+
+
+
+
+            <div class="container">
+                <div class="grid">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                            <div class="counter col_fourth">
+                                <i class="fa fa-area-chart fa-3x"></i>
+                                <h2 class="timer count-title count-number" data-to="@fifthstagebonus" data-speed="1500"></h2>
+                                <p class="count-text ">5回目のロケット　ボーナス</p>
+                            </div>
+
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                            <div class="counter col_fourth">
+                                <i class="fa fa-bar-chart fa-3x" aria-hidden="true"></i>
+                                <h2 class="timer count-title count-number" data-to="@thirdstagebonus" data-speed="1500">+</h2>
+                                <p class="count-text ">3回目のロケット　ボーナス</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                            <div class="counter col_fourth">
+                                <i class="fa fa-user fa-3x"></i>
+                                <h2 class="timer count-title count-number" data-to="@introducebonusall" data-speed="1500"></h2>
+                                <p class="count-text ">レベルアップボーナス </p>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                            <div class="counter col_fourth">
+                                <i class="fa fa-calculator fa-3x"></i>
+                                <h2 class="timer count-title count-number" data-to="@anytotal" data-speed="1500"></h2>
+                                <p class="count-text ">合計ボーナス（BC番号により）</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="counter col_fourth">
+                                <h2 style="text-align: center;">BC　番号のボーナス(%)</h2>
+                                <div class="google-map-single">
+                                    <div id="container" style="min-width: 300px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="counter col_fourth">
+                                <h2 style="text-align: center;">BC　番号のボーナス(¥)</h2>
+                                <div class="google-map-single sm-res-mg-t-30">
+                                    <div id="container2" style="min-width: 300px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <!--  User area -->
+            <!--  User area -->
+        </div>
+    </div>
+    <!--bcwisebonus end-->
     <!--  Total Bonus Area -->
     <div class="container">
         <div class="alert alert-success"><center><h4>ボーナスを受け取る (先月)</h4></center></div>
@@ -248,205 +496,8 @@
         </div>
     </div>
     <br />
-    <!--  Coin Table -->
-    <div class="container">
-        <div class="alert alert-success"><center><h4>コイン　テーブル</h4></center></div>
-        <div style="overflow-x:auto; height:250px">
-            <table class="table" id="myTable">
-                <tbody>
-                    <tr>
-                        <th onclick="sortTable(0)">BC番号</th>
-                        <th onclick="sortTable(1)">パッケージのタイプ </th>
-                        <th onclick="sortTable(2)">ポジションに御登録した日</th>
-                        <th onclick="sortTable(3)">ポジションの状態</th>
-                        <th onclick="sortTable(4)">コインの評価</th>
-                        <th onclick="sortTable(5)">現在の合計コイン</th>
-                    </tr>
-                </tbody>
-                <tbody>
-                    @{
-                    var previouscoin = 0;
-                    foreach (var a in coining)
-                    {
-                        var k = "100000";
-                        var c = "350000";
-                        var L = "100000";
-                        var coin = 2500;
-                        if (a.package == 2)
-                        {
-                        L = c;
-                        coin = 7500;
-                        }
-                        var s = "freeposition";
-                        var T = "Freeposition";
-                        if (a.freeStatus == 0)
-                        {
-                        T = "NotFreePosition";
-                        }
-                        previouscoin = previouscoin + coin;
-                        <tr>
-                            <td onclick="sortTable(0)">@a.bcNo</td>
-                            <td onclick="sortTable(1)">@L</td>
-                            <td onclick="sortTable(2)">@a.entryDate.ToString("yyyy/MM/dd")</td>
-                            <td onclick="sortTable(3)">@T</td>
-                            <td onclick="sortTable(4)">@coin</td>
-                            <td onclick="sortTable(5)">@previouscoin</td>
-                        </tr>
-                    }
 
-                    }
-                </tbody>
-            </table>
-        </div>
-    </div>
-    <br />
-    <!-- End of coin table  -->
     <!--  User area -->
-    <div class="container">
-        <br />
-        <div class="alert alert-success"><center><h4>BC番号のボーナスの評価</h4></center></div>
-        <div id="content-wrapper" class="d-flex flex-column">
-            <!-- Begin Page Content -->
-
-            <div class="col-md-12">
-                @using (Html.BeginForm())
-                {
-                <div class="col-md-3">
-                    <select class="form-control" onchange="submitform(this);" id="bcvalue1" name="bcvalue1">
-                        @{
-                        var number = 1;
-
-                        var k = "notselect";
-                        var l = "notselect";
-                        var m = "notselect";
-                        var r = "notselected";
-
-
-                        var grid2 = ViewBag.list2;
-
-                        foreach (var a in grid2)
-                        {
-                        if (number == 1)
-                        {
-                        <option value="one @a.bcNo">BC番号を選んでください。</option>
-                        }
-
-                        if (a.jumpHistory == "1")
-                        {
-                        if (a.jumpHistory == selectingbcs1[0] && a.bcNo == selectingbcs[0])
-                        {
-                        k = "selected";
-                        }
-                        <option value="one @a.bcNo" @k>1st stage - @a.bcNo</option>
-                        }
-                        if (a.jumpHistory == "2")
-                        {
-                        if (a.jumpHistory == selectingbcs1[0] && a.bcNo == selectingbcs[0])
-                        {
-                        l = "selected";
-                        }
-
-                        <option value="two @a.bcNo" @l>2nd stage - @a.bcNo</option>
-                        }
-                        if (a.jumpHistory == "3")
-                        {
-                        if (a.jumpHistory == selectingbcs1[0] && a.bcNo == selectingbcs[0])
-                        {
-                        m = "selected";
-                        }
-                        <option value="three @a.bcNo" @m>3rd stage - @a.bcNo</option>
-                        }
-                        k = "notselected";
-                        l = "notselected";
-                        m = "notselected";
-
-
-
-                        number = number + 1;
-                        }
-                        if (selectingbcs[0] == -1)
-                        {
-                        r = "selected";
-                        }
-                        <option value="all -1" @r>Allbcs Bonus</option>
-                        }
-                    </select>
-
-                </div>
-                }
-                <br>
-            </div>
-
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-            <script>
-                function submitform(thiss) {
-                    $('form').submit();
-                }
-            </script>
-
-
-            <div class="container">
-                <div class="grid">
-                    <div class="row">
-                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                            <div class="counter col_fourth">
-                                <i class="fa fa-area-chart fa-3x"></i>
-                                <h2 class="timer count-title count-number" data-to="@fifthstagebonus" data-speed="1500"></h2>
-                                <p class="count-text ">5回目のロケット　ボーナス</p>
-                            </div>
-
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                            <div class="counter col_fourth">
-                                <i class="fa fa-bar-chart fa-3x" aria-hidden="true"></i>
-                                <h2 class="timer count-title count-number" data-to="@thirdstagebonus" data-speed="1500">+</h2>
-                                <p class="count-text ">3回目のロケット　ボーナス</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                            <div class="counter col_fourth">
-                                <i class="fa fa-user fa-3x"></i>
-                                <h2 class="timer count-title count-number" data-to="@introducebonusall" data-speed="1500"></h2>
-                                <p class="count-text ">レベルアップボーナス </p>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                            <div class="counter col_fourth">
-                                <i class="fa fa-calculator fa-3x"></i>
-                                <h2 class="timer count-title count-number" data-to="@anytotal" data-speed="1500"></h2>
-                                <p class="count-text ">合計ボーナス（BC番号により）</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                            <div class="counter col_fourth">
-                                <h2 style="text-align: center;">BC　番号のボーナス(%)</h2>
-                                <div class="google-map-single">
-                                    <div id="container" style="min-width: 300px; height: 400px; max-width: 600px; margin: 0 auto"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                            <div class="counter col_fourth">
-                                <h2 style="text-align: center;">BC　番号のボーナス(¥)</h2>
-                                <div class="google-map-single sm-res-mg-t-30">
-                                    <div id="container2" style="min-width: 300px; height: 400px; max-width: 600px; margin: 0 auto"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <br />
-            <!--  User area -->
-            <!--  User area -->
-        </div>
-    </div>
-
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -457,16 +508,23 @@
 
     <script>
         $(document).ready(function () {
-            var workselected = $('.rowss').val();
-            //alert(workselected)
-            $.ajax({
-                method: "POST",
-                url: "http://localhost:65254/trees/bonusview",
-                data: { bcvalue1: workselected },
-                success: function (data) {
-                    console.log(data);
-                }
+            $('#getmonth').change(function () {
+                var doc = document.getElementById("getmonth");
+                //(doc.options[doc.selectedIndex].value);
+
+                $("#month").val(doc.options[doc.selectedIndex].value);
+                var workselected1 = $('#month').val();
+                //alert(workselected1);
             });
+        });
+
+        $(document).ready(function () {
+            var doc = document.getElementById("getmonth");
+            //alert(doc.options[doc.selectedIndex].value);
+
+            $("#month").val(doc.options[doc.selectedIndex].value);
+            var workselected1 = $('#month').val();
+            //alert(workselected1);
         });
     </script>
 
