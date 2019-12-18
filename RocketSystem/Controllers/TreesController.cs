@@ -69,7 +69,7 @@ namespace RocketSystem.Controllers
             }
             else
             {
-                Session["introducePromoCode"] = "E5Q517";
+                //Session["introducePromoCode"] = "E5Q517";
             }
             return RedirectToAction("insertPositionDetails", "PositionDetails", positionDetail);
         }
