@@ -412,7 +412,6 @@ namespace RocketSystem.Controllers
             ViewBag.list2 = list2second;
             //news
             //new query end
-           
 
             //new User wise Bonus
 
