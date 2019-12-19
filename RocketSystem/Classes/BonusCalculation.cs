@@ -37,7 +37,7 @@ namespace RocketSystem.Classes
         protected static int year = DateTime.Now.AddYears(1).Year;
         protected static int lastyear = DateTime.Now.Year;
 
-
+         
         private static DataAccessLayer db = new DataAccessLayer();
 
 
@@ -1403,6 +1403,9 @@ namespace RocketSystem.Classes
             long coin = db.StageOnes.Where(d => d.package == 1).Count() * coinone + db.StageOnes.Where(d => d.package == 2).Count() * cointwo + apitotalcoin;
 
             double coinvalue = profit5present / coin;
+            
+            //double test1 = (db.StageOnes.Where(d => d.package == 1 && d.membershipNo == membernumber).Count() * coinone + db.StageOnes.Where(d => d.package == 2 && d.membershipNo == membernumber).Count() * cointwo ) * coinvalue;
+            //double test2 = apicoinmember * coinvalue;
 
             double membercoin = db.StageOnes.Where(d => d.package == 1 && d.membershipNo == membernumber).Count() * coinone + db.StageOnes.Where(d => d.package == 2 && d.membershipNo == membernumber).Count() * cointwo + apicoinmember;
             double sharebonus = membercoin * coinvalue;
@@ -1601,6 +1604,109 @@ namespace RocketSystem.Classes
             totalcoin.coin = model.coin;
             long r = (long)Convert.ToDouble(totalcoin.coin);
             return r;
+
+        }
+        public static double getcoinvalue()
+        {
+            int coinone = db.BonusDetails.Where(d => d.bonusId == 23).OrderByDescending(d => d.bonusDetailId).Select(d => d.bonusAmount).FirstOrDefault();
+            int cointwo = db.BonusDetails.Where(d => d.bonusId == 24).OrderByDescending(d => d.bonusDetailId).Select(d => d.bonusAmount).FirstOrDefault();
+
+            double profiting = db.BonusDetails.Where(d => d.bonusId == 25).OrderByDescending(d => d.bonusDetailId).Select(d => d.bonusAmount).FirstOrDefault();
+            double profitingcoinpresentage = profiting / 100;
+
+           
+            DateTime lastmonthfirstday = new DateTime(lastyear, lastmonth, 1);
+            DateTime thismonthfirstday = new DateTime(year, thismonth, 1);
+            if (lastmonth != 12)
+            {
+                thismonthfirstday = new DateTime(lastyear, thismonth, 1);
+            }
+            int count = db.PaidBonuss.Where(d => d.paidBonusDateTime >= lastmonthfirstday && d.paidBonusDateTime < thismonthfirstday).Count();
+            double sendbonus = 0.0;
+            if (count != 0)
+            {
+                sendbonus = db.PaidBonuss.Where(d => d.paidBonusDateTime >= lastmonthfirstday && d.paidBonusDateTime < thismonthfirstday).Sum(d => d.paidFifthStageBonus + d.paidIntoduceBonus + d.paidpositionBonus + d.paidThirdStageBonus);
+            }
+            double income = db.StageOnes.Where(d => d.entryDate >= lastmonthfirstday && d.entryDate < thismonthfirstday && d.package == 1).Count() * 100000 + db.StageOnes.Where(d => d.entryDate >= lastmonthfirstday && d.entryDate < thismonthfirstday && d.package == 2).Count() * 350000;
+            double profit = income - sendbonus;
+            double profit5present = profit * profitingcoinpresentage;
+
+            
+            long apitotalcoin = Task.Run(() => BonusCalculation.getAllCoin()).Result;
+
+
+            long coin = db.StageOnes.Where(d => d.package == 1).Count() * coinone + db.StageOnes.Where(d => d.package == 2).Count() * cointwo + apitotalcoin;
+
+            double coinvalue = profit5present / coin;
+            return coinvalue;
+        }
+        public dynamic sharebonusandprofitpresentagenew()
+        {
+            int onepackagecoin = db.BonusDetails.Where(d => d.bonusId == 23).OrderByDescending(d => d.bonusDetailId).Select(d => d.bonusAmount).FirstOrDefault();
+            int twopackagecoin = db.BonusDetails.Where(d => d.bonusId == 24).OrderByDescending(d => d.bonusDetailId).Select(d => d.bonusAmount).FirstOrDefault();
+
+            List<PaidBonus> newobj = new List<PaidBonus>();
+            double coinvalues = getcoinvalue();
+
+            int year = DateTime.Now.Year;
+            int month = DateTime.Now.Month;
+            DateTime first = new DateTime(year, month, 25);
+            DateTime second = new DateTime(year + 1, 1, 1);
+            if (month == 12)
+            {
+                second = new DateTime(year + 1, 1, 1);
+            }
+            else
+            {
+                second = new DateTime(year, month + 1, 1);
+            }
+            CalculateBonusPercentageBonus("000001");
+            
+            var memberlist = db.PaidBonuss.Where(d => d.positionHistory == 1 && d.paidBonusDateTime >= first && d.paidBonusDateTime < second).GroupBy(d => d.memberId).ToList();
+            foreach(var groupmember in memberlist)
+            {
+                foreach(var memberbcs in groupmember)
+                {
+                    if(memberbcs.bcNumber == 1)
+                    {
+                        int counts = db.StageOnes.Where(d => d.membershipNo == memberbcs.memberId && d.bcNo == memberbcs.bcNumber).Join(db.StageOnes, k => k.positionCode, l => l.introducePromoCode, (k, l) => new { k.membershipNo }).Count();
+
+                        memberbcs.paidPresentageBonusThreeperson = 0;
+                        memberbcs.paidPresentageBonus =0;
+
+                        if (counts >= 6)
+                        {
+                            memberbcs.paidPresentageBonusThreeperson = fivePeopleBonusAmount;
+                            memberbcs.paidPresentageBonus = tenPeopleBonusAmount;
+
+                        }
+                        else if(count >= 3)
+                        {
+                            memberbcs.paidPresentageBonusThreeperson = fivePeopleBonusAmount;
+                        }
+                        long apicoinmember = Task.Run(() => BonusCalculation.numberofcoin(memberbcs.memberId)).Result;
+                        memberbcs.paidshareBonus = coinvalues * apicoinmember;
+                        
+                    }
+                    
+                    var package = db.StageOnes.Where(d => d.membershipNo == memberbcs.memberId && d.bcNo == memberbcs.bcNumber).FirstOrDefault();
+                    if(package.package == 2)
+                    {
+                        memberbcs.paidshareBonusRocket = coinvalues * twopackagecoin;
+                    }
+                    else
+                    {
+                        memberbcs.paidshareBonusRocket = coinvalues * onepackagecoin;
+                    }
+                    PaidBonus temporyobject = new PaidBonus();
+                    temporyobject = memberbcs;
+
+                    newobj.Add(temporyobject);
+
+
+                }
+            }
+            return newobj;
 
         }
     }

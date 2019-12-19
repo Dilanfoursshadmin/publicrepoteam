@@ -17,6 +17,8 @@ namespace RocketSystem.Models
         public double paidFifthStageBonus { get; set; }
         public double paidpositionBonus { get; set; }
         public double paidshareBonus { get; set; }
+        public double paidshareBonusRocket { get; set; }
+        public double paidPresentageBonusThreeperson { get; set; }
         public int positionHistory { get; set; }
         public int complteorno { get; set; }
         public int stageonetreeid { get; set; }
