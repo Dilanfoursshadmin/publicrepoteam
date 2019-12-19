@@ -516,13 +516,13 @@ namespace RocketSystem.Controllers
 
             //new 10/25 positionbonus
             double paidthismonthpositionbonus = 0.0;
-            int positioncountingpositionbonus = db.PaidBonuss.Where(d => d.memberId == membership && d.paidBonusDateTime >= firstdateten && d.paidBonusDateTime < firstdatetwenty).Count();
+            int positioncountingpositionbonus = db.PaidBonuss.Where(d => d.memberId == membership && d.paidBonusDateTime >= firstdatetwenty && d.paidBonusDateTime < lastday).Count();
 
-            if (positioncount2 != 0)
+            if (positioncountingpositionbonus != 0)
             {
-                paidthismonthtopaytotal2 = db.PaidBonuss.Where(d => d.memberId == membership && d.paidBonusDateTime >= firstdateten && d.paidBonusDateTime < firstdatetwenty).Sum(d => d.paidpositionBonus);
+                paidthismonthpositionbonus = db.PaidBonuss.Where(d => d.memberId == membership && d.paidBonusDateTime >= firstdatetwenty && d.paidBonusDateTime < lastday).Sum(d => d.paidpositionBonus);
             }
-            ViewBag.totoalbonuspastmonth2 = Convert.ToInt32(paidthismonthtopaytotal2);
+            ViewBag.paidthismonthpositionbonus = Convert.ToInt32(paidthismonthpositionbonus);
             //end
 
             //past month Profit Presentage Bonus
@@ -533,6 +533,16 @@ namespace RocketSystem.Controllers
                 profitpresentage = db.PaidBonuss.Where(d => d.memberId == membership && d.paidBonusDateTime >= firstallbonusdate && d.paidBonusDateTime < lastday).Sum(d => d.paidPresentageBonus);
             }
             ViewBag.profitpresentage1 = Convert.ToInt32(profitpresentage);
+            //end
+
+            //past month Profit Presentage Bonus rocket 3 person
+            int prsentagecount3person = db.PaidBonuss.Where(d => d.memberId == membership && d.paidBonusDateTime >= firstallbonusdate && d.paidBonusDateTime < lastday).Count();
+            double presentagethreeperson = 0.0;
+            if (prsentagecount3person != 0)
+            {
+                presentagethreeperson = db.PaidBonuss.Where(d => d.memberId == membership && d.paidBonusDateTime >= firstallbonusdate && d.paidBonusDateTime < lastday).Sum(d => d.paidPresentageBonusThreeperson);
+            }
+            ViewBag.presentagethreeperson = Convert.ToInt32(presentagethreeperson);
             //end
 
             //past month Profit position Bonus
