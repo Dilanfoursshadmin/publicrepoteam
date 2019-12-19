@@ -410,8 +410,8 @@ namespace RocketSystem.Controllers
             ViewBag.bcnumberselect12 = selectbcnew;
 
             ViewBag.list2 = list2second;
+            //news
             //new query end
-           
 
             //new User wise Bonus
 
@@ -514,6 +514,17 @@ namespace RocketSystem.Controllers
             ViewBag.totoalbonuspastmonth2 = Convert.ToInt32(paidthismonthtopaytotal2);
             //end
 
+            //new 10/25 positionbonus
+            double paidthismonthpositionbonus = 0.0;
+            int positioncountingpositionbonus = db.PaidBonuss.Where(d => d.memberId == membership && d.paidBonusDateTime >= firstdatetwenty && d.paidBonusDateTime < lastday).Count();
+
+            if (positioncountingpositionbonus != 0)
+            {
+                paidthismonthpositionbonus = db.PaidBonuss.Where(d => d.memberId == membership && d.paidBonusDateTime >= firstdatetwenty && d.paidBonusDateTime < lastday).Sum(d => d.paidpositionBonus);
+            }
+            ViewBag.paidthismonthpositionbonus = Convert.ToInt32(paidthismonthpositionbonus);
+            //end
+
             //past month Profit Presentage Bonus
             int profitcount = db.PaidBonuss.Where(d => d.memberId == membership && d.paidBonusDateTime >= firstallbonusdate && d.paidBonusDateTime < lastday).Count();
             double profitpresentage = 0.0;
@@ -522,6 +533,16 @@ namespace RocketSystem.Controllers
                 profitpresentage = db.PaidBonuss.Where(d => d.memberId == membership && d.paidBonusDateTime >= firstallbonusdate && d.paidBonusDateTime < lastday).Sum(d => d.paidPresentageBonus);
             }
             ViewBag.profitpresentage1 = Convert.ToInt32(profitpresentage);
+            //end
+
+            //past month Profit Presentage Bonus rocket 3 person
+            int prsentagecount3person = db.PaidBonuss.Where(d => d.memberId == membership && d.paidBonusDateTime >= firstallbonusdate && d.paidBonusDateTime < lastday).Count();
+            double presentagethreeperson = 0.0;
+            if (prsentagecount3person != 0)
+            {
+                presentagethreeperson = db.PaidBonuss.Where(d => d.memberId == membership && d.paidBonusDateTime >= firstallbonusdate && d.paidBonusDateTime < lastday).Sum(d => d.paidPresentageBonusThreeperson);
+            }
+            ViewBag.presentagethreeperson = Convert.ToInt32(presentagethreeperson);
             //end
 
             //past month Profit position Bonus
@@ -542,6 +563,21 @@ namespace RocketSystem.Controllers
                 sharepositionbonus = db.PaidBonuss.Where(d => d.memberId == membership && d.paidBonusDateTime >= firstallbonusdate && d.paidBonusDateTime < lastday).Sum(d => d.paidshareBonus);
             }
             ViewBag.sharebonus = Convert.ToInt32(sharepositionbonus);
+            //end
+
+            //past month share Bonus new Rocket
+            int sharebonusrocketcount = db.PaidBonuss.Where(d => d.memberId == membership && d.bcNumber == bcvalue1 && d.positionHistory == jumphistory && d.paidBonusDateTime >= firstallbonusdate && d.paidBonusDateTime < lastday).Count();
+            int shareallrocketbonuscount = db.PaidBonuss.Where(d => d.memberId == membership && d.paidBonusDateTime >= firstallbonusdate && d.paidBonusDateTime < lastday).Count();
+            double sharerocketbonusnew = 0.0;
+            if (sharebonusrocketcount != 0 && bcvalue1 != -1)
+            {
+                sharerocketbonusnew = db.PaidBonuss.Where(d => d.memberId == membership && d.bcNumber == bcvalue1 && d.positionHistory == jumphistory && d.paidBonusDateTime >= firstallbonusdate && d.paidBonusDateTime < lastday).Sum(d => d.paidshareBonusRocket);
+            }
+            else if (shareallrocketbonuscount != 0 && bcvalue1 == -1)
+            {
+                sharerocketbonusnew = db.PaidBonuss.Where(d => d.memberId == membership && d.paidBonusDateTime >= firstallbonusdate && d.paidBonusDateTime < lastday).Sum(d => d.paidshareBonusRocket);
+            }
+            ViewBag.sharerocketbonusnew = Convert.ToInt32(sharerocketbonusnew);
             //end
 
             //past month introduce Bonus

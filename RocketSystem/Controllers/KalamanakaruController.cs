@@ -210,7 +210,7 @@ namespace RocketSystem.Controllers
             DateTime dating = DateTime.Now.Date;
             int month = dating.Month;
             int year = dating.Year;
-            DateTime thismonth = new DateTime(year, month, 3).Date;
+            DateTime thismonth = new DateTime(year, month, 18).Date;
             DateTime paidmontdate = new DateTime(year, month, 30);
             DateTime paidmontdate1 = new DateTime(year, month, 10);
             DateTime paidmontdate2 = new DateTime(year, month, 20);
@@ -234,7 +234,20 @@ namespace RocketSystem.Controllers
 
                             db.SaveChanges();
                         }
+                        
                     }
+                    using (DataAccessLayer db=new DataAccessLayer())
+                    {
+                        var updateshareandprofitbonus = dyx.sharebonusandprofitpresentagenew();
+                        foreach (var updateshare in updateshareandprofitbonus)
+                        {
+                            var entry1 = db.Entry(updateshare);
+                            entry1.State = EntityState.Modified;
+
+                            db.SaveChanges();
+                        }
+                    }
+                    
                 }
             }
             else if (bcvalue2 == k)
