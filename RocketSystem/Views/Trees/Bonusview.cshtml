@@ -22,6 +22,8 @@
     string monthis = "january";
     string selectedmonth = ViewBag.selectedmonth;
     int paidsharebonusrocket = ViewBag.sharerocketbonusnew;
+    int paidthismonthpositionbonus = ViewBag.paidthismonthpositionbonus;
+    int presentagethreeperson = ViewBag.presentagethreeperson;
 
 
 }
@@ -425,13 +427,13 @@
                             <div class="card-header">
                                 <center>
                                     <b><h4>Introduce Bonus</h4></b>
-                                    フルボーナスの支払い日 - @month 月/25 日
+                                    Introduce Bonus - @month 月/25 日
                                 </center>
                             </div>
 
                             <div class="card-body">
                                 <i class="fa fa-lightbulb-o fa-3x"></i>
-                                <h2 class="timer count-title count-number" data-to="@paidtotoalbonus" data-speed="1500"></h2>
+                                <h2 class="timer count-title count-number" data-to="@paidthismonthpositionbonus" data-speed="1500"></h2>
                                 <p class="count-text ">あなたの先月1日から20日までのフルボーナス（1日から10までの紹介ボーナスを省いております）</p>
                             </div>
 
@@ -468,14 +470,14 @@
                         <div class="card">
                             <div class="card-header">
                                 <center>
-                                    <b><h4>紹介のボーナス</h4></b>
+                                    <b><h4>Three Person Profit</h4></b>
 
                                 </center>
                             </div>
 
                             <div class="card-body">
                                 <i class="fa fa-lightbulb-o fa-3x"></i>
-                                <h2 class="timer count-title count-number" data-to="@positionbonusall" data-speed="1500"></h2>
+                                <h2 class="timer count-title count-number" data-to="@presentagethreeperson" data-speed="1500"></h2>
                                 <p class="count-text ">先月1日から月末までに紹介ボーナス、貴方のボーナスは合計紹介によって変更されます。</p>
                             </div>
 
