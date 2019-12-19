@@ -67,6 +67,7 @@
         .login100-form-bgbtn {
             background-image: linear-gradient(20deg,#ac4edf 5%,#224abe 100%) !important;
         }
+
         .validatefont {
             font-size: 15px;
         }
@@ -104,15 +105,24 @@
                             <span class="label-input100"><i class="fas fa-unlock-alt"></i> パスワード </span>
                             @*<input class="input100" type="password" name="password" id="password" placeholder="Type your Password">*@
                             @Html.EditorFor(model => model.password, new { htmlAttributes = new { @class = "input100", @placeholder = "パスワードをご記入ください。", @type = "password" } })
-                           
+
                         </div>
                         <div>@Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger validatefont" })</div>
                         <input type="checkbox" onclick="myFunction()"> <a class="fgtpass">パスワードを表示</a>
-                        <div class="text-right p-t-8 p-b-31">
-                            <a class="nav-link js-scroll-trigger" href='@Url.Action("ForgotPassword", "Users")'> パスワードをお忘れですか ？</a>
-                            <a class="nav-link js-scroll-trigger" href='@Url.Action("ForgotMembershipNo", "Users")'>会員番号をお忘れですか？</a>
+
+                        <div class="text-right ">
+
+                            <div class="form-group">
+                                <a class="nav-link " href='@Url.Action("ForgotPassword", "Users")'>
+                                    <span class="badge badge-info" style="font-size:15px;">パスワードをお忘れですか ？</span>
+                                </a>
+                                <a class="nav-link " href='@Url.Action("ForgotMembershipNo", "Users")'>
+                                    <span class="badge badge-info" style="font-size:15px;">会員番号をお忘れですか？</span>
+                                </a>
+                            </div>
+                            @*<a class="nav-link js-scroll-trigger" href='@Url.Action("ForgotPassword", "Users")'>   </a>
+                                <a class="nav-link js-scroll-trigger" href='@Url.Action("ForgotMembershipNo", "Users")'>  </a>*@
                         </div>
-                        <br>
                         <div class="container-login100-form-btn">
                             <div class="wrap-login100-form-btn">
                                 <div class="login100-form-bgbtn"></div>
