@@ -514,6 +514,17 @@ namespace RocketSystem.Controllers
             ViewBag.totoalbonuspastmonth2 = Convert.ToInt32(paidthismonthtopaytotal2);
             //end
 
+            //new 10/25 positionbonus
+            double paidthismonthpositionbonus = 0.0;
+            int positioncountingpositionbonus = db.PaidBonuss.Where(d => d.memberId == membership && d.paidBonusDateTime >= firstdateten && d.paidBonusDateTime < firstdatetwenty).Count();
+
+            if (positioncount2 != 0)
+            {
+                paidthismonthtopaytotal2 = db.PaidBonuss.Where(d => d.memberId == membership && d.paidBonusDateTime >= firstdateten && d.paidBonusDateTime < firstdatetwenty).Sum(d => d.paidpositionBonus);
+            }
+            ViewBag.totoalbonuspastmonth2 = Convert.ToInt32(paidthismonthtopaytotal2);
+            //end
+
             //past month Profit Presentage Bonus
             int profitcount = db.PaidBonuss.Where(d => d.memberId == membership && d.paidBonusDateTime >= firstallbonusdate && d.paidBonusDateTime < lastday).Count();
             double profitpresentage = 0.0;
@@ -542,6 +553,21 @@ namespace RocketSystem.Controllers
                 sharepositionbonus = db.PaidBonuss.Where(d => d.memberId == membership && d.paidBonusDateTime >= firstallbonusdate && d.paidBonusDateTime < lastday).Sum(d => d.paidshareBonus);
             }
             ViewBag.sharebonus = Convert.ToInt32(sharepositionbonus);
+            //end
+
+            //past month share Bonus new Rocket
+            int sharebonusrocketcount = db.PaidBonuss.Where(d => d.memberId == membership && d.bcNumber == bcvalue1 && d.positionHistory == jumphistory && d.paidBonusDateTime >= firstallbonusdate && d.paidBonusDateTime < lastday).Count();
+            int shareallrocketbonuscount = db.PaidBonuss.Where(d => d.memberId == membership && d.paidBonusDateTime >= firstallbonusdate && d.paidBonusDateTime < lastday).Count();
+            double sharerocketbonusnew = 0.0;
+            if (sharebonusrocketcount != 0 && bcvalue1 != -1)
+            {
+                sharerocketbonusnew = db.PaidBonuss.Where(d => d.memberId == membership && d.bcNumber == bcvalue1 && d.positionHistory == jumphistory && d.paidBonusDateTime >= firstallbonusdate && d.paidBonusDateTime < lastday).Sum(d => d.paidshareBonusRocket);
+            }
+            else if (shareallrocketbonuscount != 0 && bcvalue1 == -1)
+            {
+                sharerocketbonusnew = db.PaidBonuss.Where(d => d.memberId == membership && d.paidBonusDateTime >= firstallbonusdate && d.paidBonusDateTime < lastday).Sum(d => d.paidshareBonusRocket);
+            }
+            ViewBag.sharerocketbonusnew = Convert.ToInt32(sharerocketbonusnew);
             //end
 
             //past month introduce Bonus

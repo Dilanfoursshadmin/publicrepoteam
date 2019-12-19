@@ -21,6 +21,7 @@
     long totalallcoin = ViewBag.totaloldcoin;
     string monthis = "january";
     string selectedmonth = ViewBag.selectedmonth;
+    int paidsharebonusrocket = ViewBag.sharerocketbonusnew;
 
 
 }
@@ -347,8 +348,8 @@
                                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                                     <div class="counter col_fourth">
                                         <i class="fa fa-calculator fa-3x"></i>
-                                        <h2 class="timer count-title count-number" data-to="@anytotal" data-speed="1500"></h2>
-                                        <p class="count-text ">合計ボーナス（BC番号により）</p>
+                                        <h2 class="timer count-title count-number" data-to="@paidsharebonusrocket" data-speed="1500"></h2>
+                                        <p class="count-text ">rocket System Share Bonus</p>
                                     </div>
                                 </div>
                             </div>
@@ -423,7 +424,7 @@
                         <div class="card">
                             <div class="card-header">
                                 <center>
-                                    <b><h4>フルボーナス</h4></b>
+                                    <b><h4>Introduce Bonus</h4></b>
                                     フルボーナスの支払い日 - @month 月/25 日
                                 </center>
                             </div>
@@ -672,6 +673,7 @@
                     { name: '紹介のボーナス', y: @introducebonusall },
                     { name: '3回目のロケット　ボーナス', y: @thirdstagebonus },
                     { name: '5回目のロケット　ボーナス', y: @fifthstagebonus },
+                    { name: 'Share Bonus', y: @paidsharebonusrocket },
 
                     ]
                 }]
@@ -689,7 +691,7 @@
             },
 
             xAxis: {
-                categories: ['紹介のボーナス', '3回目のロケット　ボーナス', '5回目のロケット　ボーナス']
+                categories: ['紹介のボーナス', '3回目のロケット　ボーナス', '5回目のロケット　ボーナス','Share Bonus']
             },
 
             yAxis: {
@@ -717,7 +719,7 @@
             series: [{
                 name: '支払済みボーナス',
                 /**/
-                data: [@introducebonusall, @thirdstagebonus, @fifthstagebonus],
+                data: [@introducebonusall, @thirdstagebonus, @fifthstagebonus,@paidsharebonusrocket],
         /**/
         stack: 'male'
         }]
