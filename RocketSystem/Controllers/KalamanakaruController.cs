@@ -358,6 +358,12 @@ namespace RocketSystem.Controllers
                 return RedirectToAction("../kalamanakaru/login");
         }
 
+        //View more Page 1
+        public ActionResult Viewmore1()
+        {
+            return View();
+        }
+
         //move to kalamanakaru
         public ActionResult loginAs(int? id)
         {
