@@ -42,7 +42,6 @@ namespace RocketSystem.DbLink
         public DbSet<CsvPositionDetail> CsvPositionDetails { get; set; }
         public DbSet<CoolingOff> CoolingOffs { get; set; }
 
-
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
