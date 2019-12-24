@@ -405,8 +405,8 @@
                                 </tbody>
                             </table>
                         </div>
-                        <br /><br />
-                        <center>   
+                        <br />
+                        <center>
                             <a href='@Url.Action("viewmore1", "Kalamanakaru")'><button type="button" class="btn btn-success btn-sm" style="background-color:palevioletred; border-color:palevioletred;"><b>View more</b></button></a>
                         </center>
                         <div id="recent-items-chart" class="flot-chart-items flot-chart vt-ct-it tb-rc-it-res"></div>
@@ -528,6 +528,50 @@
 
 <br>
 @*End Second Row*@
+
+<br>
+<!-- Start 3rd row-->
+<div class="notika-email-post-area">
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-lg-8 col-md-6 col-sm-6 col-xs-12">
+                <div class="recent-post-wrapper notika-shadow sm-res-mg-t-30 tb-res-ds-n dk-res-ds">
+                    <div class="recent-post-ctn">
+                        <div class="recent-post-title">
+                            <h2>new chart 1</h2>
+                        </div>
+                    </div>
+                    <div class="recent-post-items">
+                        @*<div id="container5" style="height: 370px; width: 100%;"></div>*@
+                        <canvas id="myChartgroupnew1" width="400" height="215"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                <div class="recent-items-wp notika-shadow sm-res-mg-t-30">
+                    <div class="rc-it-ltd">
+                        <div class="recent-items-ctn">
+                            <div class="recent-items-title">
+                                <h2>new chart 2</h2>
+                            </div>
+                        </div>
+                        <div class="recent-items-inn">
+                            <canvas id="myChartgroupnew2" width="400" height="400"></canvas>
+                        </div>
+                    </div>
+                    <br /><br /><br /><br /><br id="nuwan" /><br id="nuwan" /><br id="nuwan" /><br id="nuwan" /><br id="nuwan" /><br id="nuwan" />
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<br>
+@*End 3rd Row*@
+
 <!-- Breadcomb area Start-->
 <div class="breadcomb-area">
     <div class="container-fluid">
@@ -565,7 +609,6 @@
                 <div class="visitor-sv-tm-int sm-res-mg-t-30 tb-res-mg-t-30 tb-res-ds-n dk-res-ds">
                     <div class="contact-hd mg-bt-ant-inner">
                         <h2>Free Positon Total Paid Bonus</h2>
-
                     </div>
                     <div class="visitor-st-ch visitor-ov-ct">
                         <canvas id="pie-chart3" width="600" height="450"></canvas>
@@ -584,6 +627,7 @@
                     <br /><br />
                 </div>
             </div>
+
             <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
                 <div class="visitor-sv-tm-int">
                     <div class="contact-hd mg-bt-ant-inner">
@@ -638,6 +682,9 @@
                             </tbody>
                         </table>
                     </div>
+                    <center>
+                        <a href='@Url.Action("viewmore1", "Kalamanakaru")'><button type="button" class="btn btn-success btn-sm" style="background-color:palevioletred; border-color:palevioletred;"><b>View more</b></button></a>
+                    </center>
                 </div>
             </div>
             <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
@@ -1442,6 +1489,68 @@
             label: "Middle Position",
                 backgroundColor: "#fb9678",
             data: [4, 3, 5,3,7,4,1]
+        }]
+    };
+
+    var myBarChart = new Chart(ctx, {
+        type: 'bar',
+        data: data,
+        options: {
+            barValueSpacing: 20,
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        min: 0,
+                    }
+                }]
+            }
+        }
+    });
+
+    //grouped Bar Chart new 1
+    var ctx = document.getElementById("myChartgroupnew1").getContext("2d");
+
+    var data = {
+        labels: ["january", "February", "March", "April", "May", "June", "July", "August", "September","Octomber", "November", "December"],
+        datasets: [{
+            label: "Super position",
+            backgroundColor: "#00c292",
+            data: [3, 7, 4, 5, 2, 3, 5, 3, 7, 4, 5, 2]
+        }, {
+            label: "Middle Position",
+            backgroundColor: "#fb9678",
+                data: [4, 3, 5, 3, 7, 4, 1, 4, 3, 5, 3, 7]
+        }]
+    };
+
+    var myBarChart = new Chart(ctx, {
+        type: 'bar',
+        data: data,
+        options: {
+            barValueSpacing: 20,
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        min: 0,
+                    }
+                }]
+            }
+        }
+    });
+
+    //grouped Bar Chart new 2
+    var ctx = document.getElementById("myChartgroupnew2").getContext("2d");
+
+    var data = {
+        labels: ["january", "February", "March", "April", "May", "June", "July", "August", "September", "Octomber", "November", "December"],
+        datasets: [{
+            label: "Super position",
+            backgroundColor: "#45B069",
+            data: [3, 7, 4, 5, 2, 3, 5, 3, 7, 4, 5, 2]
+        }, {
+            label: "Middle Position",
+            backgroundColor: "#725AAB",
+            data: [4, 3, 5, 3, 7, 4, 1, 4, 3, 5, 3, 7]
         }]
     };
 
