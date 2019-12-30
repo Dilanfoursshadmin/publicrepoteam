@@ -177,14 +177,14 @@ namespace RocketSystem.Classes
             var paidbonus = db.PaidBonuss.ToList();
             List<int> paidbonusview = new List<int>();
 
-            double presentagebonus = paidbonus.Sum(d => d.paidPresentageBonus);
+            double presentagebonus = paidbonus.Sum(d => d.paidPresentageBonus + d.paidPresentageBonusThreeperson);
             if (presentagebonus == 0)
                 presentagebonus = 1;
             double introducebonus = paidbonus.Sum(d => d.paidIntoduceBonus);
             double positionbonus = paidbonus.Sum(d => d.paidpositionBonus);
             double paidthirdstagebonus = paidbonus.Sum(d => d.paidThirdStageBonus);
             double paidfifthstagebonus = paidbonus.Sum(d => d.paidFifthStageBonus);
-            double paidsharebonus = paidbonus.Sum(d => d.paidshareBonus);
+            double paidsharebonus = paidbonus.Sum(d => d.paidshareBonus + d.paidshareBonusRocket);
 
             double all = presentagebonus + introducebonus + positionbonus + paidthirdstagebonus + paidfifthstagebonus + paidsharebonus;
             presentagebonus = (presentagebonus / all) * 100;
@@ -218,12 +218,12 @@ namespace RocketSystem.Classes
             {
                 var paidbonus = db.PaidBonuss.ToList();
 
-                double presentagebonus = paidbonus.Sum(d => d.paidPresentageBonus);
+                double presentagebonus = paidbonus.Sum(d => d.paidPresentageBonus + d.paidPresentageBonusThreeperson);
                 double introducebonus = paidbonus.Sum(d => d.paidIntoduceBonus);
                 double positionbonus = paidbonus.Sum(d => d.paidpositionBonus);
                 double paidthirdstagebonus = paidbonus.Sum(d => d.paidThirdStageBonus);
                 double paidfifthstagebonus = paidbonus.Sum(d => d.paidFifthStageBonus);
-                double sharebonus = paidbonus.Sum(d => d.paidshareBonus);
+                double sharebonus = paidbonus.Sum(d => d.paidshareBonus + d.paidshareBonusRocket);
 
                 int presentagebonus1 = Convert.ToInt32(presentagebonus);
                 int positionbonus1 = Convert.ToInt32(positionbonus);
@@ -273,6 +273,8 @@ namespace RocketSystem.Classes
             double paidthirdsection10 = 0.0;
             double paidfifthsection10 = 0.0;
             double paidsharebonus = 0.0;
+            double paidsharebonusrocket = 0.0;
+            double paidpresentagebonusthreeperson = 0.0;
             double totalmonthallbonus;
 
             int years = DateTime.Now.Year;
@@ -335,7 +337,25 @@ namespace RocketSystem.Classes
                 {
                     paidsharebonus = db.PaidBonuss.Where(d => d.paidBonusDateTime >= firstmonthdate && d.paidBonusDateTime < firstOfNextMonth).Sum(d => d.paidshareBonus);
                 }
-                totalmonthallbonus = paidintroducebonus10 + paidpostition10 + paidpresentage10 + paidthirdsection10 + paidfifthsection10 + paidsharebonus;
+                var check6 = db.PaidBonuss.Where(d => d.paidBonusDateTime >= firstmonthdate && d.paidBonusDateTime < firstOfNextMonth).Count();
+                if (check6 == 0)
+                {
+                    paidsharebonusrocket = 0.0;
+                }
+                else
+                {
+                    paidsharebonusrocket = db.PaidBonuss.Where(d => d.paidBonusDateTime >= firstmonthdate && d.paidBonusDateTime < firstOfNextMonth).Sum(d => d.paidshareBonusRocket);
+                }
+                var check7 = db.PaidBonuss.Where(d => d.paidBonusDateTime >= firstmonthdate && d.paidBonusDateTime < firstOfNextMonth).Count();
+                if (check7 == 0)
+                {
+                    paidpresentagebonusthreeperson = 0.0;
+                }
+                else
+                {
+                    paidpresentagebonusthreeperson = db.PaidBonuss.Where(d => d.paidBonusDateTime >= firstmonthdate && d.paidBonusDateTime < firstOfNextMonth).Sum(d => d.paidPresentageBonusThreeperson);
+                }
+                totalmonthallbonus = paidintroducebonus10 + paidpostition10 + paidpresentage10 + paidthirdsection10 + paidfifthsection10 + paidsharebonus + paidsharebonusrocket + paidpresentagebonusthreeperson;
                 profitdetails.Add(Convert.ToInt32(totalmonthallbonus));
 
                 int counting01 = db.StageOnes.Where(d => d.package == 1 && d.entryDate >= firstmonthdate && d.entryDate < firstOfNextMonth).Count();
@@ -714,12 +734,12 @@ namespace RocketSystem.Classes
         public dynamic freepositionbonus()
         {
             List<int> freepositionbonus = new List<int>();
-            int havecolumn = db.StageOnes.Where(d => d.freeStatus == 3 || d.freeStatus == 5).Join(db.PaidBonuss.Where(d => d.positionHistory == 1), o => new { member = o.membershipNo, bcnum = o.bcNo }, m => new { member = m.memberId, bcnum = m.bcNumber }, (o, m) => new { o.treeId, o.membershipNo, o.bcNo, m.memberId, m.paidBonusDateTime, m.paidBonusId, m.paidFifthStageBonus, m.paidThirdStageBonus, m.paidpositionBonus, m.paidPresentageBonus, m.paidshareBonus, m.paidIntoduceBonus, m.positionHistory }).ToList().Count();
+            int havecolumn = db.StageOnes.Where(d => d.freeStatus == 3 || d.freeStatus == 5).Join(db.PaidBonuss.Where(d => d.positionHistory == 1), o => new { member = o.membershipNo, bcnum = o.bcNo }, m => new { member = m.memberId, bcnum = m.bcNumber }, (o, m) => new { o.treeId, o.membershipNo, o.bcNo, m.memberId, m.paidBonusDateTime, m.paidBonusId, m.paidFifthStageBonus, m.paidThirdStageBonus, m.paidpositionBonus, m.paidPresentageBonus, m.paidshareBonus, m.paidIntoduceBonus, m.positionHistory,m.paidshareBonusRocket,m.paidPresentageBonusThreeperson }).ToList().Count();
             if (havecolumn != 0)
             {
-                var next = db.StageOnes.Where(d => d.freeStatus == 3 || d.freeStatus == 5).Join(db.PaidBonuss.Where(d => d.positionHistory == 1), o => new { member = o.membershipNo, bcnum = o.bcNo }, m => new { member = m.memberId, bcnum = m.bcNumber }, (o, m) => new { o.treeId, o.membershipNo, o.bcNo, m.memberId, m.paidBonusDateTime, m.paidBonusId, m.paidFifthStageBonus, m.paidThirdStageBonus, m.paidpositionBonus, m.paidPresentageBonus, m.paidshareBonus, m.paidIntoduceBonus, m.positionHistory }).ToList();
+                var next = db.StageOnes.Where(d => d.freeStatus == 3 || d.freeStatus == 5).Join(db.PaidBonuss.Where(d => d.positionHistory == 1), o => new { member = o.membershipNo, bcnum = o.bcNo }, m => new { member = m.memberId, bcnum = m.bcNumber }, (o, m) => new { o.treeId, o.membershipNo, o.bcNo, m.memberId, m.paidBonusDateTime, m.paidBonusId, m.paidFifthStageBonus, m.paidThirdStageBonus, m.paidpositionBonus, m.paidPresentageBonus, m.paidshareBonus, m.paidIntoduceBonus, m.positionHistory,m.paidshareBonusRocket,m.paidPresentageBonusThreeperson }).ToList();
 
-                double total = next.Sum(d => d.paidIntoduceBonus + d.paidpositionBonus + d.paidPresentageBonus + d.paidshareBonus + d.paidThirdStageBonus + d.paidFifthStageBonus);
+                double total = next.Sum(d => d.paidIntoduceBonus + d.paidpositionBonus + d.paidPresentageBonus + d.paidshareBonus + d.paidThirdStageBonus + d.paidFifthStageBonus + d.paidPresentageBonusThreeperson + d.paidshareBonusRocket);
                 double bon = next.Sum(d => d.paidpositionBonus);
                 if (bon == 0)
                 {
@@ -738,14 +758,14 @@ namespace RocketSystem.Classes
                 {
                     freepositionbonus.Add(Convert.ToInt32((next.Sum(d => d.paidIntoduceBonus) / total) * 100));
                 }
-                bon = next.Sum(d => d.paidshareBonus);
+                bon = next.Sum(d => d.paidshareBonus + d.paidshareBonusRocket);
                 if (bon == 0)
                 {
                     freepositionbonus.Add(0);
                 }
                 else
                 {
-                    freepositionbonus.Add(Convert.ToInt32((next.Sum(d => d.paidshareBonus) / total) * 100));
+                    freepositionbonus.Add(Convert.ToInt32((next.Sum(d => d.paidshareBonus + d.paidshareBonusRocket) / total) * 100));
                 }
                 bon = next.Sum(d => d.paidThirdStageBonus);
                 if (bon == 0)
@@ -765,14 +785,14 @@ namespace RocketSystem.Classes
                 {
                     freepositionbonus.Add(Convert.ToInt32((next.Sum(d => d.paidFifthStageBonus) / total) * 100));
                 }
-                bon = next.Sum(d => d.paidPresentageBonus);
+                bon = next.Sum(d => d.paidPresentageBonus + d.paidPresentageBonusThreeperson);
                 if (bon == 0)
                 {
                     freepositionbonus.Add(0);
                 }
                 else
                 {
-                    freepositionbonus.Add(Convert.ToInt32((next.Sum(d => d.paidPresentageBonus) / total) * 100));
+                    freepositionbonus.Add(Convert.ToInt32((next.Sum(d => d.paidPresentageBonus + d.paidPresentageBonusThreeperson) / total) * 100));
                 }
             }
             else
@@ -800,7 +820,7 @@ namespace RocketSystem.Classes
                     {
                         i++;
                     }
-                    else if (a.Count() >= 4)
+                    if (a.Count() >= 4)
                     {
                         x++;
                     }
@@ -818,42 +838,48 @@ namespace RocketSystem.Classes
             int i = 0;
             int x = 0;
             List<int> memberpresent = new List<int>();
-            int count6personcheck = db.StageOnes.GroupBy(d => d.introducePromoCode).Count();
-            if (count6personcheck != 0)
-            {
-                var count6person = db.StageOnes.GroupBy(d => d.introducePromoCode).ToList();
-                foreach (var a in count6person)
-                {
-                    if (a.Count() >= 6)
-                    {
-                        double temporybonusvalue = 0;
-                        membership = a.ElementAt(0).membershipNo;
-                        int count = db.PaidBonuss.Where(d => d.memberId == membership).Count();
-                        if (count != 0)
-                        {
-                            temporybonusvalue = db.PaidBonuss.Where(d => d.memberId == membership).Sum(d => d.paidPresentageBonus);
-                        }
+            //int count6personcheck = db.StageOnes.GroupBy(d => d.introducePromoCode).Count();
+            //if (count6personcheck != 0)
+            //{
+            //    var count6person = db.StageOnes.GroupBy(d => d.introducePromoCode).ToList();
+            //    foreach (var a in count6person)
+            //    {
+            //        if (a.Count() >= 6)
+            //        {
+            //            double temporybonusvalue = 0;
+            //            membership = a.ElementAt(0).membershipNo;
+            //            int count = db.PaidBonuss.Where(d => d.memberId == membership).Count();
+            //            if (count != 0)
+            //            {
+            //                temporybonusvalue = db.PaidBonuss.Where(d => d.memberId == membership).Sum(d => d.paidPresentageBonus);
+            //            }
 
-                        i = i + Convert.ToInt32(temporybonusvalue);
+            //            i = i + Convert.ToInt32(temporybonusvalue);
 
-                    }
-                    else if (a.Count() >= 4)
-                    {
-                        membership = a.ElementAt(0).membershipNo;
-                        double temporybonusvalue1 = 0;
-                        int count1 = db.PaidBonuss.Where(d => d.memberId == membership).Count();
-                        if (count1 != 0)
-                        {
-                            temporybonusvalue1 = db.PaidBonuss.Where(d => d.memberId == membership).Sum(d => d.paidPresentageBonus);
-                        }
-                        x = x + Convert.ToInt32(temporybonusvalue1);
-                    }
-                }
-            }
+            //        }
+            //        else if (a.Count() >= 4)
+            //        {
+            //            membership = a.ElementAt(0).membershipNo;
+            //            double temporybonusvalue1 = 0;
+            //            int count1 = db.PaidBonuss.Where(d => d.memberId == membership).Count();
+            //            if (count1 != 0)
+            //            {
+            //                temporybonusvalue1 = db.PaidBonuss.Where(d => d.memberId == membership).Sum(d => d.paidPresentageBonus);
+            //            }
+            //            x = x + Convert.ToInt32(temporybonusvalue1);
+            //        }
+            //    }
+            //}
 
 
-            memberpresent.Add(i);
-            memberpresent.Add(x);
+            //memberpresent.Add(i);
+            //memberpresent.Add(x);
+            double sixpeople = db.PaidBonuss.Sum(d=>d.paidPresentageBonus);
+            double fourpeopele = db.PaidBonuss.Sum(d => d.paidPresentageBonusThreeperson);
+            int six = Convert.ToInt32(sixpeople);
+            int four = Convert.ToInt32(fourpeopele);
+            memberpresent.Add(six);
+            memberpresent.Add(four);
 
             return memberpresent;
         }
