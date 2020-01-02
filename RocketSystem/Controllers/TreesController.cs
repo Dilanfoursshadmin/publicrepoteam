@@ -457,7 +457,7 @@ namespace RocketSystem.Controllers
                     break;
                 case "december":
                     selectmont = 1;
-                    selectyear = selectyear + 1;
+                    selectyear = selectyear;//select year +1
                     break;
                 case "default":
 
